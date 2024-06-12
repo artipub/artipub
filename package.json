@@ -4,18 +4,20 @@
   "description": "A library for processing and publishing articles",
   "author": "Potter<aa4790139@gmail.com>",
   "scripts": {
-    "build": "rollup --config rollup.config.mjs --verbose"
+    "build": "pnpm clean && tsx script/build.ts",
+    "clean": "rm -rf dist"
   },
   "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.mts"
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.cts",
   "files": [
     "dist"
   ],
