@@ -40,9 +40,9 @@
   "dependencies": {
     "@types/node": "^20.14.2",
     "@types/unist": "^3.0.2",
-    "remark": "^15.0.1",
-    "remark-rehype": "^11.1.0",
-    "remark-stringify": "^11.0.0",
-    "tslib": "^2.6.3"
+    "remark-parse": "11.0.0",
+    "remark-stringify": "11.0.0",
+    "tslib": "^2.6.3",
+    "unified": "11.0.0"
   }
 }

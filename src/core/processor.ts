@@ -1,15 +1,20 @@
 import fs from "fs/promises"
 import { ArticleProcessorOption, Middleware } from '../types';
-import { remark } from "remark"
-import remarkRehype from 'remark-rehype';
-import stringify from 'remark-stringify';
+import { unified } from 'unified'
+import { Node } from "unist";
+import remarkParse from 'remark-parse'
+import remarkStringify from 'remark-stringify'
 
+const defaultCompressedOptions = {
+	quality: 80,
+	compressed: true
+}
 
 export class ArticleProcessor {
 	private option: ArticleProcessorOption;
 	private middlewares: Middleware[];
-	constructor(option: ArticleProcessorOption) {
-		this.option = option;
+	constructor(option?: ArticleProcessorOption) {
+		this.option = Object.assign({ compressedOptions: defaultCompressedOptions }, option);
 		this.middlewares = [];
 	}
 
@@ -35,6 +40,7 @@ export class ArticleProcessor {
 		let next = (tree: any) => {
 			if (i < this.middlewares.length) {
 				let middleware = this.middlewares[i];
+				i++;
 				return middleware(tree, next);
 			}
 			return tree;
@@ -42,17 +48,17 @@ export class ArticleProcessor {
 
 		return new Promise(async (resolve) => {
 			const fileContent = await fs.readFile(filePath, { encoding: "utf8" });
-			const processContent = await remark()
-				.use(remarkRehype)
+			const desContent = await unified()
+				.use(remarkParse)
 				.use(() => {
-					return async (tree: any, file: any) => {
-						await next(tree);
+					return async (tree: Node, file: any): Promise<Node> => {
+						return await next(tree);
 					}
 				})
-				.use(stringify)
+				.use(remarkStringify)
 				.process(fileContent);
 
-			resolve(processContent.toString());
+			resolve(desContent.toString());
 		});
 	}
 }

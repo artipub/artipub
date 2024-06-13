@@ -2,9 +2,12 @@ import { Node } from "unist";
 
 export interface ArticleProcessorOption {
 	/**
-	 * default：true
+	 * default: { quality: 80, compressed:true }
 	 */
-	compressed?: boolean
+	compressedOptions?: {
+		compressed?: boolean,
+		quality?: number,
+	}
 }
 
-export type Middleware = (node: Node, next: Middleware) => void
+export type Middleware = (node: Node, next: Middleware) => Node
