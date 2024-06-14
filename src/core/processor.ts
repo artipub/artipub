@@ -1,7 +1,7 @@
 import fs from "fs/promises"
 import { ArticleProcessorOption, Middleware } from '../types';
 import { unified } from 'unified'
-import { Node } from "unist";
+import type { Node } from "unist";
 import remarkParse from 'remark-parse'
 import remarkStringify from 'remark-stringify'
 
@@ -10,6 +10,7 @@ const defaultCompressedOptions = {
 	compressed: true
 }
 
+export { Node }
 export class ArticleProcessor {
 	private option: ArticleProcessorOption;
 	private middlewares: Middleware[];
@@ -36,25 +37,30 @@ export class ArticleProcessor {
 	 * completed.
 	 */
 	processMarkdown(filePath: string): Promise<string> {
-		let i = 0;
-		let next = (tree: any) => {
-			if (i < this.middlewares.length) {
-				let middleware = this.middlewares[i];
-				i++;
-				return middleware(tree, next);
+		let articleProcessor = this;
+
+		function customMiddleware() {
+			return (tree: Node) => {
+				return new Promise<Node>((resolve) => {
+					let i = 0;
+					let next = (tree: Node) => {
+						if (i < articleProcessor.middlewares.length) {
+							let middleware = articleProcessor.middlewares[i];
+							i++;
+							return middleware(tree, next);
+						}
+						resolve(tree);
+					}
+					next(tree);
+				});
 			}
-			return tree;
 		}
 
 		return new Promise(async (resolve) => {
 			const fileContent = await fs.readFile(filePath, { encoding: "utf8" });
 			const desContent = await unified()
 				.use(remarkParse)
-				.use(() => {
-					return async (tree: Node, file: any): Promise<Node> => {
-						return await next(tree);
-					}
-				})
+				.use(customMiddleware)
 				.use(remarkStringify)
 				.process(fileContent);
 

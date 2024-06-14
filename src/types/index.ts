@@ -10,4 +10,5 @@ export interface ArticleProcessorOption {
 	}
 }
 
-export type Middleware = (node: Node, next: Middleware) => Node
+export type Middleware = (node: Node, next: Next) => void
+export type Next = (node: Node) => void
