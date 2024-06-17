@@ -43,6 +43,7 @@
     "@types/unist": "^3.0.2",
     "remark-parse": "11.0.0",
     "remark-stringify": "11.0.0",
+    "sharp": "^0.33.4",
     "tslib": "^2.6.3",
     "unified": "11.0.0",
     "unist-util-visit": "^5.0.0"

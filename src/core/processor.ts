@@ -6,15 +6,24 @@ import remarkParse from 'remark-parse'
 import remarkStringify from 'remark-stringify'
 import { visit } from "unist-util-visit";
 import type { Visitor, Test } from "unist-util-visit"
+import { ImageCompress } from "..";
 
 const defaultCompressedOptions = {
 	quality: 80,
 	compressed: true
 }
 
+export interface ProcessorContext {
+	option: ArticleProcessorOption,
+	/**
+	 * The `filePath` property in the `ProcessorContext` interface is a string that represents the path to the Markdown file that you want to process.
+	 */
+	filePath: string
+}
+
 export { Node }
 export class ArticleProcessor {
-	private option: ArticleProcessorOption;
+	public readonly option: ArticleProcessorOption;
 	private middlewares: Middleware[];
 	constructor(option?: ArticleProcessorOption) {
 		this.option = Object.assign({ compressedOptions: defaultCompressedOptions }, option);
@@ -39,11 +48,14 @@ export class ArticleProcessor {
 	 * completed.
 	 */
 	processMarkdown(filePath: string): Promise<string> {
+		this.middlewares.push(ImageCompress);
 		let articleProcessor = this;
+		let context: ProcessorContext = {
+			filePath,
+			option: this.option,
+		}
 		function customMiddleware() {
 			return (tree: Node) => {
-				console.log("tree:", tree);
-
 				return new Promise<Node>((resolve) => {
 					let i = 0;
 					let next = () => {
@@ -66,7 +78,7 @@ export class ArticleProcessor {
 								visit(tree, test, vt, reverse);
 							}
 							visitor.bind(articleProcessor);
-							middleware(visitor, next);
+							middleware(context, visitor, next);
 						}
 						resolve(tree);
 					}

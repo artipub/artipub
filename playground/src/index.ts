@@ -1,4 +1,4 @@
-import { ArticleProcessor, NotionPublisherPlugin, DevToPublisherPlugin, Middleware, Node, Next, TVisitor } from "artipub"
+import { ArticleProcessor, NotionPublisherPlugin, DevToPublisherPlugin, Middleware, Node, Next, TVisitor, ProcessorContext } from "artipub"
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -7,8 +7,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // 初始化文章处理器和发布管理器
 const articleProcessor = new ArticleProcessor();
 
-articleProcessor.use((visit: TVisitor, next: Next) => {
-	console.log("middleware");
+articleProcessor.use((context: ProcessorContext, visit: TVisitor, next: Next) => {
+	console.log("middleware: filepath=", context.filePath);
 	visit("text", (node, index, parent) => {
 		if (parent && parent.type === "paragraph") {
 			let n = node as any;

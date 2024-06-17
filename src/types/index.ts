@@ -1,4 +1,5 @@
 import type { Visitor, Test } from "unist-util-visit"
+import { ProcessorContext } from "..";
 
 export interface ArticleProcessorOption {
 	/**
@@ -14,5 +15,6 @@ export type TVisitor = (
 	visitorOrReverse: Visitor | boolean | null | undefined,
 	maybeReverse?: boolean | null | undefined
 ) => void;
-export type Middleware = (visitor: TVisitor, next: Next) => void
+export type Middleware = (context: ProcessorContext, visitor: TVisitor, next: Next) => void
 export type Next = () => void
+export type ImageExtension = "png" | "jpeg" | "gif";
