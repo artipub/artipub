@@ -44,6 +44,7 @@
     "remark-parse": "11.0.0",
     "remark-stringify": "11.0.0",
     "tslib": "^2.6.3",
-    "unified": "11.0.0"
+    "unified": "11.0.0",
+    "unist-util-visit": "^5.0.0"
   }
 }

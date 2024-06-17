@@ -1,4 +1,4 @@
-import { ArticleProcessor, NotionPublisherPlugin, DevToPublisherPlugin, Middleware, Node, Next } from "artipub"
+import { ArticleProcessor, NotionPublisherPlugin, DevToPublisherPlugin, Middleware, Node, Next, TVisitor } from "artipub"
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -7,12 +7,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // 初始化文章处理器和发布管理器
 const articleProcessor = new ArticleProcessor();
 
-articleProcessor.use((node: Node, next: Next) => {
-	console.log("middleware 1 delay 1s");
-	setTimeout(() => {
-		console.log("middleware 1");
-		next(node);
-	}, 1000);
+articleProcessor.use((visit: TVisitor, next: Next) => {
+	console.log("middleware");
+	visit("text", (node, index, parent) => {
+		if (parent && parent.type === "paragraph") {
+			let n = node as any;
+			if (n.value === "h2") {
+				n.value = "~h2~"
+			}
+		}
+	});
+	next();
 });
 
 articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/index.md")).then((markdown: any) => {

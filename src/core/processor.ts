@@ -4,6 +4,8 @@ import { unified } from 'unified'
 import type { Node } from "unist";
 import remarkParse from 'remark-parse'
 import remarkStringify from 'remark-stringify'
+import { visit } from "unist-util-visit";
+import type { Visitor, Test } from "unist-util-visit"
 
 const defaultCompressedOptions = {
 	quality: 80,
@@ -38,20 +40,37 @@ export class ArticleProcessor {
 	 */
 	processMarkdown(filePath: string): Promise<string> {
 		let articleProcessor = this;
-
 		function customMiddleware() {
 			return (tree: Node) => {
+				console.log("tree:", tree);
+
 				return new Promise<Node>((resolve) => {
 					let i = 0;
-					let next = (tree: Node) => {
+					let next = () => {
 						if (i < articleProcessor.middlewares.length) {
 							let middleware = articleProcessor.middlewares[i];
 							i++;
-							return middleware(tree, next);
+							const visitor = (testOrVisitor: Visitor | Test, visitorOrReverse: Visitor | boolean | null | undefined, maybeReverse: boolean | null | undefined) => {
+								let reverse;
+								let vt;
+								let test;
+								if (typeof testOrVisitor === "function" && typeof visitorOrReverse !== "function") {
+									test = undefined;
+									vt = testOrVisitor;
+									reverse = visitorOrReverse;
+								} else {
+									test = testOrVisitor;
+									vt = visitorOrReverse;
+									reverse = maybeReverse;
+								}
+								visit(tree, test, vt, reverse);
+							}
+							visitor.bind(articleProcessor);
+							middleware(visitor, next);
 						}
 						resolve(tree);
 					}
-					next(tree);
+					next();
 				});
 			}
 		}

@@ -26,6 +26,9 @@ importers:
       unified:
         specifier: 11.0.0
         version: 11.0.0
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
     devDependencies:
       '@rollup/plugin-alias':
         specifier: ^5.1.0
