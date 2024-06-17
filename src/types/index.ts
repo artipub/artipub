@@ -18,3 +18,5 @@ export type TVisitor = (
 export type Middleware = (context: ProcessorContext, visitor: TVisitor, next: Next) => void
 export type Next = () => void
 export type ImageExtension = "png" | "jpeg" | "gif";
+
+export type Plugin = () => void

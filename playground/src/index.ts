@@ -1,4 +1,4 @@
-import { ArticleProcessor, NotionPublisherPlugin, DevToPublisherPlugin, Middleware, Node, Next, TVisitor, ProcessorContext } from "artipub"
+import { ArticleProcessor, PublisherManager, NotionPublisherPlugin, DevToPublisherPlugin, Next, TVisitor, ProcessorContext } from "artipub"
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -21,6 +21,6 @@ articleProcessor.use((context: ProcessorContext, visit: TVisitor, next: Next) =>
 });
 
 articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/index.md")).then((markdown: any) => {
-	console.log(markdown);
+	
 });
 
