@@ -1,2 +1,2 @@
-export * from "./ImageCompress"
-export * from "./GithubPicUpload"
+export { default as ImageCompress } from "./ImageCompress"
+export { default as GithubPicUpload } from "./GithubPicUpload"

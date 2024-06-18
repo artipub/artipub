@@ -2,9 +2,9 @@ import { GithubPicBedOption, Next, TVisitor } from "../types";
 import { ProcessorContext } from "../core"
 import path from "path";
 import fs from "fs/promises"
-import mime from "mime";
-import axios from "axios"
+import { fileTypeFromBuffer } from 'file-type';
 import { log } from "@/utils";
+const axios = require("axios");
 
 export default async function GithubPicUpload(context: ProcessorContext, visit: TVisitor, next: Next) {
 	const { option: { uploadImgOption } } = context;
@@ -38,13 +38,13 @@ export default async function GithubPicUpload(context: ProcessorContext, visit: 
 					content: contentBase64,
 				});
 
-				const contentType = mime.getType(filePath);
+				const type = await fileTypeFromBuffer(content);
 				const config = {
 					method: "put",
 					url: `https://api.github.com/repos/${picBedOption.owner}/${picBedOption.repo}/contents/${githubPath}`,
 					headers: {
 						Authorization: `Bearer ${picBedOption.token}`,
-						"Content-Type": contentType,
+						"Content-Type": type?.mime,
 						"X-GitHub-Api-Version": "2022-11-28",
 						Accept: "application/vnd.github+json",
 					},

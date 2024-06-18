@@ -1,7 +1,7 @@
 import { NotionPublisherPluginOption, PublishResult } from "@/types";
-import { markdownToBlocks } from "@tryfabric/martian";
 import path from "path";
 const { Client } = require("@notionhq/client");
+const { markdownToBlocks } = require("@tryfabric/martian");
 
 export function NotionPublisherPlugin(option: NotionPublisherPluginOption) {
 

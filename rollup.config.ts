@@ -6,12 +6,10 @@ import alias from "@rollup/plugin-alias";
 import { defineConfig } from "rollup";
 import path from "path";
 import { fileURLToPath } from "url";
+import pkg from "./package.json";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-console.log("dirname=", __dirname);
-console.log("src=", path.resolve(__dirname, "./src"));
-
+const external = Object.keys(pkg.peerDependencies);
 
 export default defineConfig([
 	{
@@ -32,13 +30,14 @@ export default defineConfig([
 			alias({
 				entries: [{ find: "@", replacement: path.resolve(__dirname, "./src") }],
 			}),
+			resolve({ browser: false }),
 			commonjs(),
-			resolve(),
 			typescript({
 				tsconfig: "./tsconfig.json",
 				sourceMap: true,
 			}),
 		],
+		external,
 	},
 	{
 		input: "src/types/index.ts",
@@ -56,6 +55,7 @@ export default defineConfig([
 		],
 		plugins: [
 			dts()
-		]
+		],
+		external,
 	}
 ]);

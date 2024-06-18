@@ -17,11 +17,15 @@
 				"./src"
 			], */
 			"artipub": [
-				"../src"
+				"../dist/index.mjs"
 			]
-		}
+		},
+		"types": [
+			"node",
+			"../dist/index.d.mts"
+		]
 	},
 	"include": [
-		"./src/**/*.ts"
+		"./src/**/*.ts",
 	]
 }

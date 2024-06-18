@@ -34,18 +34,18 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/mdast": "^4.0.4",
+    "@types/node": "^20.14.2",
+    "@types/unist": "^3.0.2",
     "rollup": "^4.18.0",
     "rollup-plugin-dts": "^6.1.1",
     "typescript": "^5.4.5"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@notionhq/client": "^2.2.15",
     "@tryfabric/martian": "^1.2.4",
-    "@types/node": "^20.14.2",
-    "@types/unist": "^3.0.2",
     "axios": "^1.7.2",
     "chalk": "^5.3.0",
-    "mime": "^4.0.3",
+    "file-type": "^19.0.0",
     "remark-parse": "11.0.0",
     "remark-stringify": "11.0.0",
     "sharp": "^0.33.4",
