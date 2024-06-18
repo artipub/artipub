@@ -39,8 +39,13 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "@tryfabric/martian": "^1.2.4",
     "@types/node": "^20.14.2",
     "@types/unist": "^3.0.2",
+    "axios": "^1.7.2",
+    "chalk": "^5.3.0",
+    "mime": "^4.0.3",
     "remark-parse": "11.0.0",
     "remark-stringify": "11.0.0",
     "sharp": "^0.33.4",

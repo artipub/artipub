@@ -2,15 +2,15 @@ import { ImageExtension, Next, TVisitor } from "../types";
 import { ProcessorContext } from "../core"
 import path from "path";
 import fs from "fs/promises";
-import sharp from "sharp";
+const sharp = require("sharp");
 
-export function ImageCompress(context: ProcessorContext, visit: TVisitor, next: Next) {
+export default async function ImageCompress(context: ProcessorContext, visit: TVisitor, next: Next) {
 	const { option } = context;
 	if (option.compressedOptions?.compressed === false) {
 		return next();
 	}
 	let caches = new Set();
-	visit("image", async (_node, index, parent) => {
+	await visit("image", async (_node, index, parent) => {
 		let { url } = _node as any;
 		if (url) {
 			url = decodeURIComponent(url);

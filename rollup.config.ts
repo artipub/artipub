@@ -4,6 +4,14 @@ import commonjs from "@rollup/plugin-commonjs";
 import dts from "rollup-plugin-dts";
 import alias from "@rollup/plugin-alias";
 import { defineConfig } from "rollup";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+console.log("dirname=", __dirname);
+console.log("src=", path.resolve(__dirname, "./src"));
+
 
 export default defineConfig([
 	{
@@ -22,10 +30,10 @@ export default defineConfig([
 		],
 		plugins: [
 			alias({
-				entries: [{ find: "@", replacement: "./src" }],
+				entries: [{ find: "@", replacement: path.resolve(__dirname, "./src") }],
 			}),
-			resolve(),
 			commonjs(),
+			resolve(),
 			typescript({
 				tsconfig: "./tsconfig.json",
 				sourceMap: true,

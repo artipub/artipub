@@ -13,9 +13,9 @@
 		"noEmit": true,
 		"allowImportingTsExtensions": true,
 		"paths": {
-			"@": [
+			/* 	"@": [
 				"./src"
-			],
+			], */
 			"artipub": [
 				"../src"
 			]
