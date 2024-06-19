@@ -1,2 +1,2 @@
-export * from "./DevToPublisherPlugin"
-export * from "./NotionPublisherPlugin"
+export * from "./DevToPublisherPlugin";
+export * from "./NotionPublisherPlugin";

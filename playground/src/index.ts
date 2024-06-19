@@ -9,7 +9,6 @@ let {
 	GITHUB_DIR,
 	GITHUB_BRANCH,
 	GITHUB_TOKEN,
-	GITHUB_CDN_PREFIX,
 	GITHUB_COMMIT_AUTHOR,
 	GITHUB_COMMIT_EMAIL,
 } = process.env;
@@ -30,8 +29,6 @@ const articleProcessor = new ArticleProcessor({
 });
 
 articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/JS基础-22：Fix Module can only be default-imported us 60a269ef8ada4513998abb64f2480b8a.md")).then(async ({ filePath, content }) => {
-	console.log("filePath=", filePath);
-	console.log("content=", content);
 	let publisherManager = new PublisherManager();
 	publisherManager.addPlugin(NotionPublisherPlugin({
 		api_key: NOTION_API_KEY,
