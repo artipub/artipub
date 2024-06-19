@@ -1,12 +1,12 @@
 import fs from "fs/promises"
 import { ArticleProcessResult, ArticleProcessorOption, Middleware } from '@/types';
 import { unified } from 'unified'
-import type { Node } from "unist";
+import type { Node, Parent } from "unist";
 import remarkParse from 'remark-parse'
 import remarkStringify from 'remark-stringify'
 import { visit } from "unist-util-visit";
 import type { Visitor, Test } from "unist-util-visit"
-import { ImageCompress } from "@/middleware";
+import { picCompress, picUpload } from "@/middleware";
 
 const defaultCompressedOptions = {
 	quality: 80,
@@ -21,7 +21,7 @@ export interface ProcessorContext {
 	filePath: string
 }
 
-export { Node }
+export { Node, Parent }
 export class ArticleProcessor {
 	public readonly option: ArticleProcessorOption;
 	private middlewares: Middleware[];
@@ -48,7 +48,8 @@ export class ArticleProcessor {
 	 * completed.
 	 */
 	processMarkdown(filePath: string): Promise<ArticleProcessResult> {
-		this.middlewares.push(ImageCompress);
+		this.middlewares.push(picCompress);
+		this.middlewares.push(picUpload);
 		let articleProcessor = this;
 		let context: ProcessorContext = {
 			filePath,
@@ -63,27 +64,25 @@ export class ArticleProcessor {
 						if (i < articleProcessor.middlewares.length) {
 							let middleware = articleProcessor.middlewares[i];
 							i++;
-							async function visitor(testOrVisitor: Visitor | Test, visitorOrReverse: Visitor | boolean | null | undefined, maybeReverse: boolean | null | undefined): Promise<void> {
-								return new Promise((innerResolve) => {
-									let reverse;
-									let vt;
-									let test;
-									if (typeof testOrVisitor === "function" && typeof visitorOrReverse !== "function") {
-										test = undefined;
-										vt = testOrVisitor;
-										reverse = visitorOrReverse;
-									} else {
-										test = testOrVisitor;
-										vt = visitorOrReverse;
-										reverse = maybeReverse;
-									}
-									visit(tree, test, vt, reverse);
-									innerResolve();
-								});
+							function visitor(testOrVisitor: Visitor | Test, visitorOrReverse: Visitor | boolean | null | undefined, maybeReverse: boolean | null | undefined): void {
+								let reverse;
+								let vt;
+								let test;
+								if (typeof testOrVisitor === "function" && typeof visitorOrReverse !== "function") {
+									test = undefined;
+									vt = testOrVisitor;
+									reverse = visitorOrReverse;
+								} else {
+									test = testOrVisitor;
+									vt = visitorOrReverse;
+									reverse = maybeReverse;
+								}
+								visit(tree, test, vt, reverse);
 							}
 							await middleware(context, visitor, next);
+						} else {
+							resolve(tree);
 						}
-						resolve(tree);
 					}
 					next();
 				});

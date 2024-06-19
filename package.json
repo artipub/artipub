@@ -11,18 +11,18 @@
   "exports": {
     ".": {
       "default": {
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs"
+        "import": "./index.js",
+        "require": "./index.cjs"
       },
       "types": {
-        "require": "./dist/index.d.cts",
-        "import": "./dist/index.d.ts"
+        "require": "./index.d.cts",
+        "import": "./index.d.ts"
       }
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "files": [
     "dist"
   ],

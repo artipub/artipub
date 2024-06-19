@@ -1,5 +1,5 @@
 import type { Visitor, Test } from "unist-util-visit"
-import { ProcessorContext } from "@/core";
+import { Node, Parent, ProcessorContext } from "@/core";
 
 export interface GithubPicBedOption {
 	owner: string,
@@ -11,7 +11,7 @@ export interface GithubPicBedOption {
 	commit_email: string,
 }
 
-export type UploadImg = (imgFilePath: string) => string;
+export type UploadImg = (imgFilePath: string) => Promise<string>;
 
 export type UploadImgOption = GithubPicBedOption | UploadImg;
 
@@ -35,7 +35,7 @@ export type TVisitor = (
 	testOrVisitor: Visitor | Test,
 	visitorOrReverse: Visitor | boolean | null | undefined,
 	maybeReverse?: boolean | null | undefined
-) => Promise<void>;
+) => void;
 export type Middleware = (context: ProcessorContext, visitor: TVisitor, next: Next) => Promise<void>
 export type Next = () => void
 export type ImageExtension = "png" | "jpeg" | "gif";
@@ -49,4 +49,9 @@ export interface PublishResult {
 export interface NotionPublisherPluginOption {
 	api_key: string,
 	page_id: string
+}
+
+export interface NodeContext {
+	node: Node,
+	parent: Parent | undefined,
 }

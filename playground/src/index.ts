@@ -29,20 +29,7 @@ const articleProcessor = new ArticleProcessor({
 	}
 });
 
-/* articleProcessor.use(async (context: ProcessorContext, visit: TVisitor, next: Next) => {
-	console.log("middleware: filepath=", context.filePath);
-	await visit("text", (node, index, parent) => {
-		if (parent && parent.type === "paragraph") {
-			let n = node as any;
-			if (n.value === "h2") {
-				n.value = "~h2~"
-			}
-		}
-	});
-	next();
-}); */
-
-articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/JS基础-22：Fix Module can only be default-imported us 60a269ef8ada4513998abb64f2480b8a.md")).then(({ filePath, content }) => {
+articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/JS基础-22：Fix Module can only be default-imported us 60a269ef8ada4513998abb64f2480b8a.md")).then(async ({ filePath, content }) => {
 	console.log("filePath=", filePath);
 	console.log("content=", content);
 	let publisherManager = new PublisherManager();
@@ -50,7 +37,7 @@ articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/JS基础-22：F
 		api_key: NOTION_API_KEY,
 		page_id: NOTION_PAGE_ID
 	}));
-	let res = publisherManager.publish(filePath, content);
+	let res = await publisherManager.publish(filePath, content);
 	console.log("publish res:", res);
 });
 
