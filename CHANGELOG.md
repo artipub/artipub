@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.2
+
+
+### 🏡 Chore
+
+- Package.json update ([f6aa106](https://github.com/yxw007/artipub/commit/f6aa106))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.1
 
 
