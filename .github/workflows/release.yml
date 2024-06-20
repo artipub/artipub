@@ -3,6 +3,11 @@ on:
   push:
     branches: [release]
 
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+  
 env:
   HUSKY: 0
   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
