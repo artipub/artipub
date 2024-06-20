@@ -37,6 +37,11 @@ jobs:
         run: |
           pnpm release --no-git-checks
 
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{snecrets.NPM_TOKEN}}
+        run: pnpm publish --access public
+
       - uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.TOKEN }}
