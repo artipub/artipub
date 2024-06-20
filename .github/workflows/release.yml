@@ -29,12 +29,13 @@ jobs:
         run: |
           git config user.name "Potter"
           git config user.email "aa4790139@gmail.com"
+          git remote set-url origin https://x-access-token:${{ secrets.TOKEN }}@github.com/yxw007/artipub.git
 
       - name: Generate Changelog and Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         run: |
-          pnpm release
+          pnpm release --no-git-checks
 
       - uses: ad-m/github-push-action@v0.6.0
         with:
