@@ -8,7 +8,7 @@
     "lint:fix": "eslint --fix --ext .ts && prettier -w src",
     "build": "pnpm clean && tsx script/build.ts",
     "clean": "rm -rf dist",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "type": "module",
   "exports": {
