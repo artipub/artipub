@@ -11,7 +11,9 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4.1.7
+        with:
+          ref: release
       - uses: pnpm/action-setup@v2.1.0
         with:
           version: 7.2.1
@@ -25,7 +27,8 @@ jobs:
 
       - name: Generate Changelog and Create Release
         run: |
-          npx changelogen gh release
+          pnpm release
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }} 
 
