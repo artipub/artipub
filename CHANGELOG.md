@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.5
+
+
+### 🏡 Chore
+
+- Release.yml ([7374042](https://github.com/yxw007/artipub/commit/7374042))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.4
 
 
