@@ -26,11 +26,12 @@ jobs:
           git config user.email "aa4790139@gmail.com"
 
       - name: Generate Changelog and Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }} 
         run: |
           pnpm release
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }} 
+      
 
       - name: Publish to npm
         run: |
