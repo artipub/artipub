@@ -37,6 +37,11 @@ jobs:
         run: |
           pnpm release --no-git-checks
 
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "chore：auto update for release"
+
       - uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.TOKEN }}
