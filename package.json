@@ -12,7 +12,7 @@
     "lint:fix": "eslint --fix --ext .ts && prettier -w src",
     "build": "pnpm clean && tsx script/build.ts",
     "clean": "rm -rf dist",
-    "release": "pnpm changelogen --release --push && pnpm publish",
+    "release": "pnpm changelogen --release --push",
     "prepare": "husky"
   },
   "type": "module",
