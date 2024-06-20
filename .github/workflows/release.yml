@@ -3,6 +3,11 @@ on:
   push:
     branches: [release]
 
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+  
 env:
   HUSKY: 0
   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -11,7 +16,9 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4.1.7
+        with:
+          ref: release
       - uses: pnpm/action-setup@v2.1.0
         with:
           version: 7.2.1
@@ -22,14 +29,17 @@ jobs:
         run: |
           git config user.name "Potter"
           git config user.email "aa4790139@gmail.com"
-
-      - name: Generate Changelog and Create Release
-        run: |
-          npx changelogen gh release
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }} 
-
-      - name: Publish to npm
+      - name: Configure npm
         run: |
           echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
-          pnpm publish
+
+      - name: Generate Changelog and Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }} 
+        run: |
+          npx changelogen --release --publish
+
+      - uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.TOKEN }} 
+          branch: master
