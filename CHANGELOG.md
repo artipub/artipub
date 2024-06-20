@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.1
+
+
+### 🏡 Chore
+
+- Update release.yml and configure npm for release workflow ([cd5c059](https://github.com/yxw007/artipub/commit/cd5c059))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.0
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.0...v1.0.0)
