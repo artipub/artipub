@@ -24,12 +24,14 @@ jobs:
         run: |
           git config user.name "Potter"
           git config user.email "aa4790139@gmail.com"
+      - name: Configure npm
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
 
       - name: Generate Changelog and Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }} 
         run: |
-          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
           npx changelogen --release --publish
 
       - uses: ad-m/github-push-action@v0.6.0
