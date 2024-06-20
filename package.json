@@ -1,6 +1,6 @@
 {
   "name": "artipub",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0",
   "description": "A library for processing and publishing articles",
   "author": "Potter<aa4790139@gmail.com>",
   "repository": {
@@ -12,7 +12,7 @@
     "lint:fix": "eslint --fix --ext .ts && prettier -w src",
     "build": "pnpm clean && tsx script/build.ts",
     "clean": "rm -rf dist",
-    "release": "changelogen --release",
+    "release": "pnpm changelogen --release --push && pnpm publish",
     "prepare": "husky"
   },
   "type": "module",

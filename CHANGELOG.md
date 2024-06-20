@@ -1,6 +1,28 @@
 # Changelog
 
 
+## v1.0.0
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.0...v1.0.0)
+
+### 🩹 Fixes
+
+- **build:** Error ([426523b](https://github.com/yxw007/artipub/commit/426523b))
+
+### 🏡 Chore
+
+- Update release.yml ([0f1ab13](https://github.com/yxw007/artipub/commit/0f1ab13))
+- Update release.yml ([e3fad7c](https://github.com/yxw007/artipub/commit/e3fad7c))
+- Update dependency ([c96b1ee](https://github.com/yxw007/artipub/commit/c96b1ee))
+- Update release.yml ([8fcec7e](https://github.com/yxw007/artipub/commit/8fcec7e))
+- Configure npm for release workflow ([b8c3ca7](https://github.com/yxw007/artipub/commit/b8c3ca7))
+- Update release.yml and configure npm for release workflow ([74110c4](https://github.com/yxw007/artipub/commit/74110c4))
+- Update package.json with git URL fix ([ec61f46](https://github.com/yxw007/artipub/commit/ec61f46))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.0-beta.0
 
 
