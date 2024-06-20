@@ -29,11 +29,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }} 
         run: |
-          pnpm release
-          git push
-      
-
-      - name: Publish to npm
-        run: |
           echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
-          pnpm publish
+          npx changelogen --release --publish
+
+      - uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.TOKEN }} 
+          branch: master
