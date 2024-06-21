@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.7
+
+
+### 🏡 Chore
+
+- Update NPM_TOKEN in release.yml ([34c43a1](https://github.com/yxw007/artipub/commit/34c43a1))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.6
 
 ## v1.0.5
