@@ -32,7 +32,7 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install modules
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Add Git Config
         run: |
