@@ -49,5 +49,7 @@ jobs:
       - name: Publish to npm
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-        run: pnpm publish --access public
+        run: |
+          pnpm whoami
+          pnpm publish --access public
 
