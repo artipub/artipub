@@ -1,14 +1,21 @@
 {
-  "name": "artipub",
-  "version": "1.0.0-beta.0",
+  "name": "@pup007/artipub",
+  "version": "1.0.20",
   "description": "A library for processing and publishing articles",
   "author": "Potter<aa4790139@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yxw007/artipub.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "lint": "eslint --ext .ts && prettier -c src",
     "lint:fix": "eslint --fix --ext .ts && prettier -w src",
     "build": "pnpm clean && tsx script/build.ts",
     "clean": "rm -rf dist",
-    "release": "changelogen --release --clean",
+    "release": "pnpm changelogen --release",
     "prepare": "husky"
   },
   "type": "module",
@@ -61,6 +68,7 @@
     "@types/mdast": "^4.0.4",
     "@types/node": "^20.14.2",
     "@types/unist": "^3.0.2",
+    "changelogen": "^0.5.5",
     "eslint": "^8.57.0",
     "eslint-config-unjs": "^0.3.2",
     "husky": "^9.0.11",

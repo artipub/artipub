@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.0.20
+
+
+### 🏡 Chore
+
+- Update branch name in release.yml to use 'master' instead of 'release' ([187fe0f](https://github.com/yxw007/artipub/commit/187fe0f))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
+
+
 ## v1.0.0-beta.0
 
 
