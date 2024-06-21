@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.14
+
+
+### 🏡 Chore
+
+- Update npm registry and publish script ([068e4c7](https://github.com/yxw007/artipub/commit/068e4c7))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.13
 
 
