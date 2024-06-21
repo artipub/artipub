@@ -45,10 +45,13 @@ jobs:
         with:
           github_token: ${{ secrets.TOKEN }}
           branch: master
-
-      - name: Publish to npm
+        
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm publish --provenance --access public
         env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-        run: |
-          npm publish --access public
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
