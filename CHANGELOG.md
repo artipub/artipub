@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.12
+
+
+### 🏡 Chore
+
+- Update npm publish command in release.yml ([09645b9](https://github.com/yxw007/artipub/commit/09645b9))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.11
 
 
