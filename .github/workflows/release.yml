@@ -10,6 +10,7 @@ permissions:
 
 env:
   HUSKY: 0
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
   Build:
@@ -33,11 +34,20 @@ jobs:
       - name: Generate Changelog and Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           pnpm release --no-git-checks
+
+      - name: Commit changes
+        run: |
+          git diff --quiet || git commit -am "chore: auto update for release"
 
       - uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.TOKEN }}
           branch: master
+
+      - name: Publish to npm
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+        run: pnpm publish --access public
+
