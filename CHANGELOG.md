@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.19
+
+
+### 🏡 Chore
+
+- Update npm registry to use npmjs.org instead of GitHub registry ([f5dc22d](https://github.com/yxw007/artipub/commit/f5dc22d))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.18
 
 
