@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.16
+
+
+### 🏡 Chore
+
+- Update npm registry and publish script in release.yml ([c80a319](https://github.com/yxw007/artipub/commit/c80a319))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.15
 
 ## v1.0.14
