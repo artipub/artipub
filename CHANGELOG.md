@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.11
+
+
+### 🏡 Chore
+
+- Remove unused command in release.yml ([e0a1588](https://github.com/yxw007/artipub/commit/e0a1588))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.10
 
 ## v1.0.9
