@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.18
+
+
+### 🏡 Chore
+
+- Update npm install command in release.yml ([6d7ee02](https://github.com/yxw007/artipub/commit/6d7ee02))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.17
 
 ## v1.0.16
