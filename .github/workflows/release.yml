@@ -1,7 +1,7 @@
 name: CI
 on:
   push:
-    branches: [master]
+    branches: [release]
 
 permissions:
   id-token: write
@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.7
         with:
-          ref: master
+          ref: release
       - uses: pnpm/action-setup@v2
         with:
           version: 8
@@ -58,6 +58,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
+          # Note: Registration-url must be set here, otherwise the permissions will be wrong
           registry-url: 'https://npm.pkg.github.com'
           scope: '@pup007'
       

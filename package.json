@@ -8,7 +8,7 @@
     "url": "git+https://github.com/yxw007/artipub.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "access": "public"
   },
   "scripts": {
     "lint": "eslint --ext .ts && prettier -c src",
