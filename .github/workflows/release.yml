@@ -62,8 +62,8 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-          echo "@pup007:registry=https://npm.pkg.github.com" >> ~/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          echo "@pup007:registry=https://registry.npmjs.org" >> ~/.npmrc
           echo "always-auth=true" >> ~/.npmrc
 
       - name: Print .npmrc
