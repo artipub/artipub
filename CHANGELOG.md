@@ -1,6 +1,25 @@
 # Changelog
 
 
+## v1.0.22-alpha
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.21...v1.0.22-alpha)
+
+### 🩹 Fixes
+
+- **build:** Tsx not found ([0b3686b](https://github.com/yxw007/artipub/commit/0b3686b))
+- **build:** Echo error ([a113031](https://github.com/yxw007/artipub/commit/a113031))
+
+### 🏡 Chore
+
+- **release:** V1.0.21 ([e2d3536](https://github.com/yxw007/artipub/commit/e2d3536))
+- Npmrc config was configured in release.yml instead ([b98ca82](https://github.com/yxw007/artipub/commit/b98ca82))
+- Update build configuration and add build step in release workflow ([4fda78f](https://github.com/yxw007/artipub/commit/4fda78f))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.21
 
 
