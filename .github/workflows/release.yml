@@ -62,7 +62,7 @@ jobs:
         run: |
           echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" > ~/.npmrc
           echo "@pup007:registry=https://npm.pkg.github.com" >> ~/.npmrc
-          ehco "always-auth=true" >> ~/.npmrc
+          echo "always-auth=true" >> ~/.npmrc
         
       - uses: actions/setup-node@v4
         with:
