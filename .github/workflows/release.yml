@@ -65,15 +65,12 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
           echo "@pup007:registry=https://registry.npmjs.org" >> ~/.npmrc
           echo "always-auth=true" >> ~/.npmrc
-
-      - name: Print .npmrc
-        run: cat ~/.npmrc
         
       - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           # Note: Registration-url must be set here, otherwise the permissions will be wrong
-          registry-url: 'https://npm.pkg.github.com'
+          registry-url: 'https://registry.npmjs.org'
           scope: '@pup007'
       
       - name: Publish package
