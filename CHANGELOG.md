@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.26
+
+
+### 🏡 Chore
+
+- **release:** V1.0.25 ([2550472](https://github.com/yxw007/artipub/commit/2550472))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.25
 
 ## v1.0.24
