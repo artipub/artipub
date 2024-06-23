@@ -13,7 +13,7 @@
   "scripts": {
     "lint": "eslint --ext .ts && prettier -c src",
     "lint:fix": "eslint --fix --ext .ts && prettier -w src",
-    "build": "pnpm clean && tsx script/build.ts",
+    "build": "pnpm clean && npx tsx script/build.ts",
     "clean": "rm -rf dist",
     "release": "pnpm changelogen --release",
     "prepare": "husky"
