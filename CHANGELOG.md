@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.2-alpha.0
+
+
+### 🏡 Chore
+
+- Update package.json exports configuration ([9697d52](https://github.com/yxw007/artipub/commit/9697d52))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.1-alpha.0
 
 
