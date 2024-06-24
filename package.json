@@ -19,21 +19,19 @@
 		"prepare": "husky"
 	},
 	"type": "module",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
-		".": {
-			"default": {
-				"import": "./index.js",
-				"require": "./index.cjs"
-			},
-			"types": {
-				"require": "./index.d.cts",
-				"import": "./index.d.ts"
-			}
+		"require": {
+			"types": "./dist/index.d.cts",
+			"require": "./dist/index.cjs"
 		},
-		"./package.json": "./package.json"
+		"import": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		}
 	},
-	"main": "index.js",
-	"types": "index.d.ts",
 	"files": [
 		"dist"
 	],
