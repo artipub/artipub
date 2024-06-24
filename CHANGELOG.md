@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.1-alpha.0
+
+
+### 📦 Build
+
+- Add release.yml ([e9bd902](https://github.com/yxw007/artipub/commit/e9bd902))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.0-beta.0
 
 
