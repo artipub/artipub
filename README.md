@@ -14,19 +14,19 @@ ArtiPub（文章发布助手）是一个旨在简化内容创作者跨平台发�
 使用 npm 安装 ：
 
 ```bash
-npm install artipub
+npm install -D @pup007/artipub
 ```
 
 使用 yarn 安装：
 
 ```bash
-yarn add artipub
+yarn add -D @pup007/artipub
 ```
 
 使用pnpm 安装：
 
 ```bash
-pnpm add artipub
+pnpm add -D @pup007/artipub
 ```
 
 ## 快速开始

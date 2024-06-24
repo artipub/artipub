@@ -1,86 +1,94 @@
 {
-  "name": "artipub",
-  "version": "1.0.0-beta.0",
-  "description": "A library for processing and publishing articles",
-  "author": "Potter<aa4790139@gmail.com>",
-  "scripts": {
-    "lint": "eslint --ext .ts && prettier -c src",
-    "lint:fix": "eslint --fix --ext .ts && prettier -w src",
-    "build": "pnpm clean && tsx script/build.ts",
-    "clean": "rm -rf dist",
-    "release": "changelogen --release --clean",
-    "prepare": "husky"
-  },
-  "type": "module",
-  "exports": {
-    ".": {
-      "default": {
-        "import": "./index.js",
-        "require": "./index.cjs"
-      },
-      "types": {
-        "require": "./index.d.cts",
-        "import": "./index.d.ts"
-      }
-    },
-    "./package.json": "./package.json"
-  },
-  "main": "index.js",
-  "types": "index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "keywords": [
-    "typescript",
-    "node",
-    "notion",
-    "dev.to",
-    "process",
-    "article",
-    "publish",
-    "flow"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{ts}": [
-      "pnpm lint:fix"
-    ]
-  },
-  "license": "ISC",
-  "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "@rollup/plugin-alias": "^5.1.0",
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/mdast": "^4.0.4",
-    "@types/node": "^20.14.2",
-    "@types/unist": "^3.0.2",
-    "eslint": "^8.57.0",
-    "eslint-config-unjs": "^0.3.2",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.7",
-    "prettier": "^3.2.5",
-    "rollup": "^4.18.0",
-    "rollup-plugin-dts": "^6.1.1",
-    "typescript": "^5.4.5"
-  },
-  "peerDependencies": {
-    "@notionhq/client": "^2.2.15",
-    "@tryfabric/martian": "^1.2.4",
-    "axios": "^1.7.2",
-    "chalk": "^5.3.0",
-    "file-type": "^19.0.0",
-    "remark-parse": "11.0.0",
-    "remark-stringify": "11.0.0",
-    "sharp": "^0.33.4",
-    "tslib": "^2.6.3",
-    "unified": "11.0.0",
-    "unist-util-visit": "^5.0.0"
-  }
+	"name": "@pup007/artipub",
+	"version": "1.0.0-beta.0",
+	"description": "A library for processing and publishing articles",
+	"author": "Potter<aa4790139@gmail.com>",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/yxw007/artipub.git"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"lint": "eslint --ext .ts && prettier -c src",
+		"lint:fix": "eslint --fix --ext .ts && prettier -w src",
+		"build": "pnpm clean && npx tsx script/build.ts",
+		"clean": "rm -rf dist",
+		"release": "pnpm changelogen --release --prepatch=alpha",
+		"prepare": "husky"
+	},
+	"type": "module",
+	"exports": {
+		".": {
+			"default": {
+				"import": "./index.js",
+				"require": "./index.cjs"
+			},
+			"types": {
+				"require": "./index.d.cts",
+				"import": "./index.d.ts"
+			}
+		},
+		"./package.json": "./package.json"
+	},
+	"main": "index.js",
+	"types": "index.d.ts",
+	"files": [
+		"dist"
+	],
+	"keywords": [
+		"typescript",
+		"node",
+		"notion",
+		"dev.to",
+		"process",
+		"article",
+		"publish",
+		"flow"
+	],
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"**/*.{ts}": [
+			"pnpm lint:fix"
+		]
+	},
+	"license": "ISC",
+	"devDependencies": {
+		"@commitlint/cli": "^19.3.0",
+		"@commitlint/config-conventional": "^19.2.2",
+		"@rollup/plugin-alias": "^5.1.0",
+		"@rollup/plugin-commonjs": "^26.0.1",
+		"@rollup/plugin-node-resolve": "^15.2.3",
+		"@rollup/plugin-typescript": "^11.1.6",
+		"@types/mdast": "^4.0.4",
+		"@types/node": "^20.14.2",
+		"@types/unist": "^3.0.2",
+		"changelogen": "^0.5.5",
+		"eslint": "^8.57.0",
+		"eslint-config-unjs": "^0.3.2",
+		"husky": "^9.0.11",
+		"lint-staged": "^15.2.7",
+		"prettier": "^3.2.5",
+		"rollup": "^4.18.0",
+		"rollup-plugin-dts": "^6.1.1",
+		"typescript": "^5.4.5"
+	},
+	"peerDependencies": {
+		"@notionhq/client": "^2.2.15",
+		"@tryfabric/martian": "^1.2.4",
+		"axios": "^1.7.2",
+		"chalk": "^5.3.0",
+		"file-type": "^19.0.0",
+		"remark-parse": "11.0.0",
+		"remark-stringify": "11.0.0",
+		"sharp": "^0.33.4",
+		"tslib": "^2.6.3",
+		"unified": "11.0.0",
+		"unist-util-visit": "^5.0.0"
+	}
 }

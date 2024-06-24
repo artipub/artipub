@@ -1,0 +1,80 @@
+name: CI
+on:
+  push:
+    branches: [master]
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
+env:
+  HUSKY: 0
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.1.7
+        with:
+          ref: master
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          # node-version-file: ".nvmrc"
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install modules
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Add Git Config
+        run: |
+          git config user.name "Potter"
+          git config user.email "aa4790139@gmail.com"
+          git remote set-url origin https://x-access-token:${{ secrets.TOKEN }}@github.com/yxw007/artipub.git
+
+      - name: Generate Changelog and Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        run: |
+          pnpm release --no-git-checks
+
+      - name: Commit changes
+        run: |
+          git diff --quiet || git commit -am "chore: auto update for release"
+
+      - uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          branch: master
+
+      - name: Set npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          echo "@pup007:registry=https://registry.npmjs.org" >> ~/.npmrc
+          echo "always-auth=true" >> ~/.npmrc
+        
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          # Note: Registration-url must be set here, otherwise the permissions will be wrong
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@pup007'
+      
+      - name: Publish package
+        run: pnpm publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
