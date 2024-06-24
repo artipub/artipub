@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.2-alpha.1
+
+
+### 🏡 Chore
+
+- Update release script in package.json for prerelease ([d034036](https://github.com/yxw007/artipub/commit/d034036))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.2-alpha.0
 
 
