@@ -1,40 +1,40 @@
 # ArtiPub
-English | [简体中文](./README_zh-CN.md)
+简体中文 | [English](./README.md)
 
-ArtiPub (article release assistant) is a tool library aimed at simplifying content creators to publish the article process.It provides a simple API that allows you to easily publish the article to multiple platforms, such as blogs, social media, etc., without manual operation of each platform.
+ArtiPub（文章发布助手）是一个旨在简化内容创作者跨平台发布文章过程的工具库。它提供了一套简单的API，可以让你轻松地将文章发布到多个平台，如博客、社交媒体等，无需手动操作每个平台。
 
-## Features
+## 特点
 
-- **Cross platform support**：Supports multiple major content platforms, including but not limited to Medium, Dev.to, etc
-- **Simple and easy to use**：Provides a concise API, only a few lines of code to achieve article publishing.
-- **Custom flow**：Plugins and middleware can be used to give users more control over the processing and publishing process.
-- **Open Source**：Encourage community contributions and continue to add new platform support and features.
+- **跨平台支持**：支持多个主流内容平台，包括但不限于Medium、Dev.to等。
+- **简单易用**：提供了简洁的API，只需几行代码即可实现文章的发布。
+- **自定义流程**：可以通过插件和中间件，让用户更好的控制处理和发布流程。
+- **开源社区**：鼓励社区贡献，持续增加新的平台支持和功能。
 
-## Install
+## 安装
 
-npm：
+使用 npm 安装 ：
 
 ```bash
 npm install -D @pup007/artipub
 ```
 
-yarn：
+使用 yarn 安装：
 
 ```bash
 yarn add -D @pup007/artipub
 ```
 
-pnpm：
+使用pnpm 安装：
 
 ```bash
 pnpm add -D @pup007/artipub
 ```
 
-## Quick Start
+## 快速开始
 
-Here is a simple example showing how to publish an article to a given platform using ArtiPub
+以下是一个简单的示例，展示如何使用 ArtiPub 发布一篇文章到指定平台：
 
-### CommonJS 
+### CommonJS 方式导入
 
 如果您的项目使用 CommonJS 模块系统，可以按照以下方式导入 ArtiPub：
 
@@ -42,7 +42,7 @@ Here is a simple example showing how to publish an article to a given platform u
 const { ArticleProcessor, PublisherManager, NotionPublisherPlugin } = require('@pup007/artipub');
 ```
 
-### ES Module 
+### ES Module 方式导入
 
 ```javascript
 import { ArticleProcessor, PublisherManager, NotionPublisherPlugin } from "@pup007/artipub"
@@ -92,14 +92,14 @@ articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(
 
 ```
 
-## Contribution
+## 贡献
 
-We welcome contributions in all forms, whether it's new features, bug fixes, or documentation improvements.
+我们欢迎所有形式的贡献，无论是新功能、bug修复还是文档改进。
 
-## License
+## 许可证
 
-ArtiPub is released under the MIT license. See the [LICENSE](./LICENSE) file for details.
+ArtiPub 是在 MIT 许可证下发布的。详情请见 [`LICENSE`](./LICENSE) 文件。
 
-## Thanks
+## 致谢
 
-Thank you to all the developers who contributed to ArtiPub, and everyone who used and supported the project.
+感谢所有为 ArtiPub 贡献的开发者，以及所有使用和支持此项目的人。
