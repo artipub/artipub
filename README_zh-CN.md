@@ -34,15 +34,13 @@ pnpm add -D @pup007/artipub
 
 以下是一个简单的示例，展示如何使用 ArtiPub 发布一篇文章到指定平台：
 
-### CommonJS 方式导入
-
-如果您的项目使用 CommonJS 模块系统，可以按照以下方式导入 ArtiPub：
+### CommonJS 
 
 ```javascript
 const { ArticleProcessor, PublisherManager, NotionPublisherPlugin } = require('@pup007/artipub');
 ```
 
-### ES Module 方式导入
+### ES Module 
 
 ```javascript
 import { ArticleProcessor, PublisherManager, NotionPublisherPlugin } from "@pup007/artipub"

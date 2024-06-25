@@ -36,8 +36,6 @@ Here is a simple example showing how to publish an article to a given platform u
 
 ### CommonJS 
 
-如果您的项目使用 CommonJS 模块系统，可以按照以下方式导入 ArtiPub：
-
 ```javascript
 const { ArticleProcessor, PublisherManager, NotionPublisherPlugin } = require('@pup007/artipub');
 ```
