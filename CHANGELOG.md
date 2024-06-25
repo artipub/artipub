@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.2-alpha.3
+
+
+### 🏡 Chore
+
+- Update ArtiPub README with chinese translation and installation instructions ([90fcada](https://github.com/yxw007/artipub/commit/90fcada))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.2-alpha.2
 
 
