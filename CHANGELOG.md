@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.2-alpha.2
+
+
+### 🩹 Fixes
+
+- **build:** Build cjs bundle format error, simplify package.json exports config ([5533734](https://github.com/yxw007/artipub/commit/5533734))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.2-alpha.1
 
 
