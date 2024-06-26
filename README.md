@@ -3,12 +3,38 @@ English | [简体中文](./README_zh-CN.md)
 
 ArtiPub (article release assistant) is a tool library aimed at simplifying content creators to publish the article process.It provides a simple API that allows you to easily publish the article to multiple platforms, such as blogs, social media, etc., without manual operation of each platform.
 
+## Why do you need artipub?
+1. Local pictures cited in Markdown need to manually compress the picture, then upload to the bed, and finally replace the picture link
+2. After Markdown finished writing, I want to publish it to other platforms to avoid manual Copy
+3. After Markdown finished writing the article, I need to modify some of the contents of Markdown and let it regenerate the content of Markdown
+4. ...
+
+> Note: ArtiPub will help you solve these problems automatically, and will expand more in the future
+
 ## Features
 
-- **Cross platform support**：Supports multiple major content platforms, including but not limited to Medium, Dev.to, etc
-- **Simple and easy to use**：Provides a concise API, only a few lines of code to achieve article publishing.
-- **Custom flow**：Plugins and middleware can be used to give users more control over the processing and publishing process.
-- **Open Source**：Encourage community contributions and continue to add new platform support and features.
+- 🌐 **Multi-platform release**: Support that the Markdown article is published to multiple mainstream content platforms, including but not limited to Notion, Medium, Dev.to, etc.
+- ✨ **Simple and easy to use**: Provide a simple API, and only need a few lines of code to implement the article release.
+- 🔌 **Support middleware and plugin**: Through plug -in and middle parts, let users make more fine -grained control processing and release processes.
+- 📖 **Complete open source**: Encourage community contributions and continue to increase new platform support and functions.
+
+## TODO
+- [ ] DevToPublisherPlugin
+- [ ] Document Site
+
+## built-in
+
+### Treatment middleware
+| Name | Support | Description |
+|-|-|-|
+| piccompress | √ | Automatic compression of the picture |
+| Picupload | √ | Picture Upload |
+
+### Publish plug -in
+| Name | Support | Description |
+|-|-|-|
+| NOTIONPUBLISHERPLUGIN | √ | Published to NOTION |
+| DEVTOPUBLISHERPLUGIN | Doing | Published to DEV.TO |
 
 ## Install
 
@@ -67,6 +93,7 @@ let {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const articleProcessor = new ArticleProcessor({
+ //tips: If you don’t want to use a github bed, uploadImgOption can also be an aspect upload function, and finally returned to the uploaded picture URL
  uploadImgOption: {
   owner: GITHUB_OWNER,
   repo: GITHUB_REPO,
@@ -90,9 +117,48 @@ articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(
 
 ```
 
-## Contribution
+## Development
 
-We welcome contributions in all forms, whether it's new features, bug fixes, or documentation improvements.
+> Note: Please create a new branch based on the master, develop on the new branch, and create PR to Master after development
+
+- Install dependency
+  ```bash
+  pnpm install
+  ```
+
+- Add process middleware
+  ```typescript
+  export default async function customMiddleware(
+    context: ProcessorContext,
+    visit: TVisitor,
+    next: Next) {
+    //visit：In depth priority traversing Markdown AST's interface, which is convenient for users to modify node. Note that this process is synchronized. If you want to process it asynchronous, find the corresponding Node first, then add asynchronous processing.
+    //next: Call next after processing, otherwise it will cause stuck and will not execute
+  }
+  ```
+- Add publish plugin
+  ```typescript
+  export function XXXPublisherPlugin(option: any) {
+    return () => {
+      let res: PublishResult = {
+        success: true,
+        info: "Published to XXX",
+      };
+      //TODO:
+      return res;
+    };
+  }
+  ```
+
+- build
+  ```bash
+  pnpm build
+  ```
+
+- playground: 
+1. First pnpm Build package artipub
+2. cd playground for verification test (Note: Do not submit the file in playground, only local tests)
+
 
 ## License
 

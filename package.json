@@ -27,7 +27,8 @@
 		"import": "./dist/index.js"
 	},
 	"files": [
-		"dist"
+		"dist",
+		"README_zh-CN.md"
 	],
 	"keywords": [
 		"typescript",
