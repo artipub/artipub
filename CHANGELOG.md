@@ -1,6 +1,8 @@
 # Changelog
 
 
+## v1.0.2-alpha.6
+
 ## v1.0.2-alpha.5
 
 
