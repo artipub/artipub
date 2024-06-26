@@ -16,8 +16,7 @@
 		"build": "pnpm clean && npx tsx script/build.ts",
 		"clean": "rm -rf dist",
 		"release": "pnpm changelogen --release -i --prerelease",
-		"prepare": "husky",
-		"postinstall": "npx tsx script/postinstall.ts"
+		"prepare": "husky"
 	},
 	"type": "module",
 	"main": "./dist/index.cjs",
@@ -73,7 +72,8 @@
 		"rollup-plugin-dts": "^6.1.1",
 		"typescript": "^5.4.5"
 	},
-	"peerDependencies": {
+	"peerDependencies": {},
+	"dependencies": {
 		"@notionhq/client": "^2.2.15",
 		"@tryfabric/martian": "^1.2.4",
 		"axios": "^1.7.2",
