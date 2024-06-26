@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 import { existsSync } from 'fs';
-import pkg from "../dist/package.json";
+import pkg from "../package.json";
 
 const peerDependencies = pkg.peerDependencies || {};
 
