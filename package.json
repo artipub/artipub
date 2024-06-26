@@ -16,7 +16,8 @@
 		"build": "pnpm clean && npx tsx script/build.ts",
 		"clean": "rm -rf dist",
 		"release": "pnpm changelogen --release -i --prerelease",
-		"prepare": "husky"
+		"prepare": "husky",
+		"postinstall": "npx tsx script/postinstall.ts"
 	},
 	"type": "module",
 	"main": "./dist/index.cjs",
@@ -28,7 +29,8 @@
 	},
 	"files": [
 		"dist",
-		"README_zh-CN.md"
+		"README_zh-CN.md",
+		"script/postinstall.ts"
 	],
 	"keywords": [
 		"typescript",
