@@ -44,7 +44,10 @@ export type Middleware = (
 export type Next = () => void;
 export type ImageExtension = "png" | "jpeg" | "gif";
 
-export type Plugin = (filePath: string, content: string) => PublishResult;
+export type Plugin = (
+  filePath: string,
+  content: string
+) => Promise<PublishResult>;
 export interface PublishResult {
   success: boolean;
   info?: string;

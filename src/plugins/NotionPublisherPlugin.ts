@@ -4,7 +4,7 @@ const { Client } = require("@notionhq/client");
 const { markdownToBlocks } = require("@tryfabric/martian");
 
 export function NotionPublisherPlugin(option: NotionPublisherPluginOption) {
-  return async (filePath: string, content: string) => {
+  return async (filePath: string, content: string): Promise<PublishResult> => {
     const articleName = path.basename(filePath);
     const blocks = markdownToBlocks(content);
     const notion = new Client({ auth: option.api_key });
