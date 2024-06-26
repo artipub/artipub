@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 import pkg from "./package.json";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const external = Object.keys(pkg.peerDependencies || {});
+const external = Object.keys(pkg?.peerDependencies || {});
 
 export default defineConfig([
 	{
