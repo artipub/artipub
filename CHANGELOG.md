@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v1.0.2-alpha.10
+
+
+### 📖 Documentation
+
+- Improve documentation ([d7c0ce8](https://github.com/yxw007/artipub/commit/d7c0ce8))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.2-alpha.9
 
 ## v1.0.2-alpha.8
