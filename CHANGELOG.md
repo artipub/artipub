@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.0.2
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.2-alpha.9...v1.0.2)
+
+### 🏡 Chore
+
+- **release:** V1.0.2-alpha.9 ([4b3c82e](https://github.com/yxw007/artipub/commit/4b3c82e))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.2-alpha.9
 
 ## v1.0.2-alpha.8
