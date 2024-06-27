@@ -97,5 +97,5 @@ export function createVisitor(tree: Node) {
       reverse = maybeReverse;
     }
     visit(tree, test, vt, reverse);
-  }
+  };
 }

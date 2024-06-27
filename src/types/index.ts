@@ -65,6 +65,8 @@ export interface NodeContext {
   parent: Parent | undefined;
 }
 
-export type TVt = (testOrVisitor: Visitor | Test,
+export type TVt = (
+  testOrVisitor: Visitor | Test,
   visitorOrReverse: Visitor | boolean | null | undefined,
-  maybeReverse: boolean | null | undefined) => void;
+  maybeReverse: boolean | null | undefined
+) => void;

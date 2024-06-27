@@ -1,11 +1,19 @@
-import { NotionPublisherPluginOption, PublishResult, TVisitor, ToMarkdown } from "@/types";
+import {
+  NotionPublisherPluginOption,
+  PublishResult,
+  TVisitor,
+  ToMarkdown,
+} from "@/types";
 import { Heading } from "mdast";
 const { Client } = require("@notionhq/client");
 const { markdownToBlocks } = require("@tryfabric/martian");
 
 export function NotionPublisherPlugin(option: NotionPublisherPluginOption) {
-  return async (articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> => {
-
+  return async (
+    articleTitle: string,
+    visit: TVisitor,
+    toMarkdown: ToMarkdown
+  ): Promise<PublishResult> => {
     visit("heading", (_node, _index, parent) => {
       let node = _node as Heading;
       if (parent && node.depth === 1) {

@@ -26,9 +26,7 @@ export class PublisherManager {
   }
   async publish() {
     function toMarkdown(tree: Root) {
-      const content = unified()
-        .use(remarkStringify)
-        .stringify(tree);
+      const content = unified().use(remarkStringify).stringify(tree);
       return { content: content.toString() };
     }
 
@@ -37,22 +35,26 @@ export class PublisherManager {
       visit(tree, "heading", (node: Heading) => {
         if (node && node.depth === 1) {
           articleName = (node?.children[0] as Text).value;
-          return true
+          return true;
         }
       });
       return articleName;
     }
 
-    const tree = await unified()
-      .use(remarkParse)
-      .parse(this.content);
+    const tree = await unified().use(remarkParse).parse(this.content);
 
     const articleTitle = getArticleTitle(tree);
 
     let res: PublishResult[] = [];
     for (let plugin of this.plugins) {
       let cloneTree = clone(tree);
-      res.push(await plugin(articleTitle, createVisitor(cloneTree), toMarkdown.bind(null, cloneTree)));
+      res.push(
+        await plugin(
+          articleTitle,
+          createVisitor(cloneTree),
+          toMarkdown.bind(null, cloneTree)
+        )
+      );
     }
     return res;
   }

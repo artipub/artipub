@@ -28,13 +28,13 @@ const articleProcessor = new ArticleProcessor({
 	}
 });
 
-articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(async ({ filePath, content }) => {
-	let publisherManager = new PublisherManager();
+articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(async ({ content }) => {
+	let publisherManager = new PublisherManager(content);
 	publisherManager.addPlugin(NotionPublisherPlugin({
 		api_key: NOTION_API_KEY ?? "",
 		page_id: NOTION_PAGE_ID ?? "",
 	}));
-	let res = await publisherManager.publish(filePath, content);
+	let res = await publisherManager.publish();
 	console.log("publish res:", res);
 });
 
