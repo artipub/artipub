@@ -1,9 +1,9 @@
-# ArtiPub
+# 🎉 ArtiPub
 English | [简体中文](./README_zh-CN.md)
 
 ArtiPub (article release assistant) is a tool library aimed at simplifying content creators to publish the article process.It provides a simple API that allows you to easily publish the article to multiple platforms, such as blogs, social media, etc., without manual operation of each platform.
 
-## Why do you need artipub?
+## ❓ Why do you need artipub?
 1. Local pictures cited in Markdown need to manually compress the picture, then upload to the bed, and finally replace the picture link
 2. After Markdown finished writing, I want to publish it to other platforms to avoid manual Copy
 3. After Markdown finished writing the article, I need to modify some of the contents of Markdown and let it regenerate the content of Markdown
@@ -11,18 +11,18 @@ ArtiPub (article release assistant) is a tool library aimed at simplifying conte
 
 > Note: ArtiPub will help you solve these problems automatically, and will expand more in the future
 
-## Features
+## ✨ Features
 
 - 🌐 **Multi-platform release**: Support that the Markdown article is published to multiple mainstream content platforms, including but not limited to Notion, Medium, Dev.to, etc.
 - ✨ **Simple and easy to use**: Provide a simple API, and only need a few lines of code to implement the article release.
 - 🔌 **Support middleware and plugin**: Through plug -in and middle parts, let users make more fine -grained control processing and release processes.
 - 📖 **Complete open source**: Encourage community contributions and continue to increase new platform support and functions.
 
-## TODO
+## 📌 TODO
 - [ ] DevToPublisherPlugin
 - [ ] Document Site
 
-## built-in
+## 🔧 Built-in
 
 ### Treatment middleware
 | Name | Support | Description |
@@ -36,7 +36,7 @@ ArtiPub (article release assistant) is a tool library aimed at simplifying conte
 | NOTIONPUBLISHERPLUGIN | √ | Published to NOTION |
 | DEVTOPUBLISHERPLUGIN | Doing | Published to DEV.TO |
 
-## Install
+## 📦 Install
 
 npm：
 
@@ -56,7 +56,7 @@ pnpm：
 pnpm add -D @pup007/artipub
 ```
 
-## Quick Start
+## 🚀 Quick Start
 
 Here is a simple example showing how to publish an article to a given platform using ArtiPub
 
@@ -72,7 +72,7 @@ const { ArticleProcessor, PublisherManager, NotionPublisherPlugin } = require('@
 import { ArticleProcessor, PublisherManager, NotionPublisherPlugin } from "@pup007/artipub"
 ```
 
-### Example
+### Usage
 
 ```js
 import { ArticleProcessor, PublisherManager, NotionPublisherPlugin } from "@pup007/artipub"
@@ -105,19 +105,19 @@ const articleProcessor = new ArticleProcessor({
  }
 });
 
-articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(async ({ filePath, content }) => {
- let publisherManager = new PublisherManager();
+articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(async ({ content }) => {
+ let publisherManager = new PublisherManager(content);
  publisherManager.addPlugin(NotionPublisherPlugin({
   api_key: NOTION_API_KEY,
   page_id: NOTION_PAGE_ID
  }));
- let res = await publisherManager.publish(filePath, content);
+ let res = await publisherManager.publish();
  // output: [ { success: true, info: 'Published to Notion successfully!' } ]
 });
 
 ```
 
-## Development
+## 💻 Development
 
 > Note: Please create a new branch based on the master, develop on the new branch, and create PR to Master after development
 
@@ -167,10 +167,11 @@ articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(
 2. cd playground for verification test (Note: Do not submit the file in playground, only local tests)
 
 
-## License
+## 📄 License
 
 ArtiPub is released under the MIT license. See the [LICENSE](./LICENSE) file for details.
 
-## Thanks
+## 🙏 Thanks
 
-Thank you to all the developers who contributed to ArtiPub, and everyone who used and supported the project.
+Thank you to all the developers who contributed to ArtiPub, and everyone who used and supported the project. 
+If this library has been useful for you, please consider giving it a ⭐️ as a way to show your support. Your encouragement is what keeps us going and improving. Thank you so much from the bottom of our hearts! 🌹

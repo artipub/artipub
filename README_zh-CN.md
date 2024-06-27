@@ -1,9 +1,9 @@
-# ArtiPub
+# 🎉 ArtiPub
 简体中文 | [English](./README.md)
 
 ArtiPub（文章发布助手）是一个旨在简化内容创作者跨平台发布文章过程的工具库。它提供了一套简单的API，可以让你轻松地将文章发布到多个平台，如博客、社交媒体等，无需手动操作每个平台。
 
-## 为什么需要ArtiPub?
+## ❓ 为什么需要ArtiPub?
 1. markdown中引用的本地图片，需要手动压缩图片，然后上传至图床，最后在把图片链接替换掉
 2. markdown写完文章后，想发布至其他平台避免手动copy
 3. markdown写完文章后，我需要修改markdown中的一些内容，让其重新生成markdown内容
@@ -11,18 +11,18 @@ ArtiPub（文章发布助手）是一个旨在简化内容创作者跨平台发�
 
 > 说明：ArtiPub全部帮你自动解决这些问题，未来将拓展更多内容
 
-## 特点
+## ✨ 特点
 
 - 🌐 **多平台发布**：支持将markdown文章发布至多个主流内容平台，包括但不限于Notion、Medium、Dev.to等。
 - ✨ **简单易用**：提供了简洁的API，只需几行代码即可实现文章的发布。
 - 🔌 **支持中间件和插件**：通过插件和中间件，让用户更细粒度的控制处理和发布流程。
 - 📖 **完全开源**：鼓励社区贡献，持续增加新的平台支持和功能。
 
-## TODO
+## 📌 TODO
 - [ ] DevToPublisherPlugin
 - [ ] Document Site
 
-## 内置
+## 🔧 内置
 
 ### 处理中间件
 |名称|支持|描述|
@@ -37,7 +37,7 @@ ArtiPub（文章发布助手）是一个旨在简化内容创作者跨平台发�
 |DevToPublisherPlugin|doing|发布至dev.to|
 
 
-## 安装
+## 📦 安装
 
 使用 npm 安装 ：
 
@@ -57,7 +57,7 @@ yarn add -D @pup007/artipub
 pnpm add -D @pup007/artipub
 ```
 
-## 快速开始
+## 🚀 快速开始
 
 以下是一个简单的示例，展示如何使用 ArtiPub 发布一篇文章到指定平台：
 
@@ -118,7 +118,7 @@ articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(
 
 ```
 
-## 开发
+## 💻 开发
 
 > 特别注意：请基于master创建一个新分支，在新分支上开发，开发完后创建PR至master
 
@@ -167,10 +167,10 @@ articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(
   1. 先pnpm build 打包artipub
   2. cd playground 进行验证测试(注意：playground中的任务东西都不要提交，仅本地测试)
 
-## 许可证
+## 📄 许可证
 
 ArtiPub 是在 MIT 许可证下发布的。详情请见 [`LICENSE`](./LICENSE) 文件。
 
-## 致谢
+## 🙏 致谢
 
-感谢所有为 ArtiPub 贡献的开发者，以及所有使用和支持此项目的人。
+感谢所有为 ArtiPub 贡献的开发者，以及所有使用和支持此项目的人。如果这个库对您有帮助，烦请赠予一个⭐️作为支持，您的鼓励是我们持续进步的最大动力，衷心感谢！🌹
