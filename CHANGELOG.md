@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v1.0.2-alpha.8
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.2-alpha.7...v1.0.2-alpha.8)
+
+### 💅 Refactors
+
+- Adjustment processor returns the result feat: plugin support for modifying AST ([afba611](https://github.com/yxw007/artipub/commit/afba611))
+
+### 📖 Documentation
+
+- Update documents synchronously according to the latest api ([f4c02bf](https://github.com/yxw007/artipub/commit/f4c02bf))
+
+### 🏡 Chore
+
+- **release:** V1.0.2-alpha.7 ([65da70d](https://github.com/yxw007/artipub/commit/65da70d))
+- Update playground ([a4e82fa](https://github.com/yxw007/artipub/commit/a4e82fa))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.2-alpha.7
 
 ## v1.0.2-alpha.6
