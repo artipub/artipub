@@ -139,7 +139,14 @@ articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(
 - Add publish plugin
   ```typescript
   export function XXXPublisherPlugin(option: any) {
-    return () => {
+    return async (
+    articleTitle: string,
+    visit: TVisitor,
+    toMarkdown: ToMarkdown
+  ): Promise<PublishResult> => {
+      //visit:In depth priority traversing Markdown AST's interface, which is convenient for users to modify node. Note that this process is synchronized.
+      //toMarkdown: The modified AST will regenerate markdown. Content is Markdown content
+      let { content } = toMarkdown();
       let res: PublishResult = {
         success: true,
         info: "Published to XXX",

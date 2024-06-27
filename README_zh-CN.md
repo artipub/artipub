@@ -106,13 +106,13 @@ const articleProcessor = new ArticleProcessor({
  }
 });
 
-articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(async ({ filePath, content }) => {
- let publisherManager = new PublisherManager();
+articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(async ({ content }) => {
+ let publisherManager = new PublisherManager(content);
  publisherManager.addPlugin(NotionPublisherPlugin({
   api_key: NOTION_API_KEY,
   page_id: NOTION_PAGE_ID
  }));
- let res = await publisherManager.publish(filePath, content);
+ let res = await publisherManager.publish();
  // output: [ { success: true, info: 'Published to Notion successfully!' } ]
 });
 
@@ -140,7 +140,14 @@ articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(
 - 新增添加插件
   ```typescript
   export function XXXPublisherPlugin(option: any) {
-    return () => {
+    return async (
+    articleTitle: string,
+    visit: TVisitor,
+    toMarkdown: ToMarkdown
+  ): Promise<PublishResult> => {
+      //visit: 深度优先遍历markdown ast的接口，方便用户修改node，注意此过程是同步的
+      //toMarkdown: 会将修改后的ast 重新生成markdown, content 就是markdown 内容
+      let { content } = toMarkdown();
       let res: PublishResult = {
         success: true,
         info: "Published to XXX",
