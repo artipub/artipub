@@ -26,8 +26,9 @@ export interface ArticleProcessorOption {
   uploadImgOption: UploadImgOption;
 }
 
+export type ToMarkdown = () => { content: string };
+
 export interface ArticleProcessResult {
-  filePath: string;
   content: string;
 }
 
@@ -45,8 +46,9 @@ export type Next = () => void;
 export type ImageExtension = "png" | "jpeg" | "gif";
 
 export type Plugin = (
-  filePath: string,
-  content: string
+  articleTitle: string,
+  visit: TVisitor,
+  toMarkdown: ToMarkdown
 ) => Promise<PublishResult>;
 export interface PublishResult {
   success: boolean;
@@ -62,3 +64,7 @@ export interface NodeContext {
   node: Node;
   parent: Parent | undefined;
 }
+
+export type TVt = (testOrVisitor: Visitor | Test,
+  visitorOrReverse: Visitor | boolean | null | undefined,
+  maybeReverse: boolean | null | undefined) => void;
