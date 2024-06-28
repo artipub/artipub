@@ -3,7 +3,7 @@ import { createVisitor, isFunction } from "@/utils";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
-import { clone } from "lodash-es";
+import { cloneDeep } from "lodash-es";
 import { Root } from "remark-stringify/lib";
 import { visit } from "unist-util-visit";
 import { Heading, Text } from "mdast";
@@ -47,7 +47,7 @@ export class PublisherManager {
 
     let res: PublishResult[] = [];
     for (let plugin of this.plugins) {
-      let cloneTree = clone(tree);
+      let cloneTree = cloneDeep(tree);
       res.push(
         await plugin(
           articleTitle,
