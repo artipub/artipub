@@ -17,7 +17,7 @@ export function NotionPublisherPlugin(option: NotionPublisherPluginOption) {
     visit("heading", (_node, _index, parent) => {
       let node = _node as Heading;
       if (parent && node.depth === 1) {
-        parent.children.splice(_index ?? 0, 1);
+        parent.children.splice(0, (_index ?? 0) + 1);
         return true;
       }
     });
