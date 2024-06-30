@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v1.0.2
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.2-alpha.11...v1.0.2)
+
+### 🔥 Performance
+
+- Let the plug-in process in parallel ([59b419f](https://github.com/yxw007/artipub/commit/59b419f))
+
+### 🏡 Chore
+
+- **release:** V1.0.2-alpha.11 ([d83ba2a](https://github.com/yxw007/artipub/commit/d83ba2a))
+- Update .prettierrc to include "endOfLine" option ([dde6e8f](https://github.com/yxw007/artipub/commit/dde6e8f))
+
+### 🤖 CI
+
+- If have already manually released the version, skip the automatic release of the github action ([375717b](https://github.com/yxw007/artipub/commit/375717b))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.2-alpha.11
 
 ## v1.0.2-alpha.10
