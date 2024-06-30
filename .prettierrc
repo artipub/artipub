@@ -1,4 +1,5 @@
 {
   "trailingComma": "es5",
-  "semi": true
+  "semi": true,
+  "endOfLine": "auto"
 }
