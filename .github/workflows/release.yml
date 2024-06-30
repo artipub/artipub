@@ -45,13 +45,19 @@ jobs:
       - name: Check if the latest commit is tagged
         id: check-tag
         run: |
-          if git describe --tags --exact-match $(git rev-parse HEAD); then
-            echo "Latest commit is tagged. Skipping release steps."
-            echo "skip=true" >> $GITHUB_ENV
-          else
-            echo "Latest commit is not tagged. Proceeding with release steps."
-            echo "skip=false" >> $GITHUB_ENV
+          if output=$(git name-rev --name-only --tags --no-undefined HEAD 2>/dev/null | sed -n "s/^\([^~^]\{1,\}\)\(\^0\)\{0,1\}$/\1/p"); then
+            if [ -z "$output" ]; then
+              echo "skip=false" >> $GITHUB_ENV
+            else
+              echo "skip=true" >> $GITHUB_ENV
+            fi
           fi
+
+      - name: Echo skip variable
+        run: |
+          echo "Skip is ${{ env.skip }}"
+          echo "Skip is ${{ env.skip }} == 'false'"
+          echo "Skip is ${{ env.skip }} == 'true'"
 
       - name: Generate Changelog and Create Release
         if: env.skip == 'false'
