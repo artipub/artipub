@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.0.3-0
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.2...v1.0.3-0)
+
+### 🏡 Chore
+
+- Add step to check if the latest commit is tagged ([16a8893](https://github.com/yxw007/artipub/commit/16a8893))
+
+### 🤖 CI
+
+- If have already manually released the version, skip the automatic release of the github action ([6fa0d14](https://github.com/yxw007/artipub/commit/6fa0d14))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.2
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.2-alpha.11...v1.0.2)
