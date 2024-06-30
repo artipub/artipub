@@ -42,43 +42,42 @@ jobs:
           git config user.email "aa4790139@gmail.com"
           git remote set-url origin https://x-access-token:${{ secrets.TOKEN }}@github.com/yxw007/artipub.git
 
-      - name: Check if the latest commit is tagged
-        id: check-tag
+      - name: Install jq
+        run: sudo apt-get install jq
+
+      - name: Compare tag with package.json version
         run: |
-          if output=$(git name-rev --name-only --tags --no-undefined HEAD 2>/dev/null | sed -n "s/^\([^~^]\{1,\}\)\(\^0\)\{0,1\}$/\1/p"); then
-            if [ -z "$output" ]; then
-              echo "skip=false" >> $GITHUB_ENV
-            else
-              echo "skip=true" >> $GITHUB_ENV
-            fi
+          closest_tag=$(git tag | tail -1)
+          package_version=$(jq -r '.version' package.json)
+          echo "Closest tag: $closest_tag"
+          echo "Package version: $package_version"
+          if [ "$closest_tag" = "$package_version" ]; then
+            echo "skip=true" >> $GITHUB_ENV
+          else
+            echo "skip=false" >> $GITHUB_ENV
           fi
 
-      - name: Echo skip variable
-        run: |
-          echo "Skip is ${{ env.skip }}"
-          echo "Skip is ${{ env.skip }} == 'false'"
-          echo "Skip is ${{ env.skip }} == 'true'"
-
+        # skip = true means skip steps below
       - name: Generate Changelog and Create Release
-        if: env.skip == 'false'
+        if: env.skip == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         run: |
           pnpm release --no-git-checks
 
       - name: Commit changes
-        if: env.skip == 'false'
+        if: env.skip == 'true'
         run: |
           git diff --quiet || git commit -am "chore: auto update for release"
 
       - uses: ad-m/github-push-action@v0.6.0
-        if: env.skip == 'false'
+        if: env.skip == 'true'
         with:
           github_token: ${{ secrets.TOKEN }}
           branch: master
 
       - name: Set npmrc
-        if: env.skip == 'false'
+        if: env.skip == 'true'
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
@@ -87,7 +86,7 @@ jobs:
           echo "always-auth=true" >> ~/.npmrc
 
       - uses: actions/setup-node@v4
-        if: env.skip == 'false'
+        if: env.skip == 'true'
         with:
           node-version: '20.x'
           # Note: Registration-url must be set here, otherwise the permissions will be wrong
@@ -95,7 +94,7 @@ jobs:
           scope: '@pup007'
 
       - name: Publish package
-        if: env.skip == 'false'
+        if: env.skip == 'true'
         run: pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
