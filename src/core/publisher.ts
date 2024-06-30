@@ -44,18 +44,17 @@ export class PublisherManager {
     const tree = await unified().use(remarkParse).parse(this.content);
 
     const articleTitle = getArticleTitle(tree);
-
-    let res: PublishResult[] = [];
+    let tasks: Promise<PublishResult>[] = [];
     for (let plugin of this.plugins) {
       let cloneTree = cloneDeep(tree);
-      res.push(
-        await plugin(
+      tasks.push(
+        plugin(
           articleTitle,
           createVisitor(cloneTree),
           toMarkdown.bind(null, cloneTree)
         )
       );
     }
-    return res;
+    return await Promise.all(tasks);
   }
 }
