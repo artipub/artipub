@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.0.4-3
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-1...v1.0.4-3)
+
+### 🩹 Fixes
+
+- **build:** Process completed with exit code 128 ([521179f](https://github.com/yxw007/artipub/commit/521179f))
+
+### 🏡 Chore
+
+- **release:** V1.0.4-2 ([fed0150](https://github.com/yxw007/artipub/commit/fed0150))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.4-2
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-1...v1.0.4-2)
