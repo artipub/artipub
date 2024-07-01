@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.0.4-0
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.3...v1.0.4-0)
+
+### 🩹 Fixes
+
+- RemarkStringify The default article description separator after serialization is incorrect ([54234d6](https://github.com/yxw007/artipub/commit/54234d6))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.3
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.2...v1.0.3)
