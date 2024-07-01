@@ -47,7 +47,7 @@ jobs:
 
       - name: Compare tag with package.json version
         run: |
-          closest_tag=$(git tag | tail -1)
+          closest_tag=$(git describe --tags --exact-match 2>/dev/null)
           package_version=$(jq -r '.version' package.json)
           echo "Closest tag: $closest_tag"
           echo "Package version: $package_version"
