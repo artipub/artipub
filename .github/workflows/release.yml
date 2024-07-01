@@ -19,6 +19,7 @@ jobs:
       - uses: actions/checkout@v4.1.7
         with:
           ref: master
+          fetch-depth: 0
       - uses: pnpm/action-setup@v2
         with:
           version: 8
@@ -47,7 +48,7 @@ jobs:
 
       - name: Compare tag with package.json version
         run: |
-          closest_tag=$(git describe --tags --exact-match 2>/dev/null)
+          closest_tag=$(git describe --tags --exact-match 2>/dev/null || echo "")
           package_version=$(jq -r '.version' package.json)
           echo "Closest tag: $closest_tag"
           echo "Package version: $package_version"
@@ -57,27 +58,31 @@ jobs:
             echo "skip=false" >> $GITHUB_ENV
           fi
 
+      - name: Output skip
+        run: |
+          echo "skip: $skip"
+
         # skip = true means skip steps below
       - name: Generate Changelog and Create Release
-        if: env.skip == 'true'
+        if: env.skip == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         run: |
           pnpm release --no-git-checks
 
       - name: Commit changes
-        if: env.skip == 'true'
+        if: env.skip == 'false'
         run: |
           git diff --quiet || git commit -am "chore: auto update for release"
 
       - uses: ad-m/github-push-action@v0.6.0
-        if: env.skip == 'true'
+        if: env.skip == 'false'
         with:
           github_token: ${{ secrets.TOKEN }}
           branch: master
 
       - name: Set npmrc
-        if: env.skip == 'true'
+        if: env.skip == 'false'
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
@@ -86,7 +91,7 @@ jobs:
           echo "always-auth=true" >> ~/.npmrc
 
       - uses: actions/setup-node@v4
-        if: env.skip == 'true'
+        if: env.skip == 'false'
         with:
           node-version: '20.x'
           # Note: Registration-url must be set here, otherwise the permissions will be wrong
@@ -94,7 +99,7 @@ jobs:
           scope: '@pup007'
 
       - name: Publish package
-        if: env.skip == 'true'
+        if: env.skip == 'false'
         run: pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
