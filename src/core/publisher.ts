@@ -26,7 +26,9 @@ export class PublisherManager {
   }
   async publish() {
     function toMarkdown(tree: Root) {
-      const content = unified().use(remarkStringify).stringify(tree);
+      const content = unified()
+        .use(remarkStringify, { rule: "-" })
+        .stringify(tree);
       return { content: content.toString() };
     }
 

@@ -85,7 +85,7 @@ export class ArticleProcessor {
       const desContent = await unified()
         .use(remarkParse)
         .use(customMiddleware)
-        .use(remarkStringify)
+        .use(remarkStringify, { rule: "-" })
         .process(fileContent);
 
       resolve({ content: desContent.toString() });
