@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.0.4-1
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-0...v1.0.4-1)
+
+### 🩹 Fixes
+
+- **build:** Git tag ([ tail -1, get tag mistake](https://github.com/yxw007/artipub/commit/ tail -1, get tag mistake))
+
+### ❤️ Contributors
+
+- 5588b06 ([@potter](http://github.com/potter))
+
 ## v1.0.4-0
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.3...v1.0.4-0)
