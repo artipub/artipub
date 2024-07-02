@@ -15,6 +15,7 @@ import {
   isFunction,
   log,
   normalizedPath,
+  relativePathImgRegex,
   writeCache,
 } from "@/utils";
 
@@ -82,7 +83,7 @@ export default async function picUpload(
     let node = _node as any;
     if (node.url) {
       let url = decodeURIComponent(node.url);
-      let regex = /[^https?].{1,}\.(png|jpg|jpeg|svg|gif)/gim;
+      let regex = relativePathImgRegex;
       if (regex.test(url)) {
         matchNodes.push({
           node,
@@ -101,11 +102,16 @@ export default async function picUpload(
           node.url = caches.get(url);
           continue;
         }
-        let regex = /[^https?].{1,}\.(png|jpg|jpeg|svg|gif)/gim;
+        let regex = relativePathImgRegex;
         if (regex.test(url)) {
           let rootDir = path.resolve(path.dirname(context.filePath));
           let filePath = path.resolve(path.join(rootDir, url));
-
+          try {
+            await fs.access(filePath, fs.constants.R_OK);
+          } catch (error) {
+            log.error(`upload image fail filePath:${filePath},error:${error}`);
+            continue;
+          }
           let res: string | null = null;
           if (isFunction(uploadImgOption)) {
             res = await (uploadImgOption as UploadImg)(filePath);

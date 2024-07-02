@@ -6,6 +6,7 @@ import {
   getCache,
   getProjectRootPath,
   normalizedPath,
+  relativePathImgRegex,
   writeCache,
 } from "@/utils";
 const sharp = require("sharp");
@@ -30,7 +31,7 @@ export default async function picCompress(
     if (url) {
       matchNodes.push({ node: _node, parent: parent as any });
       url = decodeURIComponent(url);
-      let regex = /[^https?].{1,}\.(png|jpg|jpeg|svg|gif)/gim;
+      let regex = relativePathImgRegex;
       if (regex.test(url)) {
         matchNodes.push({
           node: _node,
@@ -57,7 +58,11 @@ export default async function picCompress(
         if (extension === "jpg") {
           extension = "jpeg";
         }
-
+        try {
+          await fs.access(filePath, fs.constants.R_OK);
+        } catch (error) {
+          continue;
+        }
         let buff = await fs.readFile(filePath);
         let sharpInstance = sharp(buff)[extension as ImageExtension]({
           quality: option.compressedOptions?.quality || 80,

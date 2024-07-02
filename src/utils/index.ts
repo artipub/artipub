@@ -99,3 +99,5 @@ export function createVisitor(tree: Node) {
     visit(tree, test, vt, reverse);
   };
 }
+
+export const relativePathImgRegex = /^[^https?].{1,}\.(png|jpg|jpeg|svg|gif)$/gim;
