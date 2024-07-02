@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.0.4-7
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-5...v1.0.4-7)
+
+### 🏡 Chore
+
+- **release:** V1.0.4-6 ([f88675e](https://github.com/yxw007/artipub/commit/f88675e))
+- Remove unnecessary jq installation step and update git configuration ([9e79888](https://github.com/yxw007/artipub/commit/9e79888))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.4-6
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-5...v1.0.4-6)
