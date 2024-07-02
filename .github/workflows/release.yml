@@ -43,16 +43,11 @@ jobs:
           git config user.email "aa4790139@gmail.com"
           git remote set-url origin https://x-access-token:${{ secrets.TOKEN }}@github.com/yxw007/artipub.git
 
-      - name: Install jq
-        run: sudo apt-get install jq
-
       - name: Compare tag with package.json version
         run: |
           closest_tag=$(git describe --tags --exact-match 2>/dev/null || echo "")
-          package_version=$(jq -r '.version' package.json)
           echo "Closest tag: $closest_tag"
-          echo "Package version: $package_version"
-          if [ "$closest_tag" = "$package_version" ]; then
+          if [ "$closest_tag" != "" ]; then
             echo "skip=true" >> $GITHUB_ENV
           else
             echo "skip=false" >> $GITHUB_ENV
