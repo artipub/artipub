@@ -37,19 +37,11 @@ export type TVisitor = (
   visitorOrReverse: Visitor | boolean | null | undefined,
   maybeReverse?: boolean | null | undefined
 ) => void;
-export type Middleware = (
-  context: ProcessorContext,
-  visitor: TVisitor,
-  next: Next
-) => Promise<void>;
+export type Middleware = (context: ProcessorContext, visitor: TVisitor, next: Next) => Promise<void>;
 export type Next = () => void;
 export type ImageExtension = "png" | "jpeg" | "gif";
 
-export type Plugin = (
-  articleTitle: string,
-  visit: TVisitor,
-  toMarkdown: ToMarkdown
-) => Promise<PublishResult>;
+export type Plugin = (articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown) => Promise<PublishResult>;
 export interface PublishResult {
   success: boolean;
   info?: string;

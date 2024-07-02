@@ -48,10 +48,7 @@ export async function getCache(cachePath: string) {
   return res;
 }
 
-export async function writeCache(
-  cachePath: string,
-  caches: Map<string, string>
-) {
+export async function writeCache(cachePath: string, caches: Map<string, string>) {
   let cacheObj: any = {};
   for (let [key, value] of caches) {
     cacheObj[key] = value;
@@ -84,10 +81,7 @@ export function createVisitor(tree: Node) {
     let reverse;
     let vt;
     let test;
-    if (
-      typeof testOrVisitor === "function" &&
-      typeof visitorOrReverse !== "function"
-    ) {
+    if (typeof testOrVisitor === "function" && typeof visitorOrReverse !== "function") {
       test = undefined;
       vt = testOrVisitor;
       reverse = visitorOrReverse;

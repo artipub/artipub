@@ -1,30 +1,13 @@
-import {
-  GithubPicBedOption,
-  Next,
-  NodeContext,
-  TVisitor,
-  UploadImg,
-} from "@/types";
+import { GithubPicBedOption, Next, NodeContext, TVisitor, UploadImg } from "@/types";
 import { ProcessorContext } from "@/core";
 import path from "path";
 import fs from "fs/promises";
 import { fileTypeFromBuffer } from "file-type";
-import {
-  getCache,
-  getProjectRootPath,
-  isFunction,
-  log,
-  normalizedPath,
-  relativePathImgRegex,
-  writeCache,
-} from "@/utils";
+import { getCache, getProjectRootPath, isFunction, log, normalizedPath, relativePathImgRegex, writeCache } from "@/utils";
 
 const axios = require("axios");
 
-async function uploadToGithub(
-  filePath: string,
-  picBedOption: GithubPicBedOption
-) {
+async function uploadToGithub(filePath: string, picBedOption: GithubPicBedOption) {
   let extension = path.extname(filePath);
   let content = await fs.readFile(filePath);
   let contentBase64 = content.toString("base64");
@@ -64,18 +47,12 @@ async function uploadToGithub(
   return null;
 }
 
-export default async function picUpload(
-  context: ProcessorContext,
-  visit: TVisitor,
-  next: Next
-) {
+export default async function picUpload(context: ProcessorContext, visit: TVisitor, next: Next) {
   const {
     option: { uploadImgOption },
   } = context;
   const picBedOption = uploadImgOption as GithubPicBedOption;
-  const cachePath = normalizedPath(
-    path.resolve(getProjectRootPath(), ".artipub/cache/uploadCache.json")
-  );
+  const cachePath = normalizedPath(path.resolve(getProjectRootPath(), ".artipub/cache/uploadCache.json"));
   let caches = await getCache(cachePath);
   let matchNodes: NodeContext[] = [];
 

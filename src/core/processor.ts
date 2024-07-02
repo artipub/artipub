@@ -1,9 +1,5 @@
 import fs from "fs/promises";
-import {
-  ArticleProcessResult,
-  ArticleProcessorOption,
-  Middleware,
-} from "@/types";
+import { ArticleProcessResult, ArticleProcessorOption, Middleware } from "@/types";
 import { unified } from "unified";
 import type { Node, Parent } from "unist";
 import remarkParse from "remark-parse";
@@ -29,10 +25,7 @@ export class ArticleProcessor {
   public readonly option: ArticleProcessorOption;
   private middlewares: Middleware[];
   constructor(option: ArticleProcessorOption) {
-    this.option = Object.assign(
-      { compressedOptions: defaultCompressedOptions },
-      option
-    );
+    this.option = Object.assign({ compressedOptions: defaultCompressedOptions }, option);
     this.middlewares = [];
   }
 
@@ -82,11 +75,7 @@ export class ArticleProcessor {
 
     return new Promise(async (resolve) => {
       const fileContent = await fs.readFile(filePath, { encoding: "utf8" });
-      const desContent = await unified()
-        .use(remarkParse)
-        .use(customMiddleware)
-        .use(remarkStringify, { rule: "-" })
-        .process(fileContent);
+      const desContent = await unified().use(remarkParse).use(customMiddleware).use(remarkStringify, { rule: "-" }).process(fileContent);
 
       resolve({ content: desContent.toString() });
     });

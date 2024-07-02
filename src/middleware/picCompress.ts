@@ -2,27 +2,15 @@ import { ImageExtension, Next, NodeContext, TVisitor } from "@/types";
 import { ProcessorContext } from "@/core";
 import path from "path";
 import fs from "fs/promises";
-import {
-  getCache,
-  getProjectRootPath,
-  normalizedPath,
-  relativePathImgRegex,
-  writeCache,
-} from "@/utils";
+import { getCache, getProjectRootPath, normalizedPath, relativePathImgRegex, writeCache } from "@/utils";
 const sharp = require("sharp");
 
-export default async function picCompress(
-  context: ProcessorContext,
-  visit: TVisitor,
-  next: Next
-) {
+export default async function picCompress(context: ProcessorContext, visit: TVisitor, next: Next) {
   const { option } = context;
   if (option.compressedOptions?.compressed === false) {
     return next();
   }
-  const cachePath = normalizedPath(
-    path.resolve(getProjectRootPath(), ".artipub/cache/compressCache.json")
-  );
+  const cachePath = normalizedPath(path.resolve(getProjectRootPath(), ".artipub/cache/compressCache.json"));
   let caches = await getCache(cachePath);
   let matchNodes: NodeContext[] = [];
 
@@ -51,10 +39,7 @@ export default async function picCompress(
       if (url) {
         let rootDir = path.resolve(path.dirname(context.filePath));
         let filePath = path.resolve(path.join(rootDir, url));
-        let extension: any = path
-          .extname(filePath)
-          .slice(1)
-          .toLocaleLowerCase();
+        let extension: any = path.extname(filePath).slice(1).toLocaleLowerCase();
         if (extension === "jpg") {
           extension = "jpeg";
         }

@@ -26,9 +26,7 @@ export class PublisherManager {
   }
   async publish() {
     function toMarkdown(tree: Root) {
-      const content = unified()
-        .use(remarkStringify, { rule: "-" })
-        .stringify(tree);
+      const content = unified().use(remarkStringify, { rule: "-" }).stringify(tree);
       return { content: content.toString() };
     }
 
@@ -49,13 +47,7 @@ export class PublisherManager {
     let tasks: Promise<PublishResult>[] = [];
     for (let plugin of this.plugins) {
       let cloneTree = cloneDeep(tree);
-      tasks.push(
-        plugin(
-          articleTitle,
-          createVisitor(cloneTree),
-          toMarkdown.bind(null, cloneTree)
-        )
-      );
+      tasks.push(plugin(articleTitle, createVisitor(cloneTree), toMarkdown.bind(null, cloneTree)));
     }
     return await Promise.all(tasks);
   }
