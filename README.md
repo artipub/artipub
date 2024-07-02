@@ -1,6 +1,12 @@
 # 🎉 ArtiPub
 English | [简体中文](./README_zh-CN.md)
 
+![GitHub top language](https://img.shields.io/github/languages/top/Pup007/artipub)
+![GitHub License](https://img.shields.io/github/license/Pup007/artipub)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Pup007/artipub/release.yml)
+![NPM Version](https://img.shields.io/npm/v/%40pup007%2Fartipub)
+
+
 ArtiPub (article release assistant) is a tool library aimed at simplifying content creators to publish the article process.It provides a simple API that allows you to easily publish the article to multiple platforms, such as blogs, social media, etc., without manual operation of each platform.
 
 ## ❓ Why do you need artipub?
