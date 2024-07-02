@@ -19,16 +19,17 @@
 		"prepare": "husky"
 	},
 	"type": "module",
-	"main": "./index.cjs",
-	"module": "./index.js",
-	"types": "./index.d.ts",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
-		"require": "./index.cjs",
-		"import": "./index.js"
+		"require": "./dist/index.cjs",
+		"import": "./dist/index.js"
 	},
 	"files": [
 		"dist",
-		"README_zh-CN.md"
+		"README_zh-CN.md",
+		"package.json"
 	],
 	"keywords": [
 		"typescript",
