@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.0.4-9
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-8...v1.0.4-9)
+
+### 🏡 Chore
+
+- Remove dist's useless package.json copy ([ac12578](https://github.com/yxw007/artipub/commit/ac12578))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.4-8
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-7...v1.0.4-8)
