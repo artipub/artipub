@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.0.4-8
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-7...v1.0.4-8)
+
+### 🩹 Fixes
+
+- **chore:** Env.skip == 'false' prompt error in release.yml ([eb5560b](https://github.com/yxw007/artipub/commit/eb5560b))
+
+### 📖 Documentation
+
+- Update README.md and README_zh-CN.md with badges ([49d2b67](https://github.com/yxw007/artipub/commit/49d2b67))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.4-7
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-5...v1.0.4-7)
