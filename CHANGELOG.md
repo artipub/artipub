@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.0.4-10
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-9...v1.0.4-10)
+
+### 🩹 Fixes
+
+- Avoid errors caused by non-existent files ([71b0bfb](https://github.com/yxw007/artipub/commit/71b0bfb))
+
+### 🏡 Chore
+
+- **release:** V1.0.4-9 ([a97d0a1](https://github.com/yxw007/artipub/commit/a97d0a1))
+- Prettier printWidth is set to 140 to avoid short line breaks ([e9fab5e](https://github.com/yxw007/artipub/commit/e9fab5e))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.4-9
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-8...v1.0.4-9)
