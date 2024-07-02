@@ -72,6 +72,7 @@
 		"rollup-plugin-dts": "^6.1.1",
 		"typescript": "^5.4.5"
 	},
+	"peerDependencies": {},
 	"dependencies": {
 		"@notionhq/client": "^2.2.15",
 		"@tryfabric/martian": "^1.2.4",
