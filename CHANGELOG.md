@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.0.4-5
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-4...v1.0.4-5)
+
+### 🏡 Chore
+
+- **release:** V1.0.4-4 ([3ee1084](https://github.com/yxw007/artipub/commit/3ee1084))
+- Update npm dependency to latest stable version ([b69129d](https://github.com/yxw007/artipub/commit/b69129d))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.4-4
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-2...v1.0.4-4)
