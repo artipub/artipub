@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.0.4-11
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-10...v1.0.4-11)
+
+### 🩹 Fixes
+
+- Rollup packaging packages with incomplete esm support, resulting in packaging errors ([8a0e77c](https://github.com/yxw007/artipub/commit/8a0e77c))
+
+### 🏡 Chore
+
+- **release:** V1.0.4-10 ([71c58ca](https://github.com/yxw007/artipub/commit/71c58ca))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.4-10
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-9...v1.0.4-10)
