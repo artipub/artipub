@@ -4,7 +4,9 @@ import path from "path";
 import fs from "fs/promises";
 import { fileTypeFromBuffer } from "file-type";
 import { getCache, getProjectRootPath, isFunction, log, normalizedPath, relativePathImgRegex, writeCache } from "@/utils";
+import { createCommonJS } from "mlly";
 
+const { require } = createCommonJS(import.meta.url);
 const axios = require("axios");
 
 async function uploadToGithub(filePath: string, picBedOption: GithubPicBedOption) {

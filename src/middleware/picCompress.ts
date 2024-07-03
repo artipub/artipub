@@ -3,7 +3,9 @@ import { ProcessorContext } from "@/core";
 import path from "path";
 import fs from "fs/promises";
 import { getCache, getProjectRootPath, normalizedPath, relativePathImgRegex, writeCache } from "@/utils";
-const sharp = require("sharp");
+import { createCommonJS } from "mlly";
+
+const { require } = createCommonJS(import.meta.url);
 
 export default async function picCompress(context: ProcessorContext, visit: TVisitor, next: Next) {
   const { option } = context;
@@ -49,6 +51,7 @@ export default async function picCompress(context: ProcessorContext, visit: TVis
           continue;
         }
         let buff = await fs.readFile(filePath);
+        const sharp = require("sharp");
         let sharpInstance = sharp(buff)[extension as ImageExtension]({
           quality: option.compressedOptions?.quality || 80,
         });

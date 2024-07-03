@@ -1,5 +1,8 @@
 import { NotionPublisherPluginOption, PublishResult, TVisitor, ToMarkdown } from "@/types";
 import { Heading } from "mdast";
+import { createCommonJS } from "mlly";
+
+const { require } = createCommonJS(import.meta.url);
 const { Client } = require("@notionhq/client");
 const { markdownToBlocks } = require("@tryfabric/martian");
 
