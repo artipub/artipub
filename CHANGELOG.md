@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.0.4-16
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-15...v1.0.4-16)
+
+### 🩹 Fixes
+
+- Update remarkStringify options for consistent bullet styling, markdown format error ([1701776](https://github.com/yxw007/artipub/commit/1701776))
+- The relative image address node is not replaced correctly ([fce7b0b](https://github.com/yxw007/artipub/commit/fce7b0b))
+
+### 🏡 Chore
+
+- **release:** V1.0.4-15 ([ca71c96](https://github.com/yxw007/artipub/commit/ca71c96))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.4-15
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-14...v1.0.4-15)
