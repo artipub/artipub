@@ -75,7 +75,7 @@ export class ArticleProcessor {
 
     return new Promise(async (resolve) => {
       const fileContent = await fs.readFile(filePath, { encoding: "utf8" });
-      const desContent = await unified().use(remarkParse).use(customMiddleware).use(remarkStringify, { rule: "-" }).process(fileContent);
+      const desContent = await unified().use(remarkParse, { encoding: "utf8" }).use(customMiddleware).use(remarkStringify, { rule: "-", bullet: "-" }).process(fileContent);
 
       resolve({ content: desContent.toString() });
     });
