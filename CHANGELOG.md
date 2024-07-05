@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.0.4-14
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-13...v1.0.4-14)
+
+### 🏡 Chore
+
+- Update actions/setup version from v2 to v4 ([78a97d0](https://github.com/yxw007/artipub/commit/78a97d0))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.4-13
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-12...v1.0.4-13)
