@@ -1,6 +1,10 @@
 # Changelog
 
 
+## v1.0.4-13
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-12...v1.0.4-13)
+
 ## v1.0.4-12
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-11...v1.0.4-12)
