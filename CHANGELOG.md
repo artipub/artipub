@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.0.5-0
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4...v1.0.5-0)
+
+### 📖 Documentation
+
+- Improve document ([46d0e4b](https://github.com/yxw007/artipub/commit/46d0e4b))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.4
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-16...v1.0.4)
