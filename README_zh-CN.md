@@ -39,7 +39,7 @@ ArtiPub（文章发布助手）是一个旨在简化内容创作者跨平台发�
 |名称|支持|描述|
 |--|--|--|
 |NotionPublisherPlugin|√|发布至notion|
-|DevToPublisherPlugin|doing|发布至dev.to|
+|DevToPublisherPlugin|√|发布至dev.to|
 
 
 ## 📦 安装
@@ -69,23 +69,24 @@ pnpm add -D @pup007/artipub
 ### CommonJS 
 
 ```javascript
-const { ArticleProcessor, PublisherManager, NotionPublisherPlugin } = require('@pup007/artipub');
+const { ArticleProcessor, PublisherManager, NotionPublisherPlugin, DevToPublisherPlugin } = require('@pup007/artipub');
 ```
 
 ### ES Module 
 
 ```javascript
-import { ArticleProcessor, PublisherManager, NotionPublisherPlugin } from "@pup007/artipub"
+import { ArticleProcessor, PublisherManager, NotionPublisherPlugin, DevToPublisherPlugin } from "@pup007/artipub"
 ```
 
 ### Example
 
 ```js
-import { ArticleProcessor, PublisherManager, NotionPublisherPlugin } from "@pup007/artipub"
+import { ArticleProcessor, PublisherManager, NotionPublisherPlugin, DevToPublisherPlugin } from "@pup007/artipub"
 import path from "path";
 import { fileURLToPath } from "url";
 
 const { NOTION_API_KEY, NOTION_PAGE_ID } = process.env;
+const { DEV_TO_API_KEY } = process.env;
 let {
  GITHUB_OWNER,
  GITHUB_REPO,
@@ -116,6 +117,10 @@ articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(
  publisherManager.addPlugin(NotionPublisherPlugin({
   api_key: NOTION_API_KEY,
   page_id: NOTION_PAGE_ID
+ }));
+ publisherManager.addPlugin(DevToPublisherPlugin({
+	api_key: DEV_TO_API_KEY ?? "",
+	published: false
  }));
  let res = await publisherManager.publish();
  // output: [ { success: true, info: 'Published to Notion successfully!' } ]
