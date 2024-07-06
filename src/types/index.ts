@@ -52,6 +52,15 @@ export interface NotionPublisherPluginOption {
   page_id: string;
 }
 
+export interface DevToPublisherPluginOption {
+  api_key: string;
+  published?: boolean;
+  series?: string;
+  main_image?: string;
+  description?: string;
+  organization_id?: number;
+}
+
 export interface NodeContext {
   node: Node;
   parent: Parent | undefined;

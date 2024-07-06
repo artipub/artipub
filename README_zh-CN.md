@@ -24,7 +24,7 @@ ArtiPub（文章发布助手）是一个旨在简化内容创作者跨平台发�
 - 📖 **完全开源**：鼓励社区贡献，持续增加新的平台支持和功能。
 
 ## 📌 TODO
-- [ ] DevToPublisherPlugin
+- [x] DevToPublisherPlugin
 - [ ] Document Site
 
 ## 🔧 内置

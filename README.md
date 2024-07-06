@@ -25,7 +25,7 @@ ArtiPub (article release assistant) is a tool library aimed at simplifying conte
 - 📖 **Complete open source**: Encourage community contributions and continue to increase new platform support and functions.
 
 ## 📌 TODO
-- [ ] DevToPublisherPlugin
+- [x] DevToPublisherPlugin
 - [ ] Document Site
 
 ## 🔧 Built-in

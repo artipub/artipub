@@ -4,10 +4,12 @@ author: Potter
 date: 2024-07-01 09:24:54
 
 tags: 
-* tag1
+- tag1
+- tag2
+- tag3
 
 categories: 
-* category1
+- category1
 
 ---
 

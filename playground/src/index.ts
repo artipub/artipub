@@ -3,6 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const { NOTION_API_KEY, NOTION_PAGE_ID } = process.env;
+const { DEV_TO_API_KEY } = process.env;
 let {
 	GITHUB_OWNER,
 	GITHUB_REPO,
@@ -33,6 +34,10 @@ articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(
 	publisherManager.addPlugin(NotionPublisherPlugin({
 		api_key: NOTION_API_KEY ?? "",
 		page_id: NOTION_PAGE_ID ?? "",
+	}));
+	publisherManager.addPlugin(DevToPublisherPlugin({
+		api_key: DEV_TO_API_KEY ?? "",
+		published: false
 	}));
 	let res = await publisherManager.publish();
 	console.log("publish res:", res);
