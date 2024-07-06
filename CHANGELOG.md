@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.0.4
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-16...v1.0.4)
+
+### 🚀 Enhancements
+
+- Add DevToPublisherPlugin with option to publish articles to Dev.to ([6dd181e](https://github.com/yxw007/artipub/commit/6dd181e))
+
+### 🏡 Chore
+
+- **release:** V1.0.4-16 ([eda30ee](https://github.com/yxw007/artipub/commit/eda30ee))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.4-16
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-15...v1.0.4-16)
