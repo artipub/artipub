@@ -2,26 +2,17 @@ import { ImageExtension, Next, NodeContext, TVisitor } from "@/types";
 import { ProcessorContext } from "@/core";
 import path from "path";
 import fs from "fs/promises";
-import {
-  getCache,
-  getProjectRootPath,
-  normalizedPath,
-  writeCache,
-} from "@/utils";
-const sharp = require("sharp");
+import { getCache, getProjectRootPath, normalizedPath, relativePathImgRegex, writeCache } from "@/utils";
+import { createCommonJS } from "mlly";
 
-export default async function picCompress(
-  context: ProcessorContext,
-  visit: TVisitor,
-  next: Next
-) {
+const { require } = createCommonJS(import.meta.url);
+
+export default async function picCompress(context: ProcessorContext, visit: TVisitor, next: Next) {
   const { option } = context;
   if (option.compressedOptions?.compressed === false) {
     return next();
   }
-  const cachePath = normalizedPath(
-    path.resolve(getProjectRootPath(), ".artipub/cache/compressCache.json")
-  );
+  const cachePath = normalizedPath(path.resolve(getProjectRootPath(), ".artipub/cache/compressCache.json"));
   let caches = await getCache(cachePath);
   let matchNodes: NodeContext[] = [];
 
@@ -30,7 +21,7 @@ export default async function picCompress(
     if (url) {
       matchNodes.push({ node: _node, parent: parent as any });
       url = decodeURIComponent(url);
-      let regex = /[^https?].{1,}\.(png|jpg|jpeg|svg|gif)/gim;
+      let regex = relativePathImgRegex;
       if (regex.test(url)) {
         matchNodes.push({
           node: _node,
@@ -50,15 +41,17 @@ export default async function picCompress(
       if (url) {
         let rootDir = path.resolve(path.dirname(context.filePath));
         let filePath = path.resolve(path.join(rootDir, url));
-        let extension: any = path
-          .extname(filePath)
-          .slice(1)
-          .toLocaleLowerCase();
+        let extension: any = path.extname(filePath).slice(1).toLocaleLowerCase();
         if (extension === "jpg") {
           extension = "jpeg";
         }
-
+        try {
+          await fs.access(filePath, fs.constants.R_OK);
+        } catch (error) {
+          continue;
+        }
         let buff = await fs.readFile(filePath);
+        const sharp = require("sharp");
         let sharpInstance = sharp(buff)[extension as ImageExtension]({
           quality: option.compressedOptions?.quality || 80,
         });

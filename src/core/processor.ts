@@ -1,16 +1,11 @@
 import fs from "fs/promises";
-import {
-  ArticleProcessResult,
-  ArticleProcessorOption,
-  Middleware,
-} from "@/types";
+import { ArticleProcessResult, ArticleProcessorOption, Middleware } from "@/types";
 import { unified } from "unified";
 import type { Node, Parent } from "unist";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
-import { visit } from "unist-util-visit";
-import type { Visitor, Test } from "unist-util-visit";
 import { picCompress, picUpload } from "@/middleware";
+import { createVisitor, fileNameWithOutExtension } from "@/utils";
 
 const defaultCompressedOptions = {
   quality: 80,
@@ -30,10 +25,7 @@ export class ArticleProcessor {
   public readonly option: ArticleProcessorOption;
   private middlewares: Middleware[];
   constructor(option: ArticleProcessorOption) {
-    this.option = Object.assign(
-      { compressedOptions: defaultCompressedOptions },
-      option
-    );
+    this.option = Object.assign({ compressedOptions: defaultCompressedOptions }, option);
     this.middlewares = [];
   }
 
@@ -71,29 +63,7 @@ export class ArticleProcessor {
             if (i < articleProcessor.middlewares.length) {
               let middleware = articleProcessor.middlewares[i];
               i++;
-              function visitor(
-                testOrVisitor: Visitor | Test,
-                visitorOrReverse: Visitor | boolean | null | undefined,
-                maybeReverse: boolean | null | undefined
-              ): void {
-                let reverse;
-                let vt;
-                let test;
-                if (
-                  typeof testOrVisitor === "function" &&
-                  typeof visitorOrReverse !== "function"
-                ) {
-                  test = undefined;
-                  vt = testOrVisitor;
-                  reverse = visitorOrReverse;
-                } else {
-                  test = testOrVisitor;
-                  vt = visitorOrReverse;
-                  reverse = maybeReverse;
-                }
-                visit(tree, test, vt, reverse);
-              }
-              await middleware(context, visitor, next);
+              await middleware(context, createVisitor(tree), next);
             } else {
               resolve(tree);
             }
@@ -106,12 +76,12 @@ export class ArticleProcessor {
     return new Promise(async (resolve) => {
       const fileContent = await fs.readFile(filePath, { encoding: "utf8" });
       const desContent = await unified()
-        .use(remarkParse)
+        .use(remarkParse, { encoding: "utf8" })
         .use(customMiddleware)
-        .use(remarkStringify)
+        .use(remarkStringify, { rule: "-", bullet: "-" })
         .process(fileContent);
 
-      resolve({ filePath, content: desContent.toString() });
+      resolve({ content: desContent.toString() });
     });
   }
 }

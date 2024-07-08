@@ -2,6 +2,9 @@ import chalk from "chalk";
 import { existsSync } from "fs";
 import fs from "fs/promises";
 import path from "path";
+import { Node } from "unified/lib";
+import { Test, Visitor } from "unist-util-visit/lib";
+import { visit } from "unist-util-visit";
 
 export const log = {
   info(...args: any) {
@@ -45,10 +48,7 @@ export async function getCache(cachePath: string) {
   return res;
 }
 
-export async function writeCache(
-  cachePath: string,
-  caches: Map<string, string>
-) {
+export async function writeCache(cachePath: string, caches: Map<string, string>) {
   let cacheObj: any = {};
   for (let [key, value] of caches) {
     cacheObj[key] = value;
@@ -65,3 +65,33 @@ export async function writeCache(
     log.error(`write cache file fail ! cachePath:${cachePath}, error:${error}`);
   }
 }
+
+export function fileNameWithOutExtension(filePath: string) {
+  let filename = path.basename(filePath);
+  let extension = path.extname(filePath);
+  return filename.slice(0, filename.indexOf(extension));
+}
+
+export function createVisitor(tree: Node) {
+  return function visitor(
+    testOrVisitor: Visitor | Test,
+    visitorOrReverse: Visitor | boolean | null | undefined,
+    maybeReverse: boolean | null | undefined
+  ): void {
+    let reverse;
+    let vt;
+    let test;
+    if (typeof testOrVisitor === "function" && typeof visitorOrReverse !== "function") {
+      test = undefined;
+      vt = testOrVisitor;
+      reverse = visitorOrReverse;
+    } else {
+      test = testOrVisitor;
+      vt = visitorOrReverse;
+      reverse = maybeReverse;
+    }
+    visit(tree, test, vt, reverse);
+  };
+}
+
+export const relativePathImgRegex = /^[^https?].{1,}\.(png|jpg|jpeg|svg|gif)$/im;

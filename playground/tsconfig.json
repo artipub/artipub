@@ -13,10 +13,7 @@
 		"noEmit": true,
 		"allowImportingTsExtensions": true,
 		"paths": {
-			/* 	"@": [
-				"./src"
-			], */
-			"artipub": [
+			"@pup007/artipub": [
 				"../dist"
 			]
 		},

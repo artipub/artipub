@@ -26,8 +26,9 @@ export interface ArticleProcessorOption {
   uploadImgOption: UploadImgOption;
 }
 
+export type ToMarkdown = () => { content: string };
+
 export interface ArticleProcessResult {
-  filePath: string;
   content: string;
 }
 
@@ -36,15 +37,11 @@ export type TVisitor = (
   visitorOrReverse: Visitor | boolean | null | undefined,
   maybeReverse?: boolean | null | undefined
 ) => void;
-export type Middleware = (
-  context: ProcessorContext,
-  visitor: TVisitor,
-  next: Next
-) => Promise<void>;
+export type Middleware = (context: ProcessorContext, visitor: TVisitor, next: Next) => Promise<void>;
 export type Next = () => void;
 export type ImageExtension = "png" | "jpeg" | "gif";
 
-export type Plugin = (filePath: string, content: string) => PublishResult;
+export type Plugin = (articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown) => Promise<PublishResult>;
 export interface PublishResult {
   success: boolean;
   info?: string;
@@ -55,7 +52,22 @@ export interface NotionPublisherPluginOption {
   page_id: string;
 }
 
+export interface DevToPublisherPluginOption {
+  api_key: string;
+  published?: boolean;
+  series?: string;
+  main_image?: string;
+  description?: string;
+  organization_id?: number;
+}
+
 export interface NodeContext {
   node: Node;
   parent: Parent | undefined;
 }
+
+export type TVt = (
+  testOrVisitor: Visitor | Test,
+  visitorOrReverse: Visitor | boolean | null | undefined,
+  maybeReverse: boolean | null | undefined
+) => void;

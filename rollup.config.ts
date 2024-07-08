@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 import pkg from "./package.json";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const external = Object.keys(pkg.peerDependencies);
+const external = Object.keys(pkg?.peerDependencies || {});
 
 export default defineConfig([
 	{
@@ -30,7 +30,7 @@ export default defineConfig([
 			alias({
 				entries: [{ find: "@", replacement: path.resolve(__dirname, "./src") }],
 			}),
-			resolve({ browser: false }),
+			resolve({ browser: false, extensions: [".ts", ".js"] }),
 			commonjs(),
 			typescript({
 				tsconfig: "./tsconfig.json",
@@ -47,13 +47,12 @@ export default defineConfig([
 				format: "esm",
 				sourcemap: true,
 			},
-			{
-				file: "dist/index.d.cts",
-				format: "cjs",
-				sourcemap: true,
-			},
 		],
 		plugins: [
+			alias({
+				entries: [{ find: "@", replacement: path.resolve(__dirname, "./src") }],
+			}),
+			resolve({ browser: false, extensions: [".ts", ".js"] }),
 			dts()
 		],
 		external,

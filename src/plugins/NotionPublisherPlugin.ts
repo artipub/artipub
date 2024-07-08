@@ -1,11 +1,22 @@
-import { NotionPublisherPluginOption, PublishResult } from "@/types";
-import path from "path";
+import { NotionPublisherPluginOption, PublishResult, TVisitor, ToMarkdown } from "@/types";
+import { Heading } from "mdast";
+import { createCommonJS } from "mlly";
+
+const { require } = createCommonJS(import.meta.url);
 const { Client } = require("@notionhq/client");
 const { markdownToBlocks } = require("@tryfabric/martian");
 
 export function NotionPublisherPlugin(option: NotionPublisherPluginOption) {
-  return async (filePath: string, content: string) => {
-    const articleName = path.basename(filePath);
+  return async (articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> => {
+    visit("heading", (_node, _index, parent) => {
+      let node = _node as Heading;
+      if (parent && node.depth === 1) {
+        parent.children.splice(0, (_index ?? 0) + 1);
+        return true;
+      }
+    });
+
+    let { content } = toMarkdown();
     const blocks = markdownToBlocks(content);
     const notion = new Client({ auth: option.api_key });
     await notion.pages.create({
@@ -17,7 +28,7 @@ export function NotionPublisherPlugin(option: NotionPublisherPluginOption) {
         title: [
           {
             text: {
-              content: articleName,
+              content: articleTitle,
             },
           },
         ],
@@ -27,7 +38,7 @@ export function NotionPublisherPlugin(option: NotionPublisherPluginOption) {
 
     let res: PublishResult = {
       success: true,
-      info: "Published to Notion successfully!",
+      info: `Published [${articleTitle}] to Notion successfully!`,
     };
     return res;
   };
