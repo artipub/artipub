@@ -1,4 +1,8 @@
 import { defineConfig } from 'vitepress';
+import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url)
+const pkg = require('../../../package.json')
 
 export const zh = defineConfig({
   locales: {
@@ -23,6 +27,15 @@ export const zh = defineConfig({
 function nav() {
   return [
     { text: '指南', link: '/zh/guide/what-is-artipub', activeMatch: '/guide/' },
+    {
+      text: pkg.version,
+      items: [
+        {
+          text: '更新日志',
+          link: 'https://github.com/pup007/artipub/blob/master/CHANGELOG.md'
+        },
+      ]
+    }
   ]
 }
 

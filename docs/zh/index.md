@@ -16,6 +16,9 @@ hero:
     - theme: alt
       text: Github
       link: https://github.com/Pup007/artipub
+  image:
+    src: /logo.png
+    alt: artipub
 
 features:
   - icon: 🌐
