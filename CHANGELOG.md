@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.0.5-4
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.5-3...v1.0.5-4)
+
+### 🏡 Chore
+
+- **release:** V1.0.5-3 ([a2ff878](https://github.com/yxw007/artipub/commit/a2ff878))
+- Update homepage URL in package.json ([2c3f7c6](https://github.com/yxw007/artipub/commit/2c3f7c6))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.5-3
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.5-2...v1.0.5-3)
