@@ -1,6 +1,21 @@
 # Changelog
 
 
+## v1.0.5-3
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.5-2...v1.0.5-3)
+
+### 🏡 Chore
+
+- **release:** V1.0.5-2 ([04bd07d](https://github.com/yxw007/artipub/commit/04bd07d))
+- Auto update for release ([69bf74b](https://github.com/yxw007/artipub/commit/69bf74b))
+- Add social links to vitepress config ([e03d46e](https://github.com/yxw007/artipub/commit/e03d46e))
+- Update branch name in CI workflow ([b62b5a1](https://github.com/yxw007/artipub/commit/b62b5a1))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.5-2
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.5-1...v1.0.5-2)
