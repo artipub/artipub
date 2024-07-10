@@ -6,7 +6,10 @@
 	"homepage": "https://pup007.github.io/artipub/",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/yxw007/artipub.git"
+		"url": "git+https://github.com/pup007/artipub.git"
+	},
+	"bugs": {
+		"url": "https://github.com/pup007/artipub/issues"
 	},
 	"publishConfig": {
 		"access": "public"
@@ -56,7 +59,7 @@
 			"pnpm lint:fix"
 		]
 	},
-	"license": "ISC",
+	"license": "MIT",
 	"devDependencies": {
 		"@babel/core": "^7.24.7",
 		"@babel/preset-env": "^7.24.7",
