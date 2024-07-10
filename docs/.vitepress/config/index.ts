@@ -14,6 +14,14 @@ export default defineConfig({
   },
   base: `/${name}/`,
   themeConfig: {
-    siteTitle: name
+    siteTitle: name,
+    editLink: {
+      pattern: 'https://github.com/pup007/artipub/edit/master/docs/:path',
+      text: 'Edit this page on GitHub'
+    },
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2019-present Potter.yan'
+    },
   }
 })
