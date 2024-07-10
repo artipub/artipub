@@ -1,6 +1,20 @@
 # Changelog
 
 
+## v1.0.5-2
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.5-1...v1.0.5-2)
+
+### 🏡 Chore
+
+- **release:** V1.0.5-1 ([3f19f4b](https://github.com/yxw007/artipub/commit/3f19f4b))
+- Auto update for release ([145e243](https://github.com/yxw007/artipub/commit/145e243))
+- Add social links to vitepress config ([4118ade](https://github.com/yxw007/artipub/commit/4118ade))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.5-1
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.5-0...v1.0.5-1)
