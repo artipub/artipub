@@ -19,6 +19,9 @@ export default defineConfig({
       pattern: 'https://github.com/pup007/artipub/edit/master/docs/:path',
       text: 'Edit this page on GitHub'
     },
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/pup007/artipub' }
+    ],
     footer: {
       message: 'Released under the MIT License.',
       copyright: 'Copyright © 2019-present Potter.yan'
