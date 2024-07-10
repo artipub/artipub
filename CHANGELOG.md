@@ -1,6 +1,33 @@
 # Changelog
 
 
+## v1.0.5-1
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.5-0...v1.0.5-1)
+
+### 🩹 Fixes
+
+- **docs:** Load static resource path mistake ([25ae156](https://github.com/yxw007/artipub/commit/25ae156))
+
+### 📖 Documentation
+
+- Init ([de0f76a](https://github.com/yxw007/artipub/commit/de0f76a))
+- Multi-language support ([4e1be5b](https://github.com/yxw007/artipub/commit/4e1be5b))
+- Update navigation links ([ecb70e4](https://github.com/yxw007/artipub/commit/ecb70e4))
+
+### 🏡 Chore
+
+- Update release script in package.json ([d3aa60f](https://github.com/yxw007/artipub/commit/d3aa60f))
+- **release:** V1.0.5-0 ([d81db52](https://github.com/yxw007/artipub/commit/d81db52))
+- Auto update for release ([b67a0fb](https://github.com/yxw007/artipub/commit/b67a0fb))
+- Add pnpm workspace configuration and update Vitepress theme and config ([fe2d360](https://github.com/yxw007/artipub/commit/fe2d360))
+- Add npmrc configuration for auto-installing peers ([d0cc376](https://github.com/yxw007/artipub/commit/d0cc376))
+- Update Vitepress theme and config, add edit link and footer message ([11746a8](https://github.com/yxw007/artipub/commit/11746a8))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.5-0
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4...v1.0.5-0)
