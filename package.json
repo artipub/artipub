@@ -14,6 +14,10 @@
 		"lint": "eslint --ext .ts && prettier -c src",
 		"lint:fix": "eslint --fix --ext .ts && prettier -w src",
 		"build": "pnpm clean && npx tsx script/build.ts",
+		"docs:dev": "pnpm -F=docs docs:dev",
+		"docs:build": "pnpm -F=docs docs:build",
+		"docs:preview": "pnpm -F=docs docs:preview",
+		"docs:lunaria:build": "pnpm -F=docs lunaria:build",
 		"clean": "rm -rf dist",
 		"release": "pnpm changelogen --release -i --prerelease",
 		"prepare": "husky"

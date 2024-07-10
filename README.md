@@ -7,7 +7,7 @@ English | [简体中文](./README_zh-CN.md)
 ![NPM Version](https://img.shields.io/npm/v/%40pup007%2Fartipub)
 
 
-ArtiPub (article release assistant) is a tool library aimed at simplifying content creators to publish the article process.It provides a simple API that allows you to easily publish the article to multiple platforms, such as blogs, social media, etc., without manual operation of each platform.
+ArtiPub (article release assistant) is a tool library aimed at simplifying content creators to publish the article process.It provides a simple API that allows you to easily publish the article to any platforms, such as blogs, social media, etc., without manual operation of each platform.
 
 ## ❓ Why do you need artipub?
 1. Local pictures cited in Markdown need to manually compress the picture, then upload to the bed, and finally replace the picture link
@@ -26,21 +26,21 @@ ArtiPub (article release assistant) is a tool library aimed at simplifying conte
 
 ## 📌 TODO
 - [x] DevToPublisherPlugin
-- [ ] Document Site
+- [x] Document Site
 
 ## 🔧 Built-in
 
 ### Treatment middleware
-| Name | Support | Description |
-|-|-|-|
-| piccompress | √ | Automatic compression of the picture |
-| Picupload | √ | Picture Upload |
+| Name        | Support | Description                          |
+| ----------- | ------- | ------------------------------------ |
+| piccompress | √       | Automatic compression of the picture |
+| Picupload   | √       | Picture Upload                       |
 
 ### Publish plug -in
-| Name | Support | Description |
-|-|-|-|
-| NOTIONPUBLISHERPLUGIN | √ | Published to NOTION |
-| DEVTOPUBLISHERPLUGIN | √ | Published to DEV.TO |
+| Name                  | Support | Description         |
+| --------------------- | ------- | ------------------- |
+| NOTIONPUBLISHERPLUGIN | √       | Published to NOTION |
+| DEVTOPUBLISHERPLUGIN  | √       | Published to DEV.TO |
 
 ## 📦 Install
 

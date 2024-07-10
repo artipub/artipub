@@ -4,3 +4,4 @@ dist
 /**/.artipub
 .husky/_
 .npmrc
+docs/.vitepress/cache/
