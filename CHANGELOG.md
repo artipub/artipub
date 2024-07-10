@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.0.5-5
+
+[compare changes](https://github.com/pup007/artipub/compare/v1.0.5-4...v1.0.5-5)
+
+### 🩹 Fixes
+
+- **build:** Make document workflows execute after release to avoid latest version display mistake ([b277786](https://github.com/pup007/artipub/commit/b277786))
+
+### 🏡 Chore
+
+- **release:** V1.0.5-4 ([d18b7a2](https://github.com/pup007/artipub/commit/d18b7a2))
+- Update repository URL and bugs URL in package.json ([62431db](https://github.com/pup007/artipub/commit/62431db))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.5-4
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.5-3...v1.0.5-4)
