@@ -3,6 +3,7 @@
 	"version": "1.0.5-2",
 	"description": "A library for processing and publishing articles",
 	"author": "Potter<aa4790139@gmail.com>",
+	"homepage": "https://pup007.github.io/artipub/",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/yxw007/artipub.git"
