@@ -1,6 +1,104 @@
 # Changelog
 
 
+## v1.0.5-5
+
+[compare changes](https://github.com/pup007/artipub/compare/v1.0.5-4...v1.0.5-5)
+
+### 🩹 Fixes
+
+- **build:** Make document workflows execute after release to avoid latest version display mistake ([b277786](https://github.com/pup007/artipub/commit/b277786))
+
+### 🏡 Chore
+
+- **release:** V1.0.5-4 ([d18b7a2](https://github.com/pup007/artipub/commit/d18b7a2))
+- Update repository URL and bugs URL in package.json ([62431db](https://github.com/pup007/artipub/commit/62431db))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
+## v1.0.5-4
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.5-3...v1.0.5-4)
+
+### 🏡 Chore
+
+- **release:** V1.0.5-3 ([a2ff878](https://github.com/yxw007/artipub/commit/a2ff878))
+- Update homepage URL in package.json ([2c3f7c6](https://github.com/yxw007/artipub/commit/2c3f7c6))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
+## v1.0.5-3
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.5-2...v1.0.5-3)
+
+### 🏡 Chore
+
+- **release:** V1.0.5-2 ([04bd07d](https://github.com/yxw007/artipub/commit/04bd07d))
+- Auto update for release ([69bf74b](https://github.com/yxw007/artipub/commit/69bf74b))
+- Add social links to vitepress config ([e03d46e](https://github.com/yxw007/artipub/commit/e03d46e))
+- Update branch name in CI workflow ([b62b5a1](https://github.com/yxw007/artipub/commit/b62b5a1))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
+## v1.0.5-2
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.5-1...v1.0.5-2)
+
+### 🏡 Chore
+
+- **release:** V1.0.5-1 ([3f19f4b](https://github.com/yxw007/artipub/commit/3f19f4b))
+- Auto update for release ([145e243](https://github.com/yxw007/artipub/commit/145e243))
+- Add social links to vitepress config ([4118ade](https://github.com/yxw007/artipub/commit/4118ade))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
+## v1.0.5-1
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.5-0...v1.0.5-1)
+
+### 🩹 Fixes
+
+- **docs:** Load static resource path mistake ([25ae156](https://github.com/yxw007/artipub/commit/25ae156))
+
+### 📖 Documentation
+
+- Init ([de0f76a](https://github.com/yxw007/artipub/commit/de0f76a))
+- Multi-language support ([4e1be5b](https://github.com/yxw007/artipub/commit/4e1be5b))
+- Update navigation links ([ecb70e4](https://github.com/yxw007/artipub/commit/ecb70e4))
+
+### 🏡 Chore
+
+- Update release script in package.json ([d3aa60f](https://github.com/yxw007/artipub/commit/d3aa60f))
+- **release:** V1.0.5-0 ([d81db52](https://github.com/yxw007/artipub/commit/d81db52))
+- Auto update for release ([b67a0fb](https://github.com/yxw007/artipub/commit/b67a0fb))
+- Add pnpm workspace configuration and update Vitepress theme and config ([fe2d360](https://github.com/yxw007/artipub/commit/fe2d360))
+- Add npmrc configuration for auto-installing peers ([d0cc376](https://github.com/yxw007/artipub/commit/d0cc376))
+- Update Vitepress theme and config, add edit link and footer message ([11746a8](https://github.com/yxw007/artipub/commit/11746a8))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
+## v1.0.5-0
+
+[compare changes](https://github.com/yxw007/artipub/compare/v1.0.4...v1.0.5-0)
+
+### 📖 Documentation
+
+- Improve document ([46d0e4b](https://github.com/yxw007/artipub/commit/46d0e4b))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.4
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-16...v1.0.4)
