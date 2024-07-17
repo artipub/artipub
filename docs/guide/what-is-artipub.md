@@ -23,7 +23,7 @@ Just want to try it out? Skip to the [Quickstart](./getting-started).
 
 ## 📌 TODO
 - [x] DevToPublisherPlugin
-- [ ] Document Site
+- [x] Document Site
 
 ## 🔧 Built-in
 
