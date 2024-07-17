@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.0.5-6
+
+[compare changes](https://github.com/pup007/artipub/compare/v1.0.5-5...v1.0.5-6)
+
+### 🏡 Chore
+
+- **release:** V1.0.5-5 ([56546cc](https://github.com/pup007/artipub/commit/56546cc))
+- Update documentation site ([087ee4b](https://github.com/pup007/artipub/commit/087ee4b))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.5-5
 
 [compare changes](https://github.com/pup007/artipub/compare/v1.0.5-4...v1.0.5-5)
