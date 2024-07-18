@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress';
+import { DefaultTheme, defineConfig } from 'vitepress';
 import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
@@ -19,14 +19,27 @@ export const zh = defineConfig({
   themeConfig: {
     nav: nav(),
     sidebar: {
-      "/zh/guide/": sidebarGuide()
+      "/zh/guide/": { base: '/zh/guide/', items: sidebarGuide() },
+      "/zh/API/": { base: "/zh/API/", items: sidebarReference() },
+    },
+    outline: {
+      label: "页面导航"
     }
   }
 });
 
 function nav() {
   return [
-    { text: '指南', link: '/zh/guide/what-is-artipub', activeMatch: '/guide/' },
+    {
+      text: '指南',
+      link: '/zh/guide/what-is-artipub',
+      activeMatch: '/guide/'
+    },
+    {
+      text: 'API',
+      link: '/zh/API/processor',
+      activeMatch: '/API/'
+    },
     {
       text: pkg.version,
       items: [
@@ -39,14 +52,26 @@ function nav() {
   ]
 }
 
-function sidebarGuide() {
+function sidebarGuide(): DefaultTheme.SidebarItem[] {
   return [{
     text: "简介",
     collapsed: false,
     items: [
-      { text: 'artipub 是什么?', link: '/zh/guide/what-is-artipub' },
-      { text: '快速开始', link: '/zh/guide/getting-started' },
-      { text: '贡献', link: '/zh/guide/contribute' },
+      { text: 'artipub 是什么?', link: 'what-is-artipub' },
+      { text: '快速开始', link: 'getting-started' },
+      { text: '贡献', link: 'contribute' },
     ]
   }]
+}
+
+function sidebarReference(): DefaultTheme.SidebarItem[] {
+  return [
+    {
+      text: "API",
+      items: [
+        { text: 'ArticleProcessor', link: 'processor' },
+        { text: 'PublisherManager', link: 'publisher' },
+      ]
+    }
+  ]
 }
