@@ -3,7 +3,9 @@
 ArtiPub（文章发布助手）是一个旨在简化内容创作者跨平台发布文章过程的工具库。它提供了一套简单的API，可以让你轻松地将文章发布到任意平台，如博客、社交媒体等，无需手动操作每个平台。
 
 <div class="tip custom-block" style="padding-top: 8px">
+
 只是想尝试一下？跳至[快速入门](./getting-started)
+
 </div>
 
 ## ❓ 为什么需要ArtiPub?
@@ -23,18 +25,18 @@ ArtiPub（文章发布助手）是一个旨在简化内容创作者跨平台发�
 
 ## 📌 TODO
 - [x] DevToPublisherPlugin
-- [ ] Document Site
+- [x] Document Site
 
 ## 🔧 内置
 
 ### 处理中间件
-|名称|支持|描述|
-|--|--|--|
-|picCompress|√|图片自动压缩|
-|picUpload|√|图片上传|
+| 名称        | 支持 | 描述         |
+| ----------- | ---- | ------------ |
+| picCompress | √    | 图片自动压缩 |
+| picUpload   | √    | 图片上传     |
 
 ### 发布插件
-|名称|支持|描述|
-|--|--|--|
-|NotionPublisherPlugin|√|发布至notion|
-|DevToPublisherPlugin|√|发布至dev.to|
+| 名称                  | 支持 | 描述         |
+| --------------------- | ---- | ------------ |
+| NotionPublisherPlugin | √    | 发布至notion |
+| DevToPublisherPlugin  | √    | 发布至dev.to |
