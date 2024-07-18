@@ -88,7 +88,7 @@ const articleProcessor = new ArticleProcessor({
 articleProcessor.use(async (context: ProcessorContext, visit: TVisitor, next: Next) => {
 	visit("heading", (_node, _index, parent) => {
 		let node = _node as Heading;
-		//TODO: Treat the node
+		//TODO: process the node
 	});
 
   //Note: Remember to call next after processing, otherwise it will cause the process to be stuck in this process will not continue to be processed back
