@@ -11,6 +11,9 @@ import { Heading, Text } from "mdast";
 export class PublisherManager {
   private plugins: Plugin[];
   private content: string;
+  /**
+   * @param content markdown's content
+   */
   constructor(content: string) {
     this.content = content;
     this.plugins = [];

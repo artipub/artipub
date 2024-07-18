@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress';
+import { DefaultTheme, defineConfig } from 'vitepress';
 import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
@@ -8,7 +8,8 @@ export const en = defineConfig({
   locales: {
     root: {
       label: 'English',
-      lang: '/en/',
+      lang: 'en',
+      link: "/"
     },
     zh: {
       label: '中文',
@@ -19,14 +20,27 @@ export const en = defineConfig({
   themeConfig: {
     nav: nav(),
     sidebar: {
-      "/guide/": sidebarGuide()
+      "/guide/": { base: "/guide/", items: sidebarGuide() },
+      "/API/": { base: "/API/", items: sidebarReference() },
+    },
+    outline: {
+      label: "Outline"
     }
   }
 });
 
 function nav() {
   return [
-    { text: 'Guide', link: '/guide/what-is-artipub', activeMatch: '/guide/' },
+    {
+      text: 'Guide',
+      link: '/guide/what-is-artipub',
+      activeMatch: '/guide/'
+    },
+    {
+      text: 'API',
+      link: '/API/processor',
+      activeMatch: '/API/'
+    },
     {
       text: pkg.version,
       items: [
@@ -44,9 +58,22 @@ function sidebarGuide() {
     text: "Introduction",
     collapsed: false,
     items: [
-      { text: 'What is VitePress?', link: '/guide/what-is-artipub' },
-      { text: 'Getting Started', link: '/guide/getting-started' },
-      { text: 'Contribute', link: '/guide/contribute' },
+      { text: 'What is VitePress?', link: 'what-is-artipub' },
+      { text: 'Getting Started', link: 'getting-started' },
+      { text: 'Contribute', link: 'contribute' },
     ]
   }]
+}
+
+function sidebarReference(): DefaultTheme.SidebarItem[] {
+  return [
+    {
+      text: "API",
+      collapsed: false,
+      items: [
+        { text: 'ArticleProcessor', link: 'processor' },
+        { text: 'PublisherManager', link: 'publisher' },
+      ]
+    }
+  ]
 }
