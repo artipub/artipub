@@ -1,6 +1,25 @@
 # Changelog
 
 
+## v1.0.5-7
+
+[compare changes](https://github.com/pup007/artipub/compare/v1.0.5-6...v1.0.5-7)
+
+### 📖 Documentation
+
+- Add API documents ([c86f517](https://github.com/pup007/artipub/commit/c86f517))
+- Add API documents ([0aae751](https://github.com/pup007/artipub/commit/0aae751))
+
+### 🏡 Chore
+
+- **release:** V1.0.5-6 ([c7fee64](https://github.com/pup007/artipub/commit/c7fee64))
+- Update documentation site ([b9e31cf](https://github.com/pup007/artipub/commit/b9e31cf))
+- Update TODO comment to clarify node processing in processor.md ([4bbe076](https://github.com/pup007/artipub/commit/4bbe076))
+
+### ❤️ Contributors
+
+- Potter <75838259@qq.com>
+
 ## v1.0.5-6
 
 [compare changes](https://github.com/pup007/artipub/compare/v1.0.5-5...v1.0.5-6)
