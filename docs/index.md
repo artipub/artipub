@@ -3,7 +3,7 @@ layout: home
 title: artipub
 
 hero:
-  name: "artipub"
+  name: "Artipub"
   text: "Easy-to-use & automated one-click publishing multi platforms"
   tagline: You can easily publish the article to any platform
   actions:

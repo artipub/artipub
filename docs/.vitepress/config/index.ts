@@ -7,6 +7,12 @@ const require = createRequire(import.meta.url)
 const pkg = require('../../../package.json')
 const name: string = pkg.name.split('/').pop();
 
+function normalizeName(name: string) {
+  let arr = name.split("");
+  arr[0] = arr[0].toUpperCase();
+  return arr.join("");
+}
+
 export default defineConfig({
   locales: {
     root: { label: 'English', ...en },
@@ -14,7 +20,7 @@ export default defineConfig({
   },
   base: `/${name}/`,
   themeConfig: {
-    siteTitle: name,
+    siteTitle: normalizeName(name),
     editLink: {
       pattern: 'https://github.com/pup007/artipub/edit/master/docs/:path',
       text: 'Edit this page on GitHub'
