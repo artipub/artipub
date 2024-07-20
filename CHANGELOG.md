@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v1.0.5-8
+
+[compare changes](https://github.com/pup007/artipub/compare/v1.0.5-7...v1.0.5-8)
+
+### 📖 Documentation
+
+- Add NotionPublisherPlugin and DevToPublisherPlugin API documentation ([5f51125](https://github.com/pup007/artipub/commit/5f51125))
+- Update documentation for NotionPublisherPlugin and DevToPublisherPlugin APIs ([87139c2](https://github.com/pup007/artipub/commit/87139c2))
+
+### 🏡 Chore
+
+- **release:** V1.0.5-7 ([1938811](https://github.com/pup007/artipub/commit/1938811))
+- Auto update for release ([5d3a2ef](https://github.com/pup007/artipub/commit/5d3a2ef))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.5-7
 
 [compare changes](https://github.com/pup007/artipub/compare/v1.0.5-6...v1.0.5-7)
