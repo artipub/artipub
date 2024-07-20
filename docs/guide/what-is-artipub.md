@@ -1,4 +1,4 @@
-# What is artipub?
+# What is Artipub?
 
 ArtiPub (article release assistant) is a tool library aimed at simplifying content creators to publish the article process.It provides a simple API that allows you to easily publish the article to any platforms, such as blogs, social media, etc., without manual operation of each platform.
 
@@ -6,7 +6,7 @@ ArtiPub (article release assistant) is a tool library aimed at simplifying conte
 Just want to try it out? Skip to the [Quickstart](./getting-started).
 </div>
 
-## ❓ Why do you need artipub?
+## ❓ Why do you need Artipub?
 1. Local pictures cited in Markdown need to manually compress the picture, then upload to the bed, and finally replace the picture link
 2. After Markdown finished writing, I want to publish it to other platforms to avoid manual Copy
 3. After Markdown finished writing the article, I need to modify some of the contents of Markdown and let it regenerate the content of Markdown

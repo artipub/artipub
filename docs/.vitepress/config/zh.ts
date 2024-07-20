@@ -71,6 +71,7 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
       items: [
         { text: 'ArticleProcessor', link: 'processor' },
         { text: 'PublisherManager', link: 'publisher' },
+        { text: 'Plugins', link: 'plugin' },
       ]
     }
   ]

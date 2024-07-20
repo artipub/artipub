@@ -3,7 +3,7 @@ layout: home
 title: artipub
 
 hero:
-  name: "artipub"
+  name: "Artipub"
   text: "简单易用&自动化一键发布多平台"
   tagline: 可以让你轻松地将文章发布到任意平台
   actions:
