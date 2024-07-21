@@ -30,8 +30,8 @@ interface NotionPublisherPluginOption {
   ![](https://cdn.jsdelivr.net/gh/yxw007/BlogPicBed@master/img/202407200927324.png)
 
 - Question 2: How to get page_id?
-  1. First create a page in NOTION, and understand it as you will upload an article through Artipub to the note in this page. Similar to a workspace, we name them: inbox, and then the Inbox Connect is created to what we created.Integrating is fine.As shown below:
-  ![](https://cdn.jsdelivr.net/gh/yxw007/blogpicbed@master/img/20240720093939.png)
+  1. First create a page in NOTION, and understand it as you will upload an article through Artipub to the note in this page. Similar to a workspace, we name them: inbox, and then the Inbox Connect is created to what we created.Integrating is fine. As shown below:
+  ![](https://cdn.jsdelivr.net/gh/yxw007/BlogPicBed@master/img/202407200933939.png)
   2. In fact, Inbox is a page of notion. You can get PAGE_ID through the following ways
     ![](https://cdn.jsdelivr.net/gh/yxw007/blogpicbed@master/img/202407200948924.png)
   The paste results are similar to the following, the selected part is Page_id

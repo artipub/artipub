@@ -60,6 +60,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       { text: 'artipub 是什么?', link: 'what-is-artipub' },
       { text: '快速开始', link: 'getting-started' },
       { text: '贡献', link: 'contribute' },
+      { text: '赞助', link: 'sponsor' },
     ]
   }]
 }

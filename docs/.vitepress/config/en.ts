@@ -61,6 +61,7 @@ function sidebarGuide() {
       { text: 'What is VitePress?', link: 'what-is-artipub' },
       { text: 'Getting Started', link: 'getting-started' },
       { text: 'Contribute', link: 'contribute' },
+      { text: 'Sponsor', link: 'sponsor' },
     ]
   }]
 }
