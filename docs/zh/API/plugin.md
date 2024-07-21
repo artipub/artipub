@@ -33,7 +33,7 @@ interface NotionPublisherPluginOption {
   1. 先在notion随便创建一个页面，把它理解成你以后要通过artipub上传文章至notion就放置在这个页面中，类似于一个workspace, 咋们将其命名成：Inbox，然后将Inbox connect至我们创建的Integration就可以了。如下图所示：
   ![](https://cdn.jsdelivr.net/gh/yxw007/BlogPicBed@master/img/202407200933939.png)
   2. 其实Inbox就是notion的一个page，通过以下方式就可以拿到page_id
-    ![] (https://cdn.jsdelivr.net/gh/yxw007/blogpicbed@master/img/202407200948924.png)
+    ![](https://cdn.jsdelivr.net/gh/yxw007/blogpicbed@master/img/202407200948924.png)
     粘贴出来的结果类似以下的样子, 选中的部分就是page_id
     ![](https://cdn.jsdelivr.net/gh/yxw007/blogpicbed@master/img/202407200949155.png)
 
