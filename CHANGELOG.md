@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.0.5-11
+
+[compare changes](https://github.com/pup007/artipub/compare/v1.0.5-10...v1.0.5-11)
+
+### 📖 Documentation
+
+- Add sponsor link to sidebar in Chinese and English documentation ([3fa155b](https://github.com/pup007/artipub/commit/3fa155b))
+
+### 🏡 Chore
+
+- **release:** V1.0.5-10 ([9d5009e](https://github.com/pup007/artipub/commit/9d5009e))
+
+### ❤️ Contributors
+
+- Potter <aa4790139@gmail.com>
+
 ## v1.0.5-10
 
 [compare changes](https://github.com/pup007/artipub/compare/v1.0.5-9...v1.0.5-10)
