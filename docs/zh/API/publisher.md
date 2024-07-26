@@ -27,10 +27,10 @@ export interface PublishResult {
   info?: string;
 }
 ```
+
 - articleTitle: 文章标题
 - visit：markdown ast 遍历方法
 - toMarkdown: 将ast变成markdown 字符串内容
-
 
 ## publish
 

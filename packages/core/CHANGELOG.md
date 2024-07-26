@@ -1,6 +1,5 @@
 # Changelog
 
-
 ## v1.0.4
 
 [compare changes](https://github.com/yxw007/artipub/compare/v1.0.4-16...v1.0.4)
@@ -267,7 +266,6 @@
 
 ## v1.0.2-alpha.10
 
-
 ### 📖 Documentation
 
 - Improve documentation ([d7c0ce8](https://github.com/yxw007/artipub/commit/d7c0ce8))
@@ -286,7 +284,6 @@
 
 ## v1.0.2-alpha.5
 
-
 ### 📖 Documentation
 
 - Improve document ([a73faa0](https://github.com/yxw007/artipub/commit/a73faa0))
@@ -299,7 +296,6 @@
 
 ## v1.0.2-alpha.3
 
-
 ### 🏡 Chore
 
 - Update ArtiPub README with chinese translation and installation instructions ([90fcada](https://github.com/yxw007/artipub/commit/90fcada))
@@ -309,7 +305,6 @@
 - Potter <aa4790139@gmail.com>
 
 ## v1.0.2-alpha.2
-
 
 ### 🩹 Fixes
 
@@ -321,7 +316,6 @@
 
 ## v1.0.2-alpha.1
 
-
 ### 🏡 Chore
 
 - Update release script in package.json for prerelease ([d034036](https://github.com/yxw007/artipub/commit/d034036))
@@ -331,7 +325,6 @@
 - Potter <75838259@qq.com>
 
 ## v1.0.2-alpha.0
-
 
 ### 🏡 Chore
 
@@ -343,7 +336,6 @@
 
 ## v1.0.1-alpha.0
 
-
 ### 📦 Build
 
 - Add release.yml ([e9bd902](https://github.com/yxw007/artipub/commit/e9bd902))
@@ -353,7 +345,6 @@
 - Potter <75838259@qq.com>
 
 ## v1.0.0-beta.0
-
 
 ### 🚀 Enhancements
 
@@ -382,4 +373,3 @@
 ### ❤️ Contributors
 
 - Potter <75838259@qq.com>
-

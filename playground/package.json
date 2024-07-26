@@ -1,5 +1,5 @@
 {
-  "name": "playground",
+  "name": "@artipub/playground",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,18 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@notionhq/client": "^2.2.15",
-    "@tryfabric/martian": "^1.2.4",
-    "@types/mdast": "^4.0.4",
-    "axios": "^1.7.2",
-    "chalk": "^5.3.0",
-    "file-type": "^19.0.0",
-    "remark-parse": "11.0.0",
-    "remark-stringify": "11.0.0",
-    "sharp": "^0.33.4",
-    "tslib": "^2.6.3",
-    "typescript": "^5.4.5",
-    "unified": "11.0.0",
-    "unist-util-visit": "^5.0.0"
+    "@artipub/core": "workspace:*",
+    "typescript": "^5.4.5"
   }
 }

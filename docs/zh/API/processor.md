@@ -10,16 +10,16 @@ outline: deep
 
 ```ts
 class ArticleProcessor {
-    readonly option: ArticleProcessorOption;
-    private middlewares;
-    constructor(option: ArticleProcessorOption);
-    use(middleware: Middleware): this;
-    /**
-     * 处理markdown文件
-     * @param {string} filePath - markdown 文件路径
-     * @returns 返回处理后的markdown文件内容
-     */
-    processMarkdown(filePath: string): Promise<ArticleProcessResult>;
+  readonly option: ArticleProcessorOption;
+  private middlewares;
+  constructor(option: ArticleProcessorOption);
+  use(middleware: Middleware): this;
+  /**
+   * 处理markdown文件
+   * @param {string} filePath - markdown 文件路径
+   * @returns 返回处理后的markdown文件内容
+   */
+  processMarkdown(filePath: string): Promise<ArticleProcessResult>;
 }
 ```
 
@@ -27,26 +27,25 @@ class ArticleProcessor {
 
 ```ts
 interface ArticleProcessorOption {
-    /**
-     * default: { quality: 80, compressed:true }
-     */
-    compressedOptions?: {
-        compressed?: boolean;
-        quality?: number;
-    };
-    uploadImgOption: UploadImgOption;
+  /**
+   * default: { quality: 80, compressed:true }
+   */
+  compressedOptions?: {
+    compressed?: boolean;
+    quality?: number;
+  };
+  uploadImgOption: UploadImgOption;
 }
-
 
 type UploadImg = (imgFilePath: string) => Promise<string>;
 interface GithubPicBedOption {
-    owner: string;
-    repo: string;
-    dir: string;
-    branch: string;
-    token: string;
-    commit_author: string;
-    commit_email: string;
+  owner: string;
+  repo: string;
+  dir: string;
+  branch: string;
+  token: string;
+  commit_author: string;
+  commit_email: string;
 }
 
 /**
@@ -74,25 +73,25 @@ type Middleware = (context: ProcessorContext, visitor: TVisitor, next: Next) => 
 
 ```ts
 const articleProcessor = new ArticleProcessor({
-    uploadImgOption: {
-        owner: GITHUB_OWNER ?? "",
-        repo: GITHUB_REPO ?? "",
-        dir: GITHUB_DIR ?? "",
-        branch: GITHUB_BRANCH ?? "",
-        token: GITHUB_TOKEN ?? "",
-        commit_author: GITHUB_COMMIT_AUTHOR ?? "",
-        commit_email: GITHUB_COMMIT_EMAIL ?? "",
-    }
+  uploadImgOption: {
+    owner: GITHUB_OWNER ?? "",
+    repo: GITHUB_REPO ?? "",
+    dir: GITHUB_DIR ?? "",
+    branch: GITHUB_BRANCH ?? "",
+    token: GITHUB_TOKEN ?? "",
+    commit_author: GITHUB_COMMIT_AUTHOR ?? "",
+    commit_email: GITHUB_COMMIT_EMAIL ?? "",
+  },
 });
 
 articleProcessor.use(async (context: ProcessorContext, visit: TVisitor, next: Next) => {
-	visit("heading", (_node, _index, parent) => {
-		let node = _node as Heading;
-		//TODO: 对节点进行处理
-	});
+  visit("heading", (_node, _index, parent) => {
+    let node = _node as Heading;
+    //TODO: 对节点进行处理
+  });
 
-    //注意：处理完后记得调用next，否则会导致一直卡在这过程不会继续往后处理了
-	next();
+  //注意：处理完后记得调用next，否则会导致一直卡在这过程不会继续往后处理了
+  next();
 });
 ```
 

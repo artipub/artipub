@@ -1,4 +1,5 @@
 # 🎉 ArtiPub
+
 English | [简体中文](./README_zh-CN.md)
 
 ![GitHub top language](https://img.shields.io/github/languages/top/Pup007/artipub)
@@ -6,10 +7,10 @@ English | [简体中文](./README_zh-CN.md)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Pup007/artipub/release.yml)
 ![NPM Version](https://img.shields.io/npm/v/%40pup007%2Fartipub)
 
-
 ArtiPub (article release assistant) is a tool library aimed at simplifying content creators to publish the article process.It provides a simple API that allows you to easily publish the article to any platforms, such as blogs, social media, etc., without manual operation of each platform.
 
 ## ❓ Why do you need artipub?
+
 1. Local pictures cited in Markdown need to manually compress the picture, then upload to the bed, and finally replace the picture link
 2. After Markdown finished writing, I want to publish it to other platforms to avoid manual Copy
 3. After Markdown finished writing the article, I need to modify some of the contents of Markdown and let it regenerate the content of Markdown

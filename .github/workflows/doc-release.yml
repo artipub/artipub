@@ -27,7 +27,7 @@ jobs:
 
       - name: Run Lint
         run: pnpm run docs:build
-        
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

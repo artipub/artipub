@@ -1,8 +1,8 @@
-import { ImageExtension, Next, NodeContext, TVisitor } from "@/types";
-import { ProcessorContext } from "@/core";
-import path from "path";
-import fs from "fs/promises";
-import { getCache, getProjectRootPath, normalizedPath, relativePathImgRegex, writeCache } from "@/utils";
+import { ImageExtension, Next, NodeContext, TVisitor } from "@/lib/types";
+import { ProcessorContext } from "@/lib/core";
+import path from "node:path";
+import fs from "node:fs/promises";
+import { getCache, getProjectRootPath, normalizedPath, relativePathImgRegex, writeCache } from "@/lib/utils";
 import { createCommonJS } from "mlly";
 
 const { require } = createCommonJS(import.meta.url);
@@ -13,15 +13,15 @@ export default async function picCompress(context: ProcessorContext, visit: TVis
     return next();
   }
   const cachePath = normalizedPath(path.resolve(getProjectRootPath(), ".artipub/cache/compressCache.json"));
-  let caches = await getCache(cachePath);
-  let matchNodes: NodeContext[] = [];
+  const caches = await getCache(cachePath);
+  const matchNodes: NodeContext[] = [];
 
   visit("image", async (_node, _index, parent) => {
     let { url } = _node as any;
     if (url) {
       matchNodes.push({ node: _node, parent: parent as any });
       url = decodeURIComponent(url);
-      let regex = relativePathImgRegex;
+      const regex = relativePathImgRegex;
       if (regex.test(url)) {
         matchNodes.push({
           node: _node,
@@ -33,33 +33,33 @@ export default async function picCompress(context: ProcessorContext, visit: TVis
 
   async function handle(nodes: NodeContext[]) {
     for (const nodeContext of nodes) {
-      let node = nodeContext.node as any;
-      let url = decodeURIComponent(node.url);
+      const node = nodeContext.node as any;
+      const url = decodeURIComponent(node.url);
       if (caches.has(url)) {
         continue;
       }
       if (url) {
-        let rootDir = path.resolve(path.dirname(context.filePath));
-        let filePath = path.resolve(path.join(rootDir, url));
+        const rootDir = path.resolve(path.dirname(context.filePath));
+        const filePath = path.resolve(path.join(rootDir, url));
         let extension: any = path.extname(filePath).slice(1).toLocaleLowerCase();
         if (extension === "jpg") {
           extension = "jpeg";
         }
         try {
           await fs.access(filePath, fs.constants.R_OK);
-        } catch (error) {
+        } catch {
           continue;
         }
-        let buff = await fs.readFile(filePath);
+        const buff = await fs.readFile(filePath);
         const sharp = require("sharp");
-        let sharpInstance = sharp(buff)[extension as ImageExtension]({
+        const sharpInstance = sharp(buff)[extension as ImageExtension]({
           quality: option.compressedOptions?.quality || 80,
         });
         try {
           await sharpInstance.toFile(filePath);
           caches.set(url, filePath);
           console.log("compress success ! res path:", filePath);
-        } catch (error) {
+        } catch {
           console.log("compress fail ! res path:", filePath);
         }
       }

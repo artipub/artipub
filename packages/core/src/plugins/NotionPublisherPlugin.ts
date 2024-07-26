@@ -1,4 +1,4 @@
-import { NotionPublisherPluginOption, PublishResult, TVisitor, ToMarkdown } from "@/types";
+import { NotionPublisherPluginOption, PublishResult, TVisitor, ToMarkdown } from "@/lib/types";
 import { Heading } from "mdast";
 import { createCommonJS } from "mlly";
 
@@ -9,14 +9,14 @@ const { markdownToBlocks } = require("@tryfabric/martian");
 export function NotionPublisherPlugin(option: NotionPublisherPluginOption) {
   return async (articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> => {
     visit("heading", (_node, _index, parent) => {
-      let node = _node as Heading;
+      const node = _node as Heading;
       if (parent && node.depth === 1) {
         parent.children.splice(0, (_index ?? 0) + 1);
         return true;
       }
     });
 
-    let { content } = toMarkdown();
+    const { content } = toMarkdown();
     const blocks = markdownToBlocks(content);
     const notion = new Client({ auth: option.api_key });
     await notion.pages.create({
@@ -36,7 +36,7 @@ export function NotionPublisherPlugin(option: NotionPublisherPluginOption) {
       children: blocks,
     });
 
-    let res: PublishResult = {
+    const res: PublishResult = {
       success: true,
       info: `Published [${articleTitle}] to Notion successfully!`,
     };

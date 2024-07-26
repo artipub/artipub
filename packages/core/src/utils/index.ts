@@ -1,7 +1,7 @@
 import chalk from "chalk";
-import { existsSync } from "fs";
-import fs from "fs/promises";
-import path from "path";
+import { existsSync } from "node:fs";
+import fs from "node:fs/promises";
+import path from "node:path";
 import { Node } from "unified/lib";
 import { Test, Visitor } from "unist-util-visit/lib";
 import { visit } from "unist-util-visit";
@@ -31,15 +31,15 @@ export function normalizedPath(filePath: string) {
 }
 
 export async function getCache(cachePath: string) {
-  let res = new Map<string, string>();
+  const res = new Map<string, string>();
   try {
     if (!existsSync(cachePath)) {
       return res;
     }
 
-    let cache = await fs.readFile(cachePath, { encoding: "utf-8" });
-    let cacheArr = JSON.parse(cache);
-    for (let key of Object.keys(cacheArr)) {
+    const cache = await fs.readFile(cachePath, { encoding: "utf8" });
+    const cacheArr = JSON.parse(cache);
+    for (const key of Object.keys(cacheArr)) {
       res.set(key, cacheArr[key]);
     }
   } catch (error) {
@@ -49,17 +49,17 @@ export async function getCache(cachePath: string) {
 }
 
 export async function writeCache(cachePath: string, caches: Map<string, string>) {
-  let cacheObj: any = {};
-  for (let [key, value] of caches) {
+  const cacheObj: any = {};
+  for (const [key, value] of caches) {
     cacheObj[key] = value;
   }
   try {
-    let dir = cachePath.split("/").slice(0, -1).join("/");
+    const dir = cachePath.split("/").slice(0, -1).join("/");
     if (!existsSync(cachePath)) {
       await fs.mkdir(dir, { recursive: true });
     }
     await fs.writeFile(cachePath, JSON.stringify(cacheObj), {
-      encoding: "utf-8",
+      encoding: "utf8",
     });
   } catch (error) {
     log.error(`write cache file fail ! cachePath:${cachePath}, error:${error}`);
@@ -67,8 +67,8 @@ export async function writeCache(cachePath: string, caches: Map<string, string>)
 }
 
 export function fileNameWithOutExtension(filePath: string) {
-  let filename = path.basename(filePath);
-  let extension = path.extname(filePath);
+  const filename = path.basename(filePath);
+  const extension = path.extname(filePath);
   return filename.slice(0, filename.indexOf(extension));
 }
 
@@ -94,4 +94,4 @@ export function createVisitor(tree: Node) {
   };
 }
 
-export const relativePathImgRegex = /^[^https?].{1,}\.(png|jpg|jpeg|svg|gif)$/im;
+export const relativePathImgRegex = /^[^?hpst].+\.(png|jpg|jpeg|svg|gif)$/im;

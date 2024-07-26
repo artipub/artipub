@@ -4,16 +4,20 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "lib": ["ESNext"],
+    "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": false,
+    "preserveSymlinks": true,
+    "baseUrl": "./src",
     "paths": {
-      "@artipub/core": ["packages/core/dist"]
-    },
-    "types": ["node"]
+      "@/*": ["*"]
+    }
   },
-  "include": ["./src/**/*.ts"]
+  "include": ["src/**/*", "tests/**/*", "tsconfig.json", "rollup.config.lib.ts"],
+  "exclude": ["dist"]
 }

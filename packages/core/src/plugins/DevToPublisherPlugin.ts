@@ -1,4 +1,4 @@
-import { DevToPublisherPluginOption, PublishResult, TVisitor, ToMarkdown } from "@/types";
+import { DevToPublisherPluginOption, PublishResult, TVisitor, ToMarkdown } from "@/lib/types";
 import { Heading } from "mdast";
 import { createCommonJS } from "mlly";
 
@@ -7,12 +7,12 @@ const axios = require("axios");
 
 export function DevToPublisherPlugin(option: DevToPublisherPluginOption) {
   return async (articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> => {
-    let tags: string[] = [];
+    const tags: string[] = [];
 
     //Get tags
     visit("list", (_node, index, parent) => {
-      let node = _node as any;
-      let prevSibling = parent?.children[Number(index) - 1] as any;
+      const node = _node as any;
+      const prevSibling = parent?.children[Number(index) - 1] as any;
       if (prevSibling && prevSibling?.children && prevSibling.children[0].value === "tags:") {
         node.children.forEach((child: any) => {
           tags.push(child.children[0].children[0].value);
@@ -23,16 +23,16 @@ export function DevToPublisherPlugin(option: DevToPublisherPluginOption) {
 
     //Remove article description part
     visit("heading", (_node, _index, parent) => {
-      let node = _node as Heading;
+      const node = _node as Heading;
       if (parent && node.depth === 1) {
         parent.children.splice(0, (_index ?? 0) + 1);
         return true;
       }
     });
 
-    let { content } = toMarkdown();
+    const { content } = toMarkdown();
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://dev.to/api/articles",
         {
           article: {
@@ -60,7 +60,7 @@ export function DevToPublisherPlugin(option: DevToPublisherPluginOption) {
         info: error.error,
       };
     }
-    let res: PublishResult = {
+    const res: PublishResult = {
       success: true,
       info: "Published to Dev.to",
     };

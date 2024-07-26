@@ -1,11 +1,11 @@
-import fs from "fs/promises";
-import { ArticleProcessResult, ArticleProcessorOption, Middleware } from "@/types";
+import fs from "node:fs/promises";
+import { ArticleProcessResult, ArticleProcessorOption, Middleware } from "@/lib/types";
 import { unified } from "unified";
-import type { Node, Parent } from "unist";
+import type { Node } from "unist";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
-import { picCompress, picUpload } from "@/middleware";
-import { createVisitor, fileNameWithOutExtension } from "@/utils";
+import { picCompress, picUpload } from "@/lib/middleware";
+import { createVisitor } from "@/lib/utils";
 
 const defaultCompressedOptions = {
   quality: 80,
@@ -20,7 +20,6 @@ export interface ProcessorContext {
   filePath: string;
 }
 
-export { Node, Parent };
 export class ArticleProcessor {
   public readonly option: ArticleProcessorOption;
   private middlewares: Middleware[];
@@ -49,8 +48,8 @@ export class ArticleProcessor {
   processMarkdown(filePath: string): Promise<ArticleProcessResult> {
     this.middlewares.push(picCompress);
     this.middlewares.push(picUpload);
-    let articleProcessor = this;
-    let context: ProcessorContext = {
+    const articleProcessor = this;
+    const context: ProcessorContext = {
       filePath,
       option: this.option,
     };
@@ -59,9 +58,9 @@ export class ArticleProcessor {
       return (tree: Node) => {
         return new Promise<Node>((resolve) => {
           let i = 0;
-          let next = async () => {
+          const next = async () => {
             if (i < articleProcessor.middlewares.length) {
-              let middleware = articleProcessor.middlewares[i];
+              const middleware = articleProcessor.middlewares[i];
               i++;
               await middleware(context, createVisitor(tree), next);
             } else {
@@ -73,15 +72,23 @@ export class ArticleProcessor {
       };
     }
 
-    return new Promise(async (resolve) => {
-      const fileContent = await fs.readFile(filePath, { encoding: "utf8" });
-      const desContent = await unified()
-        .use(remarkParse, { encoding: "utf8" })
-        .use(customMiddleware)
-        .use(remarkStringify, { rule: "-", bullet: "-" })
-        .process(fileContent);
-
-      resolve({ content: desContent.toString() });
+    return new Promise((resolve, reject) => {
+      fs.readFile(filePath, { encoding: "utf8" })
+        .then((fileContent) => {
+          return unified()
+            .use(remarkParse, { encoding: "utf8" })
+            .use(customMiddleware)
+            .use(remarkStringify, { rule: "-", bullet: "-" })
+            .process(fileContent);
+        })
+        .then((desContent) => {
+          resolve({ content: desContent.toString() });
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
   }
 }
+
+export { type Parent, type Node } from "unist";

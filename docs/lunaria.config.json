@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@lunariajs/core/config.schema.json",
   "repository": {
-    "name": "@pup007/artipub",
+    "name": "@artipub/core",
     "rootDir": "docs"
   },
   "files": [

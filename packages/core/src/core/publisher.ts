@@ -1,5 +1,5 @@
-import { Plugin, PublishResult, TVisitor, ToMarkdown } from "@/types";
-import { createVisitor, isFunction } from "@/utils";
+import { Plugin, PublishResult } from "@/lib/types";
+import { createVisitor, isFunction } from "@/lib/utils";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
@@ -47,9 +47,9 @@ export class PublisherManager {
     const tree = await unified().use(remarkParse).parse(this.content);
 
     const articleTitle = getArticleTitle(tree);
-    let tasks: Promise<PublishResult>[] = [];
-    for (let plugin of this.plugins) {
-      let cloneTree = cloneDeep(tree);
+    const tasks: Promise<PublishResult>[] = [];
+    for (const plugin of this.plugins) {
+      const cloneTree = cloneDeep(tree);
       tasks.push(plugin(articleTitle, createVisitor(cloneTree), toMarkdown.bind(null, cloneTree)));
     }
     return await Promise.all(tasks);

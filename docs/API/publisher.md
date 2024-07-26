@@ -27,10 +27,10 @@ export interface PublishResult {
   info?: string;
 }
 ```
+
 - articleTitle: Article title
 - visit：markdown ast Traversal method
 - toMarkdown: Turn AST to Markdown string content
-
 
 ## publish
 

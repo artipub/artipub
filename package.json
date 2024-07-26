@@ -1,104 +1,80 @@
 {
-	"name": "@pup007/artipub",
-	"version": "1.0.4",
-	"description": "A library for processing and publishing articles",
-	"author": "Potter<aa4790139@gmail.com>",
-	"homepage": "https://pup007.github.io/artipub/",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/pup007/artipub.git"
-	},
-	"bugs": {
-		"url": "https://github.com/pup007/artipub/issues"
-	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"scripts": {
-		"lint": "eslint --ext .ts && prettier -c src",
-		"lint:fix": "eslint --fix --ext .ts && prettier -w src",
-		"build": "pnpm clean && npx tsx script/build.ts",
-		"docs:dev": "pnpm -F=docs docs:dev",
-		"docs:build": "pnpm -F=docs docs:build",
-		"docs:preview": "pnpm -F=docs docs:preview",
-		"docs:lunaria:build": "pnpm -F=docs lunaria:build",
-		"clean": "rm -rf dist",
-		"release": "pnpm changelogen --release -i --prerelease",
-		"prepare": "husky"
-	},
-	"type": "module",
-	"main": "./dist/index.cjs",
-	"module": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"exports": {
-		"require": "./dist/index.cjs",
-		"import": "./dist/index.js"
-	},
-	"files": [
-		"dist",
-		"README_zh-CN.md",
-		"package.json"
-	],
-	"keywords": [
-		"typescript",
-		"node",
-		"notion",
-		"dev.to",
-		"process",
-		"article",
-		"publish",
-		"flow"
-	],
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	},
-	"lint-staged": {
-		"**/*.{ts}": [
-			"pnpm lint:fix"
-		]
-	},
-	"license": "MIT",
-	"devDependencies": {
-		"@babel/core": "^7.24.7",
-		"@babel/preset-env": "^7.24.7",
-		"@commitlint/cli": "^19.3.0",
-		"@commitlint/config-conventional": "^19.2.2",
-		"@rollup/plugin-alias": "^5.1.0",
-		"@rollup/plugin-babel": "^6.0.4",
-		"@rollup/plugin-commonjs": "^26.0.1",
-		"@rollup/plugin-node-resolve": "^15.2.3",
-		"@rollup/plugin-typescript": "^11.1.6",
-		"@types/lodash-es": "^4.17.12",
-		"@types/node": "^20.14.2",
-		"changelogen": "^0.5.5",
-		"eslint": "^8.57.0",
-		"eslint-config-unjs": "^0.3.2",
-		"husky": "^9.0.11",
-		"lint-staged": "^15.2.7",
-		"prettier": "^3.2.5",
-		"rollup": "^4.18.0",
-		"rollup-plugin-dts": "^6.1.1",
-		"typescript": "^5.4.5"
-	},
-	"peerDependencies": {
-		"@types/mdast": "^4.0.4",
-		"@types/unist": "^3.0.2"
-	},
-	"dependencies": {
-		"@notionhq/client": "^2.2.15",
-		"@tryfabric/martian": "^1.2.4",
-		"axios": "^1.7.2",
-		"chalk": "^5.3.0",
-		"file-type": "^19.0.0",
-		"lodash-es": "^4.17.21",
-		"mlly": "^1.7.1",
-		"remark-parse": "11.0.0",
-		"remark-stringify": "11.0.0",
-		"sharp": "^0.33.4",
-		"tslib": "^2.6.3",
-		"unified": "11.0.0",
-		"unist-util-visit": "^5.0.0"
-	}
+  "name": "artipub",
+  "version": "1.0.4",
+  "description": "A library for processing and publishing articles",
+  "author": "Potter<aa4790139@gmail.com>",
+  "homepage": "https://artipub.github.io/artipub/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artipub/artipub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/artipub/artipub/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "eslint . && prettier -c .",
+    "lint:fix": "eslint . --fix && prettier -w .",
+    "dev": "pnpm -F=playground dev",
+    "build": "pnpm --filter=./packages/* run build",
+    "docs:dev": "pnpm -F=docs docs:dev",
+    "docs:build": "pnpm -F=docs docs:build",
+    "docs:preview": "pnpm -F=docs docs:preview",
+    "docs:lunaria:build": "pnpm -F=docs lunaria:build",
+    "clean": "pnpm -F=artipub clean",
+    "release": "pnpm -F=artipub release",
+    "prepare": "husky"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README_zh-CN.md",
+    "package.json"
+  ],
+  "keywords": [
+    "typescript",
+    "node",
+    "notion",
+    "dev.to",
+    "process",
+    "article",
+    "publish",
+    "flow"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{ts}": [
+      "pnpm lint:fix"
+    ]
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@types/node": "^20.14.2",
+    "changelogen": "^0.5.5",
+    "commander": "^12.1.0",
+    "eslint": "^9.7.0",
+    "eslint-config-unjs": "^0.3.2",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
+  },
+  "peerDependencies": {},
+  "dependencies": {},
+  "packageManager": "pnpm@8.1.0+sha512.7b61fbdf04d1c667397d617fe9026a6eec14e8edcd455642d46d561571bc12a7cdffe641bbc5d51c96703c7e978740f16c4a19830f3fc32daeb60083c0fbb84a"
 }

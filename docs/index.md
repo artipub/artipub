@@ -33,6 +33,4 @@ features:
   - icon: 📖
     text: Complete open source
     details: Encourage community contributions and continue to increase new platform support and functions.
-
 ---
-

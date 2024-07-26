@@ -1,7 +1,7 @@
-import { defineRendererConfig, html } from '@lunariajs/core';
+import { defineRendererConfig, html } from "@lunariajs/core";
 
 export default defineRendererConfig({
-	slots: {
-		afterTitle: () => html`<p>This is an example slotted component!</p>`,
-	},
+  slots: {
+    afterTitle: () => html`<p>This is an example slotted component!</p>`,
+  },
 });

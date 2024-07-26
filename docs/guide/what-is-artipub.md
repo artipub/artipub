@@ -7,6 +7,7 @@ Just want to try it out? Skip to the [Quickstart](./getting-started).
 </div>
 
 ## ❓ Why do you need Artipub?
+
 1. Local pictures cited in Markdown need to manually compress the picture, then upload to the bed, and finally replace the picture link
 2. After Markdown finished writing, I want to publish it to other platforms to avoid manual Copy
 3. After Markdown finished writing the article, I need to modify some of the contents of Markdown and let it regenerate the content of Markdown
@@ -22,18 +23,21 @@ Just want to try it out? Skip to the [Quickstart](./getting-started).
 - 📖 **Complete open source**: Encourage community contributions and continue to increase new platform support and functions.
 
 ## 📌 TODO
+
 - [x] DevToPublisherPlugin
 - [x] Document Site
 
 ## 🔧 Built-in
 
 ### Treatment middleware
+
 | Name        | Support | Description                          |
 | ----------- | ------- | ------------------------------------ |
 | piccompress | √       | Automatic compression of the picture |
 | Picupload   | √       | Picture Upload                       |
 
 ### Publish plug -in
+
 | Name                  | Support | Description         |
 | --------------------- | ------- | ------------------- |
 | NOTIONPUBLISHERPLUGIN | √       | Published to NOTION |

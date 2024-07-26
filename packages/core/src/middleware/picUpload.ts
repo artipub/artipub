@@ -1,22 +1,22 @@
-import { GithubPicBedOption, Next, NodeContext, TVisitor, UploadImg } from "@/types";
-import { ProcessorContext } from "@/core";
-import path from "path";
-import fs from "fs/promises";
+import { GithubPicBedOption, Next, NodeContext, TVisitor, UploadImg } from "@/lib/types";
+import { ProcessorContext } from "@/lib/core";
+import path from "node:path";
+import fs from "node:fs/promises";
 import { fileTypeFromBuffer } from "file-type";
-import { getCache, getProjectRootPath, isFunction, log, normalizedPath, relativePathImgRegex, writeCache } from "@/utils";
+import { getCache, getProjectRootPath, isFunction, log, normalizedPath, relativePathImgRegex, writeCache } from "@/lib/utils";
 import { createCommonJS } from "mlly";
 
 const { require } = createCommonJS(import.meta.url);
 const axios = require("axios");
 
 async function uploadToGithub(filePath: string, picBedOption: GithubPicBedOption) {
-  let extension = path.extname(filePath);
-  let content = await fs.readFile(filePath);
-  let contentBase64 = content.toString("base64");
-  let fileName = Date.now();
-  let githubPath = `${picBedOption.dir}/${fileName}${extension}`;
+  const extension = path.extname(filePath);
+  const content = await fs.readFile(filePath);
+  const contentBase64 = content.toString("base64");
+  const fileName = Date.now();
+  const githubPath = `${picBedOption.dir}/${fileName}${extension}`;
 
-  let commitData = JSON.stringify({
+  const commitData = JSON.stringify({
     message: "commit image",
     committer: {
       name: picBedOption.commit_author,
@@ -55,14 +55,14 @@ export default async function picUpload(context: ProcessorContext, visit: TVisit
   } = context;
   const picBedOption = uploadImgOption as GithubPicBedOption;
   const cachePath = normalizedPath(path.resolve(getProjectRootPath(), ".artipub/cache/uploadCache.json"));
-  let caches = await getCache(cachePath);
-  let matchNodes: NodeContext[] = [];
+  const caches = await getCache(cachePath);
+  const matchNodes: NodeContext[] = [];
 
   visit("image", async (_node, _index, parent) => {
-    let node = _node as any;
+    const node = _node as any;
     if (node.url) {
-      let url = decodeURIComponent(node.url);
-      let regex = relativePathImgRegex;
+      const url = decodeURIComponent(node.url);
+      const regex = relativePathImgRegex;
       if (regex.test(url)) {
         matchNodes.push({
           node,
@@ -74,17 +74,17 @@ export default async function picUpload(context: ProcessorContext, visit: TVisit
 
   async function handle(nodes: NodeContext[]) {
     for (const nodeContext of nodes) {
-      let node = nodeContext.node as any;
-      let url = decodeURIComponent(node.url);
+      const node = nodeContext.node as any;
+      const url = decodeURIComponent(node.url);
       if (url) {
         if (caches.has(url)) {
           node.url = caches.get(url);
           continue;
         }
-        let regex = relativePathImgRegex;
+        const regex = relativePathImgRegex;
         if (regex.test(url)) {
-          let rootDir = path.resolve(path.dirname(context.filePath));
-          let filePath = path.resolve(path.join(rootDir, url));
+          const rootDir = path.resolve(path.dirname(context.filePath));
+          const filePath = path.resolve(path.join(rootDir, url));
           try {
             await fs.access(filePath, fs.constants.R_OK);
           } catch (error) {
@@ -92,11 +92,7 @@ export default async function picUpload(context: ProcessorContext, visit: TVisit
             continue;
           }
           let res: string | null = null;
-          if (isFunction(uploadImgOption)) {
-            res = await (uploadImgOption as UploadImg)(filePath);
-          } else {
-            res = await uploadToGithub(filePath, picBedOption);
-          }
+          res = await (isFunction(uploadImgOption) ? (uploadImgOption as UploadImg)(filePath) : uploadToGithub(filePath, picBedOption));
           if (res) {
             node.url = res;
             caches.set(url, res);
