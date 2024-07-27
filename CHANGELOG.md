@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.0.5-14
+
+[compare changes](https://github.com/pup007/artipub/compare/v1.0.5-13...v1.0.5-14)
+
+### 🏡 Chore
+
+- **release:** V1.0.5-13 ([a5c0167](https://github.com/pup007/artipub/commit/a5c0167))
+
+### ❤️ Contributors
+
+- Potter ([@artipub](http://github.com/artipub))
+
 ## v1.0.5-13
 
 [compare changes](https://github.com/pup007/artipub/compare/v1.0.5-12...v1.0.5-13)
