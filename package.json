@@ -57,7 +57,8 @@
   },
   "lint-staged": {
     "**/*.{ts}": [
-      "pnpm lint:fix"
+      "pnpm lint:fix",
+      "git add ."
     ]
   },
   "license": "MIT",

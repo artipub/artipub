@@ -1,11 +1,11 @@
 import fs from "node:fs/promises";
-import { ArticleProcessResult, ArticleProcessorOption, Middleware } from "@/lib/types";
+import { ArticleProcessResult, ArticleProcessorOption, Middleware } from "@/types";
 import { unified } from "unified";
 import type { Node } from "unist";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
-import { picCompress, picUpload } from "@/lib/middleware";
-import { createVisitor } from "@/lib/utils";
+import { picCompress, picUpload } from "@/middleware";
+import { createVisitor } from "@/utils";
 
 const defaultCompressedOptions = {
   quality: 80,

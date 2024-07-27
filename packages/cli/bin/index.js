@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { run } = require("../dist/cli/index.js");
+import { run } from "../dist/index.js";
 
 run().catch((error_) => {
   console.error(error_);

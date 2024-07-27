@@ -1,4 +1,4 @@
-import { NotionPublisherPluginOption, PublishResult, TVisitor, ToMarkdown } from "@/lib/types";
+import { NotionPublisherPluginOption, PublishResult, TVisitor, ToMarkdown } from "@/types";
 import { Heading } from "mdast";
 import { createCommonJS } from "mlly";
 

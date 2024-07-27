@@ -13,44 +13,44 @@ const external = Object.keys(pkg?.peerDependencies || {});
 
 export default defineConfig([
   {
-    input: "src/lib/index.ts",
+    input: "src/index.ts",
     output: [
       {
-        file: "dist/lib/index.js",
+        file: "dist/index.js",
         format: "esm",
         sourcemap: true,
       },
       {
-        file: "dist/lib/index.cjs",
+        file: "dist/index.cjs",
         format: "cjs",
         sourcemap: true,
       },
     ],
     plugins: [
       alias({
-        entries: [{ find: "@", replacement: path.resolve(__dirname, "./src/lib") }],
+        entries: [{ find: "@", replacement: path.resolve(__dirname, "./src") }],
       }),
       resolve({ browser: false, extensions: [".ts", ".js"] }),
       commonjs(),
       typescript({
-        tsconfig: "./tsconfig.lib.json",
+        tsconfig: "./tsconfig.json",
         sourceMap: true,
       }),
     ],
     external,
   },
   {
-    input: "src/lib/index.ts",
+    input: "src/index.ts",
     output: [
       {
-        file: "dist/lib/index.d.ts",
+        file: "dist/index.d.ts",
         format: "esm",
         sourcemap: true,
       },
     ],
     plugins: [
       alias({
-        entries: [{ find: "@", replacement: path.resolve(__dirname, "./lib/src") }],
+        entries: [{ find: "@", replacement: path.resolve(__dirname, "./src") }],
       }),
       resolve({ browser: false, extensions: [".ts", ".js"] }),
       dts(),

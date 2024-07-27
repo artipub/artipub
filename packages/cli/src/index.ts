@@ -1,20 +1,30 @@
+import { createCommonJS } from "mlly";
 import { Command } from "commander";
-import inquirer from "inquirer";
 import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 import interactPrompt from "./interact";
+import { schema } from "./constant";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
+const { require } = createCommonJS(import.meta.url);
+const Ajv = require("Ajv");
 const program = new Command();
 
 function answersToConfig(answers: any) {}
 
 async function updateArticle(articlePath: string, config: any) {}
 
+function validateConfig(config: any) {
+  const ajv = new Ajv();
+  const validate = ajv.compile(schema);
+  const valid = validate(config);
+  if (!valid) {
+    throw new Error(validate.errors?.map((e: any) => e.message).join("\n"));
+  }
+  return true;
+}
+
 async function handleAddOrUpdate(articlePath: string, options: any) {
   if (options.config) {
+    //TODO: 配置文件，添加ts类型，修改到此处?
     const config = JSON.parse(fs.readFileSync(options.config, "utf8"));
     return updateArticle(articlePath, config);
   } else {
@@ -24,44 +34,59 @@ async function handleAddOrUpdate(articlePath: string, options: any) {
   }
 }
 
-function registerCommands() {
+function help() {
+  console.log(`
+Usage: artipub [command]
+
+Commands:
+  add    <article path>  add an existing article
+  update <article path>  update an existing article
+  clear                  clear the cache
+
+Options:
+  -h, --help  display help for command
+  `);
+}
+
+function registerCommands(resolve: (value?: unknown) => void) {
   program
-    .command("add <article path>")
+    .command("add")
+    .argument("<string>", "article path")
     .description("add an existing article")
     .option("--config <path>", "Path to the configuration file")
     .action(async (articlePath: string, options: any) => {
-      handleAddOrUpdate(articlePath, options);
+      await handleAddOrUpdate(articlePath, options);
+      resolve();
     });
 
   program
-    .command("update <article path>")
+    .command("update")
+    .argument("<string>", "article path")
     .description("Update an existing article")
     .option("--config <path>", "Path to the configuration file")
     .action(async (articlePath: string, options: any) => {
-      handleAddOrUpdate(articlePath, options);
+      await handleAddOrUpdate(articlePath, options);
+      resolve();
     });
 
   program
-    .command("clear cache")
+    .command("clear")
     .description("Clear the cache")
     .action(() => {
       console.log("Cache cleared.");
-      //TODO:
-    });
-
-  program
-    .command("-h")
-    .description("Display help")
-    .action(() => {
-      program.help();
+      resolve();
     });
 }
 
 export function run() {
   return new Promise((resolve, reject) => {
     try {
-      registerCommands();
-      resolve(void 0);
+      registerCommands(resolve);
+      if (process.argv.length <= 2) {
+        help();
+      } else {
+        program.parse(process.argv);
+      }
     } catch (error) {
       reject(error);
     }

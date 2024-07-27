@@ -1,5 +1,5 @@
 import type { Visitor, Test } from "unist-util-visit";
-import { Node, Parent, ProcessorContext } from "@/lib/core";
+import { Node, Parent, ProcessorContext } from "@/core";
 
 export interface GithubPicBedOption {
   owner: string;

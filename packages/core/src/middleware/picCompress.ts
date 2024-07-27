@@ -1,8 +1,8 @@
-import { ImageExtension, Next, NodeContext, TVisitor } from "@/lib/types";
-import { ProcessorContext } from "@/lib/core";
+import { ImageExtension, Next, NodeContext, TVisitor } from "@/types";
+import { ProcessorContext } from "@/core";
 import path from "node:path";
 import fs from "node:fs/promises";
-import { getCache, getProjectRootPath, normalizedPath, relativePathImgRegex, writeCache } from "@/lib/utils";
+import { getCache, getProjectRootPath, normalizedPath, relativePathImgRegex, writeCache } from "@/utils";
 import { createCommonJS } from "mlly";
 
 const { require } = createCommonJS(import.meta.url);

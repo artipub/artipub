@@ -1,91 +1,10 @@
-import Ajv, { JSONSchemaType } from "ajv";
-import inquirer from "inquirer";
+import { createCommonJS } from "mlly";
+import type { QuestionCollection } from "@types/inquirer";
 
-const basePlatformSchema: JSONSchemaType<{ name: string; destination?: string }> = {
-  type: "object",
-  properties: {
-    name: { type: "string" },
-    destination: { type: "string", nullable: true },
-  },
-  required: ["name"],
-  additionalProperties: false,
-};
+const { require } = createCommonJS(import.meta.url);
+const inquirer = require("inquirer").default;
 
-const notionPlatformSchema: JSONSchemaType<{ name: "notion"; api_key: string; data_base_id: string; page_id: string }> = {
-  properties: {
-    name: { type: "string", const: "notion" },
-    api_key: { type: "string" },
-    data_base_id: { type: "string" },
-    page_id: { type: "string" },
-  },
-  required: ["name", "api_key", "data_base_id", "page_id"],
-};
-
-const devToPlatformSchema: JSONSchemaType<{
-  name: "dev.to";
-  api_key: string;
-  published?: boolean;
-  series?: string;
-  main_image?: string;
-  description?: string;
-  organization_id?: number;
-}> = {
-  ...basePlatformSchema,
-  properties: {
-    name: { type: "string", const: "dev.to" },
-    api_key: { type: "string" },
-    published: { type: "boolean", nullable: true },
-    series: { type: "string", nullable: true },
-    main_image: { type: "string", nullable: true },
-    description: { type: "string", nullable: true },
-    organization_id: { type: "number", nullable: true },
-  },
-  required: ["name", "api_key"],
-};
-
-const schema = {
-  type: "object",
-  properties: {
-    github_owner: { type: "string" },
-    github_repo: { type: "string" },
-    github_dir: { type: "string" },
-    github_branch: { type: "string" },
-    github_token: { type: "string" },
-    github_cdn_prefix: { type: "string" },
-    github_commit_author: { type: "string" },
-    github_commit_email: { type: "string" },
-    platform: {
-      type: "array",
-      items: {
-        anyOf: [basePlatformSchema, notionPlatformSchema, devToPlatformSchema],
-      },
-    },
-  },
-  required: [
-    "github_owner",
-    "github_repo",
-    "github_dir",
-    "github_branch",
-    "github_token",
-    "github_cdn_prefix",
-    "github_commit_author",
-    "github_commit_email",
-    "platform",
-  ],
-  additionalProperties: false,
-};
-
-function validateConfig(config: any) {
-  const ajv = new Ajv();
-  const validate = ajv.compile(schema);
-  const valid = validate(config);
-  if (!valid) {
-    throw new Error(validate.errors?.map((e) => e.message).join("\n"));
-  }
-  return true;
-}
-
-const platformPrompts = {
+const platformPrompts: Record<string, QuestionCollection[]> = {
   "native blog": [
     {
       type: "input",
@@ -146,23 +65,82 @@ const platformPrompts = {
 };
 
 export default async function interactPrompt() {
-  const { platform } = await inquirer.prompt([
+  console.log("Please enter the following GitHub related information:");
+
+  const githubQuestions = [
     {
-      type: "",
+      type: "input",
+      name: "github_owner",
+      message: "Enter GitHub owner:",
+      validate: (input: string) => (input ? true : "GitHub owner is required."),
     },
     {
-      type: "list",
+      type: "input",
+      name: "github_repo",
+      message: "Enter GitHub repository:",
+      validate: (input: string) => (input ? true : "GitHub repository is required."),
+    },
+    {
+      type: "input",
+      name: "github_dir",
+      message: "Enter GitHub directory:",
+      validate: (input: string) => (input ? true : "GitHub directory is required."),
+    },
+    {
+      type: "input",
+      name: "github_branch",
+      message: "Enter GitHub branch:",
+      validate: (input: string) => (input ? true : "GitHub branch is required."),
+    },
+    {
+      type: "input",
+      name: "github_token",
+      message: "Enter GitHub token:",
+      validate: (input: string) => (input ? true : "GitHub token is required."),
+    },
+    {
+      type: "input",
+      name: "github_cdn_prefix",
+      message: "Enter GitHub CDN prefix:",
+      validate: (input: string) => (input ? true : "GitHub CDN prefix is required."),
+    },
+    {
+      type: "input",
+      name: "github_commit_author",
+      message: "Enter GitHub commit author:",
+      validate: (input: string) => (input ? true : "GitHub commit author is required."),
+    },
+    {
+      type: "input",
+      name: "github_commit_email",
+      message: "Enter GitHub commit email:",
+      validate: (input: string) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(input) ? true : "Please enter a valid email address.";
+      },
+    },
+  ];
+  const githubAnswers = await inquirer.prompt(githubQuestions);
+
+  console.log("GitHub information entered successfully. Now, please select the platform:");
+  const checkPlatformAnswers = await inquirer.prompt([
+    {
+      type: "checkbox",
       name: "platform",
       message: "Select the platform:",
       choices: Object.keys(platformPrompts),
     },
   ]);
 
-  const platformSpecificPrompts = platformPrompts[platform];
-  const platformDetails = await inquirer.prompt(platformSpecificPrompts);
+  const platformAnswers: any = {};
+  for (const platform of checkPlatformAnswers.platform) {
+    console.log(`Please enter the following information for ${platform}:`);
+    const answers = await inquirer.prompt(platformPrompts[platform]);
+    platformAnswers[platform] = answers;
+  }
 
   return {
-    platform,
-    ...platformDetails,
+    githubAnswers,
+    platformAnswers,
   };
 }

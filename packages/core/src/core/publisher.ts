@@ -1,5 +1,5 @@
-import { Plugin, PublishResult } from "@/lib/types";
-import { createVisitor, isFunction } from "@/lib/utils";
+import { Plugin, PublishResult } from "@/types";
+import { createVisitor, isFunction } from "@/utils";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
