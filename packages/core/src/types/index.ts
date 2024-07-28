@@ -1,15 +1,6 @@
 import type { Visitor, Test } from "unist-util-visit";
 import { Node, Parent, ProcessorContext } from "@/core";
-
-export interface GithubPicBedOption {
-  owner: string;
-  repo: string;
-  dir: string;
-  branch: string;
-  token: string;
-  commit_author: string;
-  commit_email: string;
-}
+import type { GithubPicBedOption } from "@artipub/shared";
 
 export type UploadImg = (imgFilePath: string) => Promise<string>;
 
@@ -45,20 +36,6 @@ export type Plugin = (articleTitle: string, visit: TVisitor, toMarkdown: ToMarkd
 export interface PublishResult {
   success: boolean;
   info?: string;
-}
-
-export interface NotionPublisherPluginOption {
-  api_key: string;
-  page_id: string;
-}
-
-export interface DevToPublisherPluginOption {
-  api_key: string;
-  published?: boolean;
-  series?: string;
-  main_image?: string;
-  description?: string;
-  organization_id?: number;
 }
 
 export interface NodeContext {

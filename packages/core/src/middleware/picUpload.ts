@@ -1,10 +1,11 @@
-import { GithubPicBedOption, Next, NodeContext, TVisitor, UploadImg } from "@/types";
+import { Next, NodeContext, TVisitor, UploadImg } from "@/types";
 import { ProcessorContext } from "@/core";
 import path from "node:path";
 import fs from "node:fs/promises";
 import { fileTypeFromBuffer } from "file-type";
 import { getCache, getProjectRootPath, isFunction, log, normalizedPath, relativePathImgRegex, writeCache } from "@/utils";
 import { createCommonJS } from "mlly";
+import { GithubPicBedOption } from "@artipub/shared";
 
 const { require } = createCommonJS(import.meta.url);
 const axios = require("axios");

@@ -53,10 +53,16 @@ importers:
 
   packages/cli:
     dependencies:
+      "@types/inquirer":
+        specifier: ^9.0.7
+        version: 9.0.7
       ajv:
         specifier: ^8.17.1
         version: 8.17.1
     devDependencies:
+      "@artipub/shared":
+        specifier: workspace:*
+        version: link:../shared
       "@babel/core":
         specifier: ^7.24.7
         version: 7.24.9
@@ -84,9 +90,6 @@ importers:
       "@types/commander":
         specifier: ^2.12.2
         version: 2.12.2
-      "@types/inquirer":
-        specifier: ^9.0.7
-        version: 9.0.7
       "@types/lodash-es":
         specifier: ^4.17.12
         version: 4.17.12
@@ -157,6 +160,9 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
     devDependencies:
+      "@artipub/shared":
+        specifier: workspace:*
+        version: link:../shared
       "@babel/core":
         specifier: ^7.24.7
         version: 7.24.9
@@ -190,6 +196,8 @@ importers:
       rollup-plugin-dts:
         specifier: ^6.1.1
         version: 6.1.1(rollup@4.19.1)(typescript@5.4.5)
+
+  packages/shared: {}
 
   playground:
     devDependencies:

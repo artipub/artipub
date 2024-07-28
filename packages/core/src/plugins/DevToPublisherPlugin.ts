@@ -1,4 +1,5 @@
-import { DevToPublisherPluginOption, PublishResult, TVisitor, ToMarkdown } from "@/types";
+import { PublishResult, TVisitor, ToMarkdown } from "@/types";
+import { DevToPublisherPluginOption } from "@artipub/shared";
 import { Heading } from "mdast";
 import { createCommonJS } from "mlly";
 

@@ -3,14 +3,31 @@ import { Command } from "commander";
 import fs from "node:fs";
 import interactPrompt from "./interact";
 import { schema } from "./constant";
+import { ArticleConfig } from "./type";
+
+type InteractPrompt = Awaited<ReturnType<typeof interactPrompt>>;
 
 const { require } = createCommonJS(import.meta.url);
 const Ajv = require("Ajv");
 const program = new Command();
 
-function answersToConfig(answers: any) {}
+function answersToConfig(answers: InteractPrompt): ArticleConfig {
+  const { githubAnswers, platformAnswers } = answers;
+  const config: ArticleConfig = {
+    githubOption: githubAnswers,
+    platforms: platformAnswers,
+  };
+  return config;
+}
 
-async function updateArticle(articlePath: string, config: any) {}
+async function updateArticle(articlePath: string, config: ArticleConfig) {
+  if (!validateConfig(config)) {
+    throw new Error("Invalid configuration");
+  }
+  console.log("config:", config);
+
+  //TODO: Implement the update article logic
+}
 
 function validateConfig(config: any) {
   const ajv = new Ajv();
@@ -24,7 +41,6 @@ function validateConfig(config: any) {
 
 async function handleAddOrUpdate(articlePath: string, options: any) {
   if (options.config) {
-    //TODO: 配置文件，添加ts类型，修改到此处?
     const config = JSON.parse(fs.readFileSync(options.config, "utf8"));
     return updateArticle(articlePath, config);
   } else {

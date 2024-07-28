@@ -59,6 +59,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@artipub/shared": "workspace:*",
     "@babel/core": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
     "@rollup/plugin-alias": "^5.1.0",
@@ -68,9 +69,9 @@
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/ajv": "^1.0.0",
     "@types/commander": "^2.12.2",
-    "@types/inquirer": "^9.0.7",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.14.2",
+    "@types/inquirer": "^9.0.7",
     "commander": "^12.1.0",
     "inquirer": "^10.1.2",
     "mlly": "^1.7.1",

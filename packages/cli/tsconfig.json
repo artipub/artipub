@@ -15,7 +15,8 @@
     "preserveSymlinks": true,
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "types/*": ["./node_modules/@types/*"]
     }
   },
   "include": ["src/**/*", "tests/**/*", "tsconfig.json", "rollup.config.ts"],

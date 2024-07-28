@@ -1,6 +1,6 @@
-import type { JSONSchemaType } from "@types/ajv";
+import type { JSONSchemaType } from "ajv";
 
-export const basePlatformSchema: JSONSchemaType<{ name: string; destination?: string }> = {
+export const blogPlatformSchema: JSONSchemaType<{ name: string; destination?: string }> = {
   type: "object",
   properties: {
     name: { type: "string" },
@@ -43,34 +43,43 @@ export const devToPlatformSchema: JSONSchemaType<{
   required: ["name", "api_key"],
 };
 
-export const schema = {
+export const schema: JSONSchemaType<{
+  githubOption: {
+    owner: string;
+    repo: string;
+    dir: string;
+    branch: string;
+    token: string;
+    cdn_prefix: string;
+    commit_author: string;
+    commit_email: string;
+  };
+  platforms: object;
+}> = {
   type: "object",
   properties: {
-    github_owner: { type: "string" },
-    github_repo: { type: "string" },
-    github_dir: { type: "string" },
-    github_branch: { type: "string" },
-    github_token: { type: "string" },
-    github_cdn_prefix: { type: "string" },
-    github_commit_author: { type: "string" },
-    github_commit_email: { type: "string" },
-    platform: {
-      type: "array",
+    githubOption: {
+      type: "object",
+      properties: {
+        owner: { type: "string" },
+        repo: { type: "string" },
+        dir: { type: "string" },
+        branch: { type: "string" },
+        token: { type: "string" },
+        cdn_prefix: { type: "string" },
+        commit_author: { type: "string" },
+        commit_email: { type: "string" },
+      },
+      required: ["owner", "repo", "dir", "branch", "token", "cdn_prefix", "commit_author", "commit_email"],
+      additionalProperties: false,
+    },
+    platforms: {
+      type: "object",
       items: {
-        anyOf: [basePlatformSchema, notionPlatformSchema, devToPlatformSchema],
+        anyOf: [blogPlatformSchema, notionPlatformSchema, devToPlatformSchema],
       },
     },
   },
-  required: [
-    "github_owner",
-    "github_repo",
-    "github_dir",
-    "github_branch",
-    "github_token",
-    "github_cdn_prefix",
-    "github_commit_author",
-    "github_commit_email",
-    "platform",
-  ],
+  required: ["githubOption", "platforms"],
   additionalProperties: false,
 };
