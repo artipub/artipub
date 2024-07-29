@@ -76,6 +76,7 @@ export const schema: JSONSchemaType<{
     platforms: {
       type: "object",
       items: {
+        //TODO: 类型定义还需要调整
         anyOf: [blogPlatformSchema, notionPlatformSchema, devToPlatformSchema],
       },
     },

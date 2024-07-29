@@ -2,5 +2,5 @@
   "name": "@artipub/shared",
   "version": "0.0.1",
   "type": "module",
-  "main": "index.ts"
+  "main": "src/index.ts"
 }

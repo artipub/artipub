@@ -1,7 +1,7 @@
 name: Release
 on:
   push:
-    branches: []
+    branches: ["master"]
 
 permissions:
   id-token: write

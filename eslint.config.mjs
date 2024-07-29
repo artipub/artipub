@@ -9,6 +9,7 @@ export default unjs({
     "unicorn/no-process-exit": 0,
     "unicorn/no-this-assignment": 0,
     "@typescript-eslint/no-this-alias": 0,
+    "@typescript-eslint/no-unused-vars": 1,
     "unicorn/filename-case": 0,
     "unicorn/no-array-for-each": 0,
     semi: ["error", "always"],

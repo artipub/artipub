@@ -1,6 +1,6 @@
 import { createCommonJS } from "mlly";
 import type { DevToPublisherPluginOption, GithubPicBedOption, NativeBlogOption, NotionPublisherPluginOption } from "@artipub/shared";
-import { PlatformAnswers, PlatformOptions } from "./type";
+import { PlatformAnswers, PlatformOptions } from "./types";
 
 const { require } = createCommonJS(import.meta.url);
 const inquirer = require("inquirer").default;
