@@ -26,6 +26,7 @@ export default defineConfig([
         sourcemap: true,
       },
     ],
+    external,
     plugins: [
       alias({
         entries: [{ find: "@", replacement: path.resolve(__dirname, "./src") }],
@@ -37,7 +38,6 @@ export default defineConfig([
         sourceMap: true,
       }),
     ],
-    external,
   },
   {
     input: "src/index.ts",
@@ -48,6 +48,7 @@ export default defineConfig([
         sourcemap: true,
       },
     ],
+    external,
     plugins: [
       alias({
         entries: [{ find: "@", replacement: path.resolve(__dirname, "./src") }],
@@ -55,6 +56,5 @@ export default defineConfig([
       resolve({ browser: false, extensions: [".ts", ".js"] }),
       dts(),
     ],
-    external,
   },
 ]);
