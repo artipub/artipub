@@ -60,6 +60,7 @@
   "license": "MIT",
   "devDependencies": {
     "@artipub/shared": "workspace:*",
+    "@artipub/core": "workspace:*",
     "@babel/core": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
     "@rollup/plugin-alias": "^5.1.0",

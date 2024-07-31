@@ -66,12 +66,6 @@ export async function writeCache(cachePath: string, caches: Map<string, string>)
   }
 }
 
-export function fileNameWithOutExtension(filePath: string) {
-  const filename = path.basename(filePath);
-  const extension = path.extname(filePath);
-  return filename.slice(0, filename.indexOf(extension));
-}
-
 export function createVisitor(tree: Node) {
   return function visitor(
     testOrVisitor: Visitor | Test,

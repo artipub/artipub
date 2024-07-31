@@ -14,3 +14,9 @@ export interface ArticleConfig {
   githubOption: GithubPicBedOption;
   platforms: PlatformAnswers;
 }
+
+export interface AddOrUpdateCommandOptions {
+  config?: string;
+}
+
+export type ActionType = "Add" | "Update";

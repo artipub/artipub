@@ -14,8 +14,8 @@ export function defineConfig(config: ArticleConfig) {
   return config;
 }
 
-export function getConfigPath(dir: string = process.cwd()) {
-  dir = normalizePath(path.resolve(dir));
+export function getConfigPath(dir: string) {
+  dir = normalizePath(path.resolve(dir)) ?? "";
   const configPath = supportedConfigExtensions
     .flatMap((ext) => [path.resolve(dir, `artipub.config.${ext}`)])
     .find((it) => fs.pathExistsSync(it));
@@ -26,6 +26,6 @@ export async function loadConfig(configPath: string) {
   if (!fs.pathExistsSync(configPath)) {
     throw new Error(`Config file not found: ${configPath}`);
   }
-  const configModule = await import(url.pathToFileURL(configPath).toString());
+  const configModule = await import(url.pathToFileURL(configPath).href);
   return configModule.default;
 }
