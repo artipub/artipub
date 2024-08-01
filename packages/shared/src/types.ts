@@ -9,7 +9,19 @@ export interface GithubPicBedOption {
 }
 
 export interface NativeBlogOption {
-  dir_path: string;
+  /**
+   * this is local absolute path
+   */
+  destination_path: string;
+  /**
+   * default is https://cdn.jsdelivr.net/gh
+   */
+  cdn_prefix?: string;
+  /**
+   * this is article's resource image domain
+   * default is raw.githubusercontent.com
+   */
+  res_domain?: string;
 }
 
 export interface NotionPublisherPluginOption {

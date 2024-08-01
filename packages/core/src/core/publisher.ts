@@ -52,6 +52,9 @@ export class PublisherManager {
       const cloneTree = cloneDeep(tree);
       tasks.push(plugin(articleTitle, createVisitor(cloneTree), toMarkdown.bind(null, cloneTree)));
     }
+    if (tasks.length === 0) {
+      throw new Error("No plugins were added, please add plugin before publish.");
+    }
     return await Promise.all(tasks);
   }
 }
