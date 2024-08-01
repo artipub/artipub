@@ -5,3 +5,4 @@ dist
 .husky/_
 .npmrc
 docs/.vitepress/cache/
+/**/artipub.config.*
