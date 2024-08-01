@@ -4,10 +4,10 @@ import interactPrompt from "./interact";
 import { schema } from "./constant";
 import { getConfigPath, loadConfig } from "./config";
 import fs from "fs-extra";
-import { ArticleProcessor, PublisherManager, NotionPublisherPlugin, DevToPublisherPlugin } from "@artipub/core";
+import { ArticleProcessor, ArticleProcessResult, Plugin, PublisherManager, publisherPlugins } from "@artipub/core";
 
 import type { ActionType, AddOrUpdateCommandOptions, ArticleConfig } from "./types";
-import { normalizePath, resolvePath, fileNameWithOutExtension } from "@artipub/shared";
+import { normalizePath, resolvePath } from "@artipub/shared";
 
 type InteractPrompt = Awaited<ReturnType<typeof interactPrompt>>;
 
@@ -58,38 +58,19 @@ function addArticleToPlatform(articlePath: string, config: ArticleConfig) {
     },
   });
 
-  processor.processMarkdown(articlePath).then(async ({ content }) => {
-    const filename = fileNameWithOutExtension(articlePath);
+  processor.processMarkdown(articlePath).then(async ({ content }: ArticleProcessResult) => {
+    const publisher = new PublisherManager(content);
 
-    console.log("filename:", filename);
-    console.log("content:", content);
-
-    /*  let publisher = new PublisherManager(content);
-     publisher.addPlugin(
-       NotionPublisherPlugin({
-         api_key: NOTION_API_KEY,
-         page_id: NOTION_PAGE_ID,
-       })
-     );
-     publisher.addPlugin(
-       BlogPublisherPlugin({
-         targetDir: articleTargetDir,
-       })
-     );
-     publisher.addPlugin(
-       NativePlatformPublisherPlugin({
-         targetDir: getArticleDir(),
-       })
-     );
-     publisher.addPlugin(
-       DevToPublisherPlugin({
-         api_key: DEV_TO_API_KEY ?? "",
-         published: false,
-       })
-     );
- 
-     let res = await publisher.publish();
-     console.log("publish res:", res); */
+    for (const publisherKey of Object.keys(publisherPlugins)) {
+      const options = (config as any)[publisherKey];
+      const plugin = publisherPlugins[publisherKey as keyof typeof publisherPlugins] as any;
+      if (options) {
+        publisher.addPlugin(plugin(...options));
+      }
+    }
+    
+    const res = await publisher.publish();
+    console.log("publish res:", res);
   });
 }
 

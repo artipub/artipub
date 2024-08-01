@@ -1,12 +1,14 @@
 import type { JSONSchemaType } from "ajv";
 
-export const blogPlatformSchema: JSONSchemaType<{ name: string; destination?: string }> = {
+export const blogPlatformSchema: JSONSchemaType<{ name: "blog"; destination_path: string; cdn_prefix?: string; res_domain?: string }> = {
   type: "object",
   properties: {
-    name: { type: "string" },
-    destination: { type: "string", nullable: true },
+    name: { type: "string", const: "blog" },
+    destination_path: { type: "string" },
+    cdn_prefix: { type: "string", nullable: true },
+    res_domain: { type: "string", nullable: true },
   },
-  required: ["name"],
+  required: ["name", "destination_path"],
   additionalProperties: false,
 };
 
