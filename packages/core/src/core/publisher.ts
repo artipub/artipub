@@ -1,4 +1,4 @@
-import { Plugin, PublishResult } from "@/types";
+import { PublisherPlugin, PublishResult } from "@/types";
 import { createVisitor, isFunction } from "@/utils";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
@@ -9,7 +9,7 @@ import { visit } from "unist-util-visit";
 import { Heading, Text } from "mdast";
 
 export class PublisherManager {
-  private plugins: Plugin[];
+  private plugins: PublisherPlugin[];
   private content: string;
   /**
    * @param content markdown's content
@@ -18,7 +18,7 @@ export class PublisherManager {
     this.content = content;
     this.plugins = [];
   }
-  addPlugin(plugin: Plugin) {
+  addPlugin(plugin: PublisherPlugin) {
     if (!isFunction(plugin)) {
       throw new Error("Plugin must be a function");
     }
@@ -50,7 +50,10 @@ export class PublisherManager {
     const tasks: Promise<PublishResult>[] = [];
     for (const plugin of this.plugins) {
       const cloneTree = cloneDeep(tree);
-      tasks.push(plugin(articleTitle, createVisitor(cloneTree), toMarkdown.bind(null, cloneTree)));
+      const result = plugin
+        .process(articleTitle, createVisitor(cloneTree), () => toMarkdown(cloneTree))
+        .then((res) => Object.assign({ name: plugin.name }, res));
+      tasks.push(result);
     }
     if (tasks.length === 0) {
       throw new Error("No plugins were added, please add plugin before publish.");

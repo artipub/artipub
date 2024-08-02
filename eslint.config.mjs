@@ -13,6 +13,7 @@ export default unjs({
     "unicorn/no-unreadable-array-destructuring": 0,
     "unicorn/filename-case": 0,
     "unicorn/no-array-for-each": 0,
+    "unicorn/no-array-reduce": 0,
     semi: ["error", "always"],
   },
   markdown: {

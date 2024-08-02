@@ -32,8 +32,13 @@ export type Middleware = (context: ProcessorContext, visitor: TVisitor, next: Ne
 export type Next = () => void;
 export type ImageExtension = "png" | "jpeg" | "gif";
 
-export type Plugin = (articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown) => Promise<PublishResult>;
+export interface PublisherPlugin {
+  process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult>;
+  name: string;
+}
+
 export interface PublishResult {
+  name?: string;
   success: boolean;
   info?: string;
 }
