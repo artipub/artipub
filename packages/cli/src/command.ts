@@ -4,16 +4,24 @@ import interactPrompt from "./interact";
 import { schema } from "./constant";
 import { getConfigPath, loadConfig } from "./config";
 import fs from "fs-extra";
-import { ArticleProcessor, ArticleProcessResult, Plugin, PublisherManager, publisherPlugins } from "@artipub/core";
+import { ArticleProcessor, ArticleProcessResult, PublisherManager, publisherPlugins } from "@artipub/core";
+import { normalizePath, resolvePath } from "@artipub/shared";
 
 import type { ActionType, AddOrUpdateCommandOptions, ArticleConfig } from "./types";
-import { normalizePath, resolvePath } from "@artipub/shared";
 
 type InteractPrompt = Awaited<ReturnType<typeof interactPrompt>>;
 
 const { require } = createCommonJS(import.meta.url);
 const Ajv = require("Ajv");
 const program = new Command();
+const pluginNameMapConfigPropertyName: Record<string, string> = Object.keys(publisherPlugins).reduce(
+  (pre, key) => {
+    const plugin = publisherPlugins[key as keyof typeof publisherPlugins];
+    pre[plugin.name] = key;
+    return pre;
+  },
+  {} as Record<string, string>
+);
 
 export function help() {
   console.log(`
@@ -45,36 +53,41 @@ async function updateArticle(type: ActionType, articlePath: string, config: Arti
   }
 
   if (type == "Add") {
-    addArticleToPlatform(articlePath, config);
+    return await addArticleToPlatform(articlePath, config);
   } else if (type === "Update") {
-    updateArticleToPlatform(articlePath, config);
+    return await updateArticleToPlatform(articlePath, config);
+  } else {
+    throw new Error("Invalid action type");
   }
 }
 
-function addArticleToPlatform(articlePath: string, config: ArticleConfig) {
+async function addArticleToPlatform(articlePath: string, config: ArticleConfig) {
   const processor = new ArticleProcessor({
     uploadImgOption: {
       ...config.githubOption,
     },
   });
 
-  processor.processMarkdown(articlePath).then(async ({ content }: ArticleProcessResult) => {
+  return processor.processMarkdown(articlePath).then(async ({ content }: ArticleProcessResult) => {
     const publisher = new PublisherManager(content);
 
     for (const publisherKey of Object.keys(publisherPlugins)) {
       const options = (config as any)[publisherKey];
       const plugin = publisherPlugins[publisherKey as keyof typeof publisherPlugins] as any;
       if (options) {
-        publisher.addPlugin(plugin(...options));
+        publisher.addPlugin(plugin({ articlePath, ...options }));
       }
     }
-    
+
     const res = await publisher.publish();
     console.log("publish res:", res);
+    return res;
   });
 }
 
-function updateArticleToPlatform(articlePath: string, config: ArticleConfig) {}
+function updateArticleToPlatform(articlePath: string, config: ArticleConfig) {
+  //TODO:
+}
 
 function validateConfig(config: any) {
   const ajv = new Ajv();
@@ -101,7 +114,17 @@ async function handleAddOrUpdate(type: ActionType, articlePath: string, options:
   } else {
     const answers = await interactPrompt();
     const config = answersToConfig(answers);
-    return updateArticle(type, articlePath, config);
+    const publishResults = await updateArticle(type, articlePath, config);
+    if (publishResults) {
+      for (const result of publishResults) {
+        if (result.success || !result.name || !pluginNameMapConfigPropertyName[result.name]) {
+          continue;
+        }
+        const configKey = pluginNameMapConfigPropertyName[result.name] as string;
+        delete (config.platforms as any)[configKey];
+      }
+      //TODO: save config
+    }
   }
 }
 

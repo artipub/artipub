@@ -135,7 +135,7 @@ export default async function interactPrompt() {
     if (answers) {
       switch (platform) {
         case "nativeBlog": {
-          platformAnswers.nativeBlog = answers as NativeBlogOption;
+          platformAnswers.native = answers as NativeBlogOption;
 
           break;
         }

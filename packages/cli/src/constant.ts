@@ -1,6 +1,6 @@
 import type { JSONSchemaType } from "ajv";
 
-export const blogPlatformSchema: JSONSchemaType<{ name: "blog"; destination_path: string; cdn_prefix?: string; res_domain?: string }> = {
+export const nativePlatformSchema: JSONSchemaType<{ name: "blog"; destination_path: string; cdn_prefix?: string; res_domain?: string }> = {
   type: "object",
   properties: {
     name: { type: "string", const: "blog" },
@@ -79,7 +79,7 @@ export const schema: JSONSchemaType<{
       type: "object",
       items: {
         //TODO: 类型定义还需要调整
-        anyOf: [blogPlatformSchema, notionPlatformSchema, devToPlatformSchema],
+        anyOf: [nativePlatformSchema, notionPlatformSchema, devToPlatformSchema],
       },
     },
   },

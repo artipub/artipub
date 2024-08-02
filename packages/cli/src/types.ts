@@ -1,7 +1,7 @@
-import type { DevToPublisherPluginOption, GithubPicBedOption, NativeBlogOption, NotionPublisherPluginOption } from "@artipub/shared";
+import type { DevToPublisherPluginOption, GithubPicBedOption, NativePublisherOption, NotionPublisherPluginOption } from "@artipub/shared";
 
 export type PlatformOptions = {
-  nativeBlog?: NativeBlogOption;
+  native?: NativePublisherOption;
   notion?: NotionPublisherPluginOption;
   devTo?: DevToPublisherPluginOption;
 };
