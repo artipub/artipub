@@ -7,7 +7,7 @@ const { require } = createCommonJS(import.meta.url);
 const { Client } = require("@notionhq/client");
 const { markdownToBlocks } = require("@tryfabric/martian");
 
-export default function NativePublisherPlugin(option: NotionPublisherPluginOption) {
+export default function NotionPublisherPlugin(option: NotionPublisherPluginOption) {
   return {
     name: "NotionPublisherPlugin",
     async process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> {

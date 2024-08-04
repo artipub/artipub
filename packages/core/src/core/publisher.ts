@@ -19,7 +19,7 @@ export class PublisherManager {
     this.plugins = [];
   }
   addPlugin(plugin: PublisherPlugin) {
-    if (!isFunction(plugin)) {
+    if (!isFunction(plugin.process)) {
       throw new Error("Plugin must be a function");
     }
     if (this.plugins.includes(plugin)) {
