@@ -1,15 +1,17 @@
 import { createCommonJS } from "mlly";
 import type { DevToPublisherPluginOption, GithubPicBedOption, NativeBlogOption, NotionPublisherPluginOption } from "@artipub/shared";
 import { PlatformAnswers, PlatformOptions } from "./types";
+import useLogger from "./logger";
 
 const { require } = createCommonJS(import.meta.url);
 const inquirer = require("inquirer").default;
+const logger = useLogger("interact");
 
 const platformPrompts: Record<string, any[]> = {
-  nativeBlog: [
+  native: [
     {
       type: "input",
-      name: "dir_path",
+      name: "destination_path",
       message: "Enter the destination path for the native blog:",
     },
   ],
@@ -61,7 +63,7 @@ const platformPrompts: Record<string, any[]> = {
 } as const;
 
 export default async function interactPrompt() {
-  console.log("Please enter the following GitHub related information:");
+  logger.info("Please enter the following GitHub related information:");
 
   const githubQuestions = [
     {
@@ -98,7 +100,7 @@ export default async function interactPrompt() {
       type: "input",
       name: "cdn_prefix",
       message: "Enter GitHub CDN prefix:",
-      validate: (input: string) => (input ? true : "GitHub CDN prefix is required."),
+      validate: (input: string) => (input ? input.startsWith("http") : true),
     },
     {
       type: "input",
@@ -118,7 +120,7 @@ export default async function interactPrompt() {
   ];
   const githubAnswers: GithubPicBedOption = await inquirer.prompt(githubQuestions);
 
-  console.log("GitHub information entered successfully. Now, please select the platform:");
+  logger.info("GitHub information entered successfully. Now, please select the platform:");
   const checkPlatformAnswers = await inquirer.prompt([
     {
       type: "checkbox",
@@ -130,22 +132,22 @@ export default async function interactPrompt() {
 
   const platformAnswers: PlatformAnswers = {};
   for (const platform of checkPlatformAnswers.platform) {
-    console.log(`Please enter the following information for ${platform}:`);
-    const answers = (await inquirer.prompt(platformPrompts[platform])) as PlatformOptions[keyof PlatformOptions];
-    if (answers) {
+    logger.info(`Please enter the following information for ${platform}:`);
+    const answer = (await inquirer.prompt(platformPrompts[platform])) as PlatformOptions[keyof PlatformOptions];
+    if (answer) {
       switch (platform) {
-        case "nativeBlog": {
-          platformAnswers.native = answers as NativeBlogOption;
+        case "native": {
+          platformAnswers.native = answer as NativeBlogOption;
 
           break;
         }
         case "notion": {
-          platformAnswers.notion = answers as NotionPublisherPluginOption;
+          platformAnswers.notion = answer as NotionPublisherPluginOption;
 
           break;
         }
         case "devTo": {
-          platformAnswers.devTo = answers as DevToPublisherPluginOption;
+          platformAnswers.devTo = answer as DevToPublisherPluginOption;
 
           break;
         }
@@ -158,4 +160,21 @@ export default async function interactPrompt() {
     githubAnswers,
     platformAnswers,
   };
+}
+
+export async function promptForPlatform(platforms: string[]) {
+  const platformChoices = [];
+  for (const platform of platforms) {
+    platformChoices.push({ name: platform, value: platform, checked: true });
+  }
+
+  const answers = await inquirer.prompt([
+    {
+      type: "checkbox",
+      name: "platforms",
+      message: "请选择要发布的平台:",
+      choices: platformChoices,
+    },
+  ]);
+  return answers.platforms as string[];
 }

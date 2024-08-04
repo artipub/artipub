@@ -53,6 +53,12 @@ importers:
 
   packages/cli:
     dependencies:
+      "@artipub/core":
+        specifier: workspace:*
+        version: link:../core
+      "@artipub/shared":
+        specifier: workspace:*
+        version: link:../shared
       ajv:
         specifier: ^8.17.1
         version: 8.17.1
@@ -60,12 +66,6 @@ importers:
         specifier: ^11.2.0
         version: 11.2.0
     devDependencies:
-      "@artipub/core":
-        specifier: workspace:*
-        version: link:../core
-      "@artipub/shared":
-        specifier: workspace:*
-        version: link:../shared
       "@babel/core":
         specifier: ^7.24.7
         version: 7.25.2
@@ -117,9 +117,6 @@ importers:
 
   packages/core:
     dependencies:
-      "@artipub/shared":
-        specifier: workspace:*
-        version: link:../shared
       "@notionhq/client":
         specifier: ^2.2.15
         version: 2.2.15
@@ -166,6 +163,9 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
     devDependencies:
+      "@artipub/shared":
+        specifier: workspace:*
+        version: link:../shared
       "@babel/core":
         specifier: ^7.24.7
         version: 7.25.2
@@ -200,11 +200,7 @@ importers:
         specifier: ^6.1.1
         version: 6.1.1(rollup@4.19.1)(typescript@5.5.4)
 
-  packages/shared:
-    dependencies:
-      mlly:
-        specifier: ^1.7.1
-        version: 1.7.1
+  packages/shared: {}
 
   playground:
     devDependencies:

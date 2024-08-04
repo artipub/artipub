@@ -22,7 +22,7 @@ export function getConfigPath(dir: string) {
   return configPath;
 }
 
-export async function loadConfig(configPath: string) {
+export async function loadConfig(configPath: string): Promise<ArticleConfig> {
   if (!fs.pathExistsSync(configPath)) {
     throw new Error(`Config file not found: ${configPath}`);
   }

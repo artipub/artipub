@@ -1,4 +1,9 @@
 import type { JSONSchemaType } from "ajv";
+import { createCommonJS } from "mlly";
+
+const { require } = createCommonJS(import.meta.url);
+const pkg = require("../package.json");
+export const projectName = pkg.name;
 
 export const nativePlatformSchema: JSONSchemaType<{ name: "blog"; destination_path: string; cdn_prefix?: string; res_domain?: string }> = {
   type: "object",
