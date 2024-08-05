@@ -1,7 +1,14 @@
 import unjs from "eslint-config-unjs";
 
 export default unjs({
-  ignores: ["**/dist", "**/node_modules", "**/CHANGELOG.md", "docs/.vitepress/cache", "docs/lunaria.config.json", ".artipub/cache"],
+  ignores: [
+    "**/dist",
+    "**/node_modules",
+    "packages/**/CHANGELOG.md",
+    "docs/.vitepress/cache",
+    "docs/lunaria.config.json",
+    ".artipub/cache",
+  ],
   rules: {
     "unicorn/no-null": 0,
     "unicorn/prefer-top-level-await": 0,

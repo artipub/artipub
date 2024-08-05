@@ -6,3 +6,4 @@ dist
 .npmrc
 docs/.vitepress/cache/
 /**/artipub.config.*
+*-lock.yaml
