@@ -1,7 +1,7 @@
 name: Docs Release
 on:
   workflow_run:
-    workflows: ["Publish-Package"]
+    workflows: ["Publish"]
     types:
       - completed
     branches: [main]

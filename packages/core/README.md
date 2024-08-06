@@ -25,8 +25,4 @@ ArtiPub (article release assistant) is a tool library aimed at simplifying conte
 - 🔌 **Support middleware and plugin**: Through plug -in and middle parts, let users make more fine -grained control processing and release processes.
 - 📖 **Complete open source**: Encourage community contributions and continue to increase new platform support and functions.
 
-[Read the Docs to Learn More](https://pup007.github.io/artipub/).
-
-## 📄 License
-
-ArtiPub is released under the MIT license. See the [LICENSE](./LICENSE) file for details.
+[Read the Docs to Learn More](https://artipub.github.io/).
