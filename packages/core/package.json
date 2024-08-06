@@ -1,6 +1,6 @@
 {
   "name": "@artipub/core",
-  "version": "0.0.1",
+  "version": "0.1.0-beta",
   "description": "A library for processing and publishing articles",
   "author": "Potter<aa4790139@gmail.com>",
   "homepage": "https://aritipub.github.io/",
