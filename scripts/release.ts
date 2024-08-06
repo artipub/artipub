@@ -1,14 +1,12 @@
 import fs from "node:fs/promises";
-import type { Options as ExecaOptions, ResultPromise } from "execa";
-import { execa } from "execa";
-import colors from "picocolors";
-import path from "node:path";
 import { readFileSync, writeFileSync } from "node:fs";
 import prompts from "prompts";
 import semver from "semver";
 import { execSync } from "node:child_process";
+import colors from "picocolors";
 
 import type { ReleaseType } from "semver";
+import { getPackageInfo, runIfNotDry, step } from "./utils";
 
 interface VersionChoice {
   title: string;
@@ -17,39 +15,26 @@ interface VersionChoice {
 
 async function getLatestTag(pkgName: string): Promise<string> {
   const pkgJson = JSON.parse(await fs.readFile(`packages/${pkgName}/package.json`, "utf8"));
-  return pkgJson.version ? `${pkgName}@${pkgJson.version}` : "";
-}
-
-function run<EO extends ExecaOptions>(
-  bin: string,
-  args: string[],
-  opts?: EO
-): ResultPromise<EO & (keyof EO extends "stdio" ? any : { stdio: "inherit" })> {
-  return execa(bin, args, { stdio: "inherit", ...opts }) as any;
-}
-
-function getPackageInfo(pkgName: string, getPkgDir = (pkg) => `packages/${pkg}`) {
-  const pkgDir = path.resolve(getPkgDir(pkgName));
-  const pkgPath = path.resolve(pkgDir, "package.json");
-  const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
-  if (pkg.private) {
-    throw new Error(`Package ${pkgName} is private`);
-  }
-  return { pkg, pkgDir, pkgPath };
+  return `${pkgName}@${pkgJson.version}`;
 }
 
 async function logRecentCommits(pkgName: string): Promise<void> {
   const tag = await getLatestTag(pkgName);
   if (!tag) return;
-  const sha = await run("git", ["rev-list", "-n", "1", tag], {
-    stdio: "pipe",
-  }).then((res) => (res.stdout as any)?.trim());
-  console.log(
-    colors.bold(
-      `\n${colors.blue(`i`)} Commits of ${colors.green(pkgName)} since ${colors.green(tag)} ${colors.gray(`(${sha.slice(0, 5)})`)}`
-    )
-  );
-  await run("git", ["--no-pager", "log", `${sha}..HEAD`, "--oneline", "--", `packages/${pkgName}`], { stdio: "inherit" });
+  try {
+    const sha = await runIfNotDry("git", ["rev-list", "-n", "1", tag], {
+      stdio: "pipe",
+    }).then((res) => (res.stdout as any)?.trim());
+    console.log(
+      colors.bold(
+        `\n${colors.blue(`i`)} Commits of ${colors.green(pkgName)} since ${colors.green(tag)} ${colors.gray(`(${sha.slice(0, 5)})`)}`
+      )
+    );
+    await runIfNotDry("git", ["--no-pager", "log", `${sha}..HEAD`, "--oneline", "--", `packages/${pkgName}`], { stdio: "inherit" });
+  } catch {
+    console.log(colors.yellow(`${pkgName} not found any tag , ${pkgName} is first release !`));
+  }
+
   console.log();
 }
 
@@ -146,11 +131,11 @@ async function promptVersionChoice(pkg: { version: string }) {
   return targetVersion;
 }
 
-async function generateChangelog(pkgName: string, targetVersion: string) {
+async function generateChangelog(pkgName: string) {
   console.log(colors.cyan("\nGenerating changelog..."));
   const changelogArgs = ["conventional-changelog", "-p", "angular", "-i", "CHANGELOG.md", "-s", "--commit-path", "."];
   if (pkgName !== "vite") changelogArgs.push("--lerna-package", pkgName);
-  await run("npx", changelogArgs, { cwd: `packages/${pkgName}` });
+  await runIfNotDry("npx", changelogArgs, { cwd: `packages/${pkgName}` });
   // conventional-changelog generates links with short commit hashes, extend them to full hashes
   extendCommitHash(`packages/${pkgName}/CHANGELOG.md`);
 }
@@ -174,14 +159,8 @@ function extendCommitHash(path: string): void {
   console.log(colors.green(`${path} update success!`));
 }
 
-export function step(msg: string): void {
-  return console.log(colors.cyan(msg));
-}
-
-export const runIfNotDry = run;
-
 async function commitChanges(repo: string, tag: string) {
-  const { stdout } = await run("git", ["diff"], { stdio: "pipe" });
+  const { stdout } = await runIfNotDry("git", ["diff"], { stdio: "pipe" });
   if (stdout) {
     step("\nCommitting changes...");
     await runIfNotDry("git", ["add", "-A"]);
@@ -205,7 +184,7 @@ https://github.com/artipub/${repo}/actions/workflows/publish.yml`
   );
 }
 
-const main = async () => {
+const run = async () => {
   const repo = "artipub";
   const packages = ["core", "cli"];
 
@@ -223,13 +202,12 @@ const main = async () => {
   const targetVersion = await promptVersionChoice(pkg);
   updateVersion(pkgPath, targetVersion);
 
-  await generateChangelog(selectedPkg, targetVersion);
+  await generateChangelog(selectedPkg);
 
-  //6. commit changes
   const tag = `${selectedPkg}@${targetVersion}`;
   await commitChanges(repo, tag);
 
   console.log();
 };
 
-main();
+run();

@@ -1,9 +1,9 @@
 {
   "name": "@artipub/cli",
+  "version": "0.0.1",
   "description": "A library for processing and publishing articles",
   "author": "Potter<aa4790139@gmail.com>",
   "homepage": "https://aritipub.github.io/",
-  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aritipub/artipub.git"

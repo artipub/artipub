@@ -92,7 +92,7 @@ async function addArticleToPlatform(articlePath: string, config: ArticleConfig, 
   });
 }
 
-function updateArticleToPlatform(articlePath: string, config: ArticleConfig, pluginNameMapConfigPropertyName?: Record<string, string>) {
+function updateArticleToPlatform(_articlePath: string, _config: ArticleConfig, _pluginNameMapConfigPropertyName?: Record<string, string>) {
   //TODO:
   /* 
   1. 提取ArticlePath内容中的唯一串article_unique_id
