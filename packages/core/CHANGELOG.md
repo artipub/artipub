@@ -1,3 +1,9 @@
+# [0.1.0-beta.0](https://github.com/aritipub/artipub/compare/core@0.1.0-beta...core@0.1.0-beta.0) (2024-08-06)
+
+### Features
+
+- **build:** add publish workflow for core and cli packages ([98e099b](https://github.com/aritipub/artipub/commit/98e099ba9a82ebd17540adec321c67a1858c3390))
+
 # 0.1.0-beta (2024-08-06)
 
 ### Bug Fixes
