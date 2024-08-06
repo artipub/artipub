@@ -24,11 +24,6 @@ ArtiPub（文章发布助手）是一个旨在简化内容创作者跨平台发�
 - 🔌 **支持中间件和插件**：通过插件和中间件，让用户更细粒度的控制处理和发布流程。
 - 📖 **完全开源**：鼓励社区贡献，持续增加新的平台支持和功能。
 
-## 📌 TODO
-
-- [x] DevToPublisherPlugin
-- [x] Document Site
-
 ## 🔧 内置
 
 ### 处理中间件
@@ -44,3 +39,4 @@ ArtiPub（文章发布助手）是一个旨在简化内容创作者跨平台发�
 | --------------------- | ---- | ------------ |
 | NotionPublisherPlugin | √    | 发布至notion |
 | DevToPublisherPlugin  | √    | 发布至dev.to |
+| NativePublisherPlugin | √    | 发布至native |

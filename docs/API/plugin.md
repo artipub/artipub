@@ -83,3 +83,23 @@ More info：https://developers.forem.com/api/v1#tag/articles
 
   You can generate your own on this page api_key：https://dev.to/settings/extensions If you slide the page to the bottom, you can see some of the content as shown in the figure below：
   ![](https://cdn.jsdelivr.net/gh/yxw007/BlogPicBed@master/img/202407200945604.png)
+
+## NativePublisherPlugin
+
+```ts
+interface NativePublisherOption {
+  /**
+   * this is local absolute path
+   */
+  destination_path: string;
+  /**
+   * default is https://cdn.jsdelivr.net/gh
+   */
+  cdn_prefix?: string;
+  /**
+   * this is article's resource image domain
+   * default is raw.githubusercontent.com
+   */
+  res_domain?: string;
+}
+```

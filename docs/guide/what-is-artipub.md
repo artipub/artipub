@@ -22,11 +22,6 @@ Just want to try it out? Skip to the [Quickstart](./getting-started).
 - 🔌 **Support middleware and plugin**: Through plug -in and middle parts, let users make more fine -grained control processing and release processes.
 - 📖 **Complete open source**: Encourage community contributions and continue to increase new platform support and functions.
 
-## 📌 TODO
-
-- [x] DevToPublisherPlugin
-- [x] Document Site
-
 ## 🔧 Built-in
 
 ### Treatment middleware
@@ -42,3 +37,4 @@ Just want to try it out? Skip to the [Quickstart](./getting-started).
 | --------------------- | ------- | ------------------- |
 | NOTIONPUBLISHERPLUGIN | √       | Published to NOTION |
 | DEVTOPUBLISHERPLUGIN  | √       | Published to DEV.TO |
+| NativePublisherPlugin | √       | Published to native |

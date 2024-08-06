@@ -65,6 +65,12 @@ const articleProcessor = new ArticleProcessor({
 articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(async ({ content }) => {
   let publisherManager = new PublisherManager(content);
   publisherManager.addPlugin(
+    NativePublisherPlugin({
+      //tips: local directory，example：publish to your blog is to save the article to a directory in your blog project
+      targetDir: "",
+    })
+  );
+  publisherManager.addPlugin(
     NotionPublisherPlugin({
       api_key: NOTION_API_KEY,
       page_id: NOTION_PAGE_ID,

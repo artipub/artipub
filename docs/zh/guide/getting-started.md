@@ -27,19 +27,19 @@ pnpm add -D @artipub/core
 ### CommonJS
 
 ```javascript
-const { ArticleProcessor, PublisherManager, NotionPublisherPlugin, DevToPublisherPlugin } = require("@artipub/core");
+const { ArticleProcessor, PublisherManager, NotionPublisherPlugin, DevToPublisherPlugin, NativePublisherPlugin } = require("@artipub/core");
 ```
 
 ### ES Module
 
 ```javascript
-import { ArticleProcessor, PublisherManager, NotionPublisherPlugin, DevToPublisherPlugin } from "@artipub/core";
+import { ArticleProcessor, PublisherManager, NotionPublisherPlugin, DevToPublisherPlugin, NativePublisherPlugin } from "@artipub/core";
 ```
 
 ### Example
 
 ```js
-import { ArticleProcessor, PublisherManager, NotionPublisherPlugin, DevToPublisherPlugin } from "@artipub/core";
+import { ArticleProcessor, PublisherManager, NotionPublisherPlugin, DevToPublisherPlugin, NativePublisherPlugin } from "@artipub/core";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -64,6 +64,12 @@ const articleProcessor = new ArticleProcessor({
 
 articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(async ({ content }) => {
   let publisherManager = new PublisherManager(content);
+  publisherManager.addPlugin(
+    NativePublisherPlugin({
+      //tips: 本地目录，比如：发布至自己blog，其实就是将文章保存至博客项目的某个目录下
+      targetDir: "",
+    })
+  );
   publisherManager.addPlugin(
     NotionPublisherPlugin({
       api_key: NOTION_API_KEY,

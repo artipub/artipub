@@ -1,6 +1,6 @@
 # Contribute
 
-> Note: Please create a new branch based on the master, develop on the new branch, and create PR to Master after development
+> Note: Please create a new branch based on the main, develop on the new branch, and create PR to main after development
 
 - Install dependency
 
@@ -19,16 +19,19 @@
 
   ```typescript
   export function XXXPublisherPlugin(option: any) {
-    return async (articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> => {
-      //visit:In depth priority traversing Markdown AST's interface, which is convenient for users to modify node. Note that this process is synchronized.
-      //toMarkdown: The modified AST will regenerate markdown. Content is Markdown content
-      let { content } = toMarkdown();
-      let res: PublishResult = {
-        success: true,
-        info: "Published to XXX",
-      };
-      //TODO:
-      return res;
+    return {
+      name: "XXXPublisherPlugin",
+      async process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> => {
+        //visit:In depth priority traversing Markdown AST's interface, which is convenient for users to modify node. Note that this process is synchronized.
+        //toMarkdown: The modified AST will regenerate markdown. Content is Markdown content
+        let { content } = toMarkdown();
+        let res: PublishResult = {
+          success: true,
+          info: "Published to XXX",
+        };
+        //TODO:
+        return res;
+      }
     };
   }
   ```

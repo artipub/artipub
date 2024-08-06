@@ -83,3 +83,23 @@ More info：https://developers.forem.com/api/v1#tag/articles
 
   可以在此页面生成自己的api_key：https://dev.to/settings/extensions 将页面滑动至最底下就可以看到如下图所示部分内容：
   ![](https://cdn.jsdelivr.net/gh/yxw007/BlogPicBed@master/img/202407200945604.png)
+
+## NativePublisherPlugin
+
+```ts
+interface NativePublisherOption {
+  /**
+   * 这是本地绝对路径
+   */
+  destination_path: string;
+  /**
+   * 默认：https://cdn.jsdelivr.net/gh
+   */
+  cdn_prefix?: string;
+  /**
+   * 这是文章的资源图像域
+   * 默认：raw.githubusercontent.com
+   */
+  res_domain?: string;
+}
+```

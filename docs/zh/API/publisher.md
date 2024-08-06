@@ -38,6 +38,10 @@ export interface PublishResult {
 
 ```ts
 export interface PublishResult {
+  /**
+   * 发布插件名称
+   */
+  name?: string;
   success: boolean;
   info?: string;
 }

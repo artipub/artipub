@@ -1,6 +1,6 @@
 # 贡献
 
-> 特别注意：请基于master创建一个新分支，在新分支上开发，开发完后创建PR至master
+> 特别注意：请基于main创建一个新分支，在新分支上开发，开发完后创建PR至master
 
 - 安装依赖
 
@@ -19,7 +19,9 @@
 
   ```typescript
   export function XXXPublisherPlugin(option: any) {
-    return async (articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> => {
+    return {
+      name: "XXXPublisherPlugin",
+      async process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> => {
       //visit: 深度优先遍历markdown ast的接口，方便用户修改node，注意此过程是同步的
       //toMarkdown: 会将修改后的ast 重新生成markdown, content 就是markdown 内容
       let { content } = toMarkdown();
@@ -30,6 +32,7 @@
       //TODO:
       return res;
     };
+    }
   }
   ```
 

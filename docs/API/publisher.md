@@ -38,6 +38,10 @@ Publish MarkDown to all registered plugin platforms
 
 ```ts
 export interface PublishResult {
+  /**
+   * publisher plugin name
+   */
+  name?: string;
   success: boolean;
   info?: string;
 }
