@@ -15,7 +15,7 @@ hero:
       link: /zh/guide/getting-started
     - theme: alt
       text: Github
-      link: https://github.com/Pup007/artipub
+      link: https://github.com/artipub/artipub
   image:
     src: /logo.png
     alt: artipub
