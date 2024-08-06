@@ -15,7 +15,8 @@ interface VersionChoice {
 
 async function getLatestTag(pkgName: string): Promise<string> {
   const pkgJson = JSON.parse(await fs.readFile(`packages/${pkgName}/package.json`, "utf8"));
-  return `${pkgName}@${pkgJson.version}`;
+  const version = pkgJson.version;
+  return pkgName === "core" ? `v${version}` : `${pkgName}@${version}`;
 }
 
 async function logRecentCommits(pkgName: string): Promise<void> {
@@ -184,6 +185,10 @@ https://github.com/artipub/${repo}/actions/workflows/publish.yml`
   );
 }
 
+function getTag(pkg: string, version: string) {
+  return pkg === "core" ? `v${version}` : `${pkg}@${version}`;
+}
+
 const run = async () => {
   const repo = "artipub";
   const packages = ["core", "cli"];
@@ -204,7 +209,7 @@ const run = async () => {
 
   await generateChangelog(selectedPkg);
 
-  const tag = `${selectedPkg}@${targetVersion}`;
+  const tag = getTag(selectedPkg, targetVersion);
   await commitChanges(repo, tag);
 
   console.log();

@@ -1,10 +1,10 @@
 name: Docs Release
 on:
   workflow_run:
-    workflows: ["Release"]
+    workflows: ["Publish-Package"]
     types:
       - completed
-    branches: [master]
+    branches: [main]
 
 jobs:
   Build:

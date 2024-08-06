@@ -50,7 +50,7 @@ export async function getActiveVersion(npmName: string): Promise<string | undefi
     return (await run("npm", ["info", npmName, "version"], { stdio: "pipe" })).stdout;
   } catch (error_: any) {
     // Not published yet
-    if (error_.stderr.startsWith("npm ERR! code E404")) return;
+    if (error_.stderr.includes("npm error code E404")) return;
     throw error_;
   }
 }

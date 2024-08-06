@@ -1,9 +1,9 @@
-name: Publish Package
+name: Publish-Package
 
 on:
   push:
     tags:
-      - "core@*" # Push events to matching core@*, i.e. core@1.0.0
+      - "v*" # Push events to matching core@*, i.e. v1.0.0
       - "cli@*" # Push events to matching cli@*, i.e. cli@1.0.0
 
 jobs:
@@ -30,8 +30,9 @@ jobs:
 
       - name: Install deps
         run: pnpm install
-        env:
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+
+      - name: Install tsx
+        run: pnpm install -g tsx
 
       - name: Publish package
         run: pnpm run ci-publish ${{ github.ref_name }}
