@@ -1,3 +1,7 @@
+## [0.0.3](https://github.com/aritipub/artipub/compare/cli@0.0.2-beta.0...cli@0.0.3) (2024-08-07)
+
+
+
 ## 0.0.2-beta.0 (2024-08-06)
 
 
