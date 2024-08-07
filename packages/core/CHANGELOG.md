@@ -1,3 +1,9 @@
+## <small>1.1.1-alpha.2 (2024-08-07)</small>
+
+* fix(chore): package.json link error ([16bbefe](https://github.com/artipub/artipub/commit/16bbefe4b89b2e329db14eccdc265dc3a23c836c))
+
+
+
 ## [1.1.1-alpha.1](https://github.com/aritipub/artipub/compare/v1.1.1-alpha.0...v1.1.1-alpha.1) (2024-08-07)
 
 
