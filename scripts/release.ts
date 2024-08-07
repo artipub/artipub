@@ -134,7 +134,7 @@ async function promptVersionChoice(pkg: { version: string }) {
 
 async function generateChangelog(pkgName: string) {
   console.log(colors.cyan("\nGenerating changelog..."));
-  const changelogArgs = ["conventional-changelog", "-p", "angular", "-i", "CHANGELOG.md", "-s", "--commit-path", "."];
+  const changelogArgs = ["conventional-changelog", "-i", "CHANGELOG.md", "-s", "--commit-path", "."];
   if (pkgName !== "core") changelogArgs.push("--lerna-package", pkgName);
   await runIfNotDry("npx", changelogArgs, { cwd: `packages/${pkgName}` });
   // conventional-changelog generates links with short commit hashes, extend them to full hashes
