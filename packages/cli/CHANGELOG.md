@@ -1,3 +1,10 @@
+## <small>0.0.5-beta.1 (2024-08-07)</small>
+
+* fix(chore): package.json link error ([16bbefe](https://github.com/artipub/artipub/commit/16bbefe4b89b2e329db14eccdc265dc3a23c836c))
+* chore(docs):  update doc link ([6ca2189](https://github.com/artipub/artipub/commit/6ca21893dbf234dba83239aae61de332c4a14a08))
+
+
+
 ## [0.0.4](https://github.com/aritipub/artipub/compare/cli@0.0.4-beta.0...cli@0.0.4) (2024-08-07)
 
 
