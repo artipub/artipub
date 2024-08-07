@@ -19,6 +19,7 @@ jobs:
       - name: Set npmrc
         run: |
           echo "auto-install-peers=true" >> ~/.npmrc
+          echo "strict-peer-dependencies=false" >> ~/.npmrc
 
       - name: Install modules
         run: |
