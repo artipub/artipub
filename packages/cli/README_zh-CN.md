@@ -13,4 +13,4 @@
 
 不想通过js的方式使用@artipub/core，想更加轻量灵活的发布和更新文章至多个平台，写完文章后我就想立马将文章markdown 发布至多个平台，那么此时@artipub/cli 就是为了解决这个问题而衍生出来。
 
-[阅读文档了解更多](https://artipub.github.io/)
+[阅读文档了解更多](https://artipub.github.io/artipub/)

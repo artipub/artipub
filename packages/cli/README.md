@@ -13,4 +13,4 @@ English | [简体中文](./README_zh-CN.md)
 
 I don’t want to use @artipub/core through js. I want to publish and update articles to multiple platforms in a more lightweight and flexible way. After writing an article, I want to publish the article markdown to multiple platforms immediately. At this time, @artipub/cli is derived to solve this problem.
 
-[Read the Docs to Learn More](https://artipub.github.io/).
+[Read the Docs to Learn More](https://artipub.github.io/artipub/).
