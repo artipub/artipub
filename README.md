@@ -29,8 +29,8 @@ ArtiPub (article release assistant) is a tool library aimed at simplifying conte
 
 | Package               | Version (click for changelogs)                                                                |
 | --------------------- | :-------------------------------------------------------------------------------------------- |
-| [core](packages/core) | [![core version](https://img.shields.io/npm/v/%40artipub%2Fcore)(packages/core/CHANGELOG.md)] |
-| [cli](packages/cli)   | [![cli version](https://img.shields.io/npm/v/%40artipub%2Fcli)(packages/cli/CHANGELOG.md)]    |
+| [core](packages/core) | [![core version](https://img.shields.io/npm/v/%40artipub%2Fcore)](packages/core/CHANGELOG.md) |
+| [cli](packages/cli)   | [![cli version](https://img.shields.io/npm/v/%40artipub%2Fcli)](packages/cli/CHANGELOG.md)    |
 
 [Read the Docs to Learn More](https://artipub.github.io/artipub/).
 
