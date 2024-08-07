@@ -1,3 +1,9 @@
+## <small>0.0.5-beta.2 (2024-08-07)</small>
+
+* fix(CHANGELOG): link error ([a0107d2](https://github.com/artipub/artipub/commit/a0107d26fd9fa157923118cb0977ce35a31f5511))
+
+
+
 ## <small>0.0.5-beta.1 (2024-08-07)</small>
 
 * fix(chore): package.json link error ([16bbefe](https://github.com/artipub/artipub/commit/16bbefe4b89b2e329db14eccdc265dc3a23c836c))
