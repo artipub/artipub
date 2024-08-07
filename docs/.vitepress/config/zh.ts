@@ -2,7 +2,7 @@ import { DefaultTheme, defineConfig } from "vitepress";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
-const pkg = require("../../../package.json");
+const pkg = require("../../../packages/core/package.json");
 
 export const zh = defineConfig({
   locales: {

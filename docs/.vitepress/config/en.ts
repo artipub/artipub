@@ -2,7 +2,8 @@ import { DefaultTheme, defineConfig } from "vitepress";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
-const pkg = require("../../../package.json");
+const corePkg = require("../../../packages/core/package.json");
+const cliPkg = require("../../../packages/cli/package.json");
 
 export const en = defineConfig({
   locales: {
@@ -42,11 +43,20 @@ function nav() {
       activeMatch: "/API/",
     },
     {
-      text: pkg.version,
+      text: `core:${corePkg.version}`,
       items: [
         {
           text: "更新日志",
-          link: "https://github.com/pup007/artipub/blob/master/CHANGELOG.md",
+          link: "https://github.com/artipub/artipub/blob/main/packages/core/CHANGELOG.md",
+        },
+      ],
+    },
+    {
+      text: `cli:${cliPkg.version}`,
+      items: [
+        {
+          text: "更新日志",
+          link: "https://github.com/artipub/artipub/blob/main/packages/cli/CHANGELOG.md",
         },
       ],
     },
