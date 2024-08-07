@@ -1,3 +1,12 @@
+## [1.1.1-alpha.1](https://github.com/aritipub/artipub/compare/v1.1.1-alpha.0...v1.1.1-alpha.1) (2024-08-07)
+
+
+### Bug Fixes
+
+* **docs:** fix document errors ([645d8df](https://github.com/aritipub/artipub/commit/645d8dfc5972f3eb19348fbaaff2242f6ff00000))
+
+
+
 ## 1.1.1-alpha.0 (2024-08-06)
 
 
