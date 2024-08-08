@@ -19,6 +19,8 @@ async function publish({ defaultPackage, packageManager }) {
   const { pkg, pkgDir } = getPackageInfo(pkgName);
   if (pkg.version !== version) throw new Error(`Package version from tag "${version}" mismatches with current version "${pkg.version}"`);
 
+  await buildPackage(pkgName, packageManager);
+
   const activeVersion = await getActiveVersion(pkg.name);
 
   step("Publishing package...");
@@ -30,6 +32,13 @@ async function publish({ defaultPackage, packageManager }) {
         ? "previous"
         : undefined;
   await publishPackage(pkgDir, releaseTag, packageManager);
+}
+
+async function buildPackage(pkgName: string, packageManager: "npm" | "pnpm" = "npm") {
+  step("Building package...");
+  await runIfNotDry(packageManager, ["run", "build"], {
+    cwd: `packages/${pkgName}`,
+  });
 }
 
 async function publishPackage(pkgDir: string, tag?: string, packageManager: "npm" | "pnpm" = "npm"): Promise<void> {
