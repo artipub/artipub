@@ -1,4 +1,4 @@
-import { PublishResult, ToMarkdown, TVisitor } from "@/types";
+import { PublishResult, ToMarkdown, TVisitor, ExtendsParam } from "@/types";
 import { NativePublisherOption } from "@artipub/shared";
 import path from "node:path";
 import fs from "node:fs/promises";
@@ -12,8 +12,13 @@ export default function NativePublisherPlugin(options: NativePublisherOption) {
   if (!res_domain) {
     res_domain = "raw.githubusercontent.com";
   }
+  let extendsParam: ExtendsParam = {};
   return {
     name: "NativePublisherPlugin",
+    extendsParam(params: ExtendsParam) {
+      extendsParam = params;
+      return this;
+    },
     async process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> {
       const regex = new RegExp(`/https://(${res_domain})/(.*?)/(.*?)/(.*?)(.png|.jpg|jpeg|svg|jif)`, "im");
       visit("image", (node: any) => {

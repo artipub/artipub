@@ -1,11 +1,12 @@
 import fs from "node:fs/promises";
-import { ArticleProcessResult, ArticleProcessorOption, Middleware } from "@/types";
+import { ArticleProcessResult, ArticleProcessorOption, Middleware, Next, TVisitor } from "@/types";
 import { unified } from "unified";
-import type { Node } from "unist";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
 import { picCompress, picUpload } from "@/middleware";
-import { createVisitor } from "@/utils";
+import { createVisitor, getUniqueId } from "@/utils";
+import { Paragraph, Text } from "mdast";
+import { Node } from "unified/lib";
 
 const defaultCompressedOptions = {
   quality: 80,
@@ -18,6 +19,28 @@ export interface ProcessorContext {
    * The `filePath` property in the `ProcessorContext` interface is a string that represents the path to the Markdown file that you want to process.
    */
   filePath: string;
+}
+
+async function injectArticleUniqueId(context: ProcessorContext, visit: TVisitor, next: Next) {
+  let articleUniqueID = null;
+  visit("paragraph", (_node, _index, parent) => {
+    const node = _node as Paragraph;
+    if (parent?.type === "root" && _index === 1 && node && node.children[0] && node.children[0].type === "text") {
+      let value = (node.children[0] as Text).value ?? "";
+      const match = value.match(/id:\s+(\w+)$/im);
+      if (match) {
+        articleUniqueID = match[1];
+        return true;
+      } else {
+        articleUniqueID = getUniqueId();
+        value = `id: ${articleUniqueID}\n${value}`;
+        node.children[0].value = value;
+        return true;
+      }
+    }
+  });
+
+  next();
 }
 
 export class ArticleProcessor {
@@ -48,6 +71,7 @@ export class ArticleProcessor {
   processMarkdown(filePath: string): Promise<ArticleProcessResult> {
     this.middlewares.push(picCompress);
     this.middlewares.push(picUpload);
+    this.middlewares.push(injectArticleUniqueId);
     const articleProcessor = this;
     const context: ProcessorContext = {
       filePath,

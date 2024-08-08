@@ -1,4 +1,4 @@
-import { ArticleProcessor, PublisherManager, NotionPublisherPlugin, DevToPublisherPlugin } from "@artipub/core";
+import { ArticleProcessor, PublisherManager, publisherPlugins } from "@artipub/core";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -21,16 +21,21 @@ const articleProcessor = new ArticleProcessor({
   },
 });
 
-articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/xxx.md")).then(async ({ content }) => {
+articleProcessor.processMarkdown(path.resolve(__dirname, "../doc/article/Example.md")).then(async ({ content }) => {
   const publisherManager = new PublisherManager(content);
   publisherManager.addPlugin(
-    NotionPublisherPlugin({
+    publisherPlugins.native({
+      destination_path: path.resolve(__dirname, "../doc/article"),
+    })
+  );
+  publisherManager.addPlugin(
+    publisherPlugins.notion({
       api_key: NOTION_API_KEY ?? "",
       page_id: NOTION_PAGE_ID ?? "",
     })
   );
   publisherManager.addPlugin(
-    DevToPublisherPlugin({
+    publisherPlugins.devTo({
       api_key: DEV_TO_API_KEY ?? "",
       published: false,
     })
