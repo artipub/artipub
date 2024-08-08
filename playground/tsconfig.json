@@ -11,7 +11,7 @@
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "paths": {
-      "@artipub/core": ["packages/core/dist"]
+      "@artipub/core": ["../packages/core/dist"]
     },
     "types": ["node"]
   },
