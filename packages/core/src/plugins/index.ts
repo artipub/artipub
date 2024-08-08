@@ -1,6 +1,6 @@
-import { default as DevToPublisherPlugin } from "./DevToPublisherPlugin";
-import { default as NotionPublisherPlugin } from "./NotionPublisherPlugin";
-import { default as NativePublisherPlugin } from "./NativePublisherPlugin";
+import DevToPublisherPlugin from "./DevToPublisherPlugin";
+import NotionPublisherPlugin from "./NotionPublisherPlugin";
+import NativePublisherPlugin from "./NativePublisherPlugin";
 
 export const publisherPlugins = {
   devTo: DevToPublisherPlugin,
@@ -8,9 +8,6 @@ export const publisherPlugins = {
   native: NativePublisherPlugin,
 };
 
-export default {
-  DevToPublisherPlugin,
-  NotionPublisherPlugin,
-  NativePublisherPlugin,
-  publisherPlugins,
-};
+export { default as DevToPublisherPlugin } from "./DevToPublisherPlugin";
+export { default as NotionPublisherPlugin } from "./NotionPublisherPlugin";
+export { default as NativePublisherPlugin } from "./NativePublisherPlugin";
