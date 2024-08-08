@@ -1,3 +1,8 @@
+## <small>1.1.3 (2024-08-08)</small>
+
+
+
+
 ## <small>1.1.1-alpha.3 (2024-08-07)</small>
 
 * fix(CHANGELOG): link error ([a0107d2](https://github.com/artipub/artipub/commit/a0107d26fd9fa157923118cb0977ce35a31f5511))
