@@ -1,3 +1,10 @@
+## <small>1.1.5-beta.0 (2024-08-08)</small>
+
+* fix(chore): build command mistake ([888c12e](https://github.com/artipub/artipub/commit/888c12e045d14b0a74922237dc598923cb831d84))
+* fix(core): plugin export mistake ([c1d3ed5](https://github.com/artipub/artipub/commit/c1d3ed54fe6866945d851e67268b492aa7312368))
+
+
+
 ## <small>1.1.3 (2024-08-08)</small>
 
 
