@@ -1,4 +1,4 @@
-import { PublishResult, TVisitor, ToMarkdown } from "@/types";
+import { PublishResult, TVisitor, ToMarkdown, ExtendsParam } from "@/types";
 import { NotionPublisherPluginOption } from "@artipub/shared";
 import { Heading } from "mdast";
 import { createCommonJS } from "mlly";
@@ -8,8 +8,13 @@ const { Client } = require("@notionhq/client");
 const { markdownToBlocks } = require("@tryfabric/martian");
 
 export default function NotionPublisherPlugin(option: NotionPublisherPluginOption) {
+  let extendsParam: ExtendsParam = {};
   return {
     name: "NotionPublisherPlugin",
+    extendsParam(params: ExtendsParam) {
+      extendsParam = params;
+      return this;
+    },
     async process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> {
       visit("heading", (_node, _index, parent) => {
         const node = _node as Heading;
@@ -41,9 +46,7 @@ export default function NotionPublisherPlugin(option: NotionPublisherPluginOptio
           children: blocks,
         });
 
-        if (res.status !== 200) {
-          throw new Error(`Failed to publish [${articleTitle}] to Notion!`);
-        }
+        return res;
       }
 
       function updateArticle() {
@@ -51,16 +54,28 @@ export default function NotionPublisherPlugin(option: NotionPublisherPluginOptio
         throw new Error(`Failed to publish [${articleTitle}] to Notion, The Notion does not support updated articles at this time !`);
       }
 
+      let article_id = option.update_page_id ?? extendsParam.pid;
       try {
-        await (option.update_page_id ? updateArticle() : postArticle());
+        if (article_id) {
+          await updateArticle();
+        } else {
+          const res = await postArticle();
+          if (res.id) {
+            article_id = res.id;
+          } else {
+            throw new Error(`Failed to publish [${articleTitle}] to Notion!`);
+          }
+        }
       } catch (error: any) {
         return {
+          pid: article_id,
           success: false,
           info: error,
         };
       }
 
       const res: PublishResult = {
+        pid: article_id,
         success: true,
         info: `Published [${articleTitle}] to Notion successfully!`,
       };

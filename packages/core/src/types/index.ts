@@ -32,12 +32,18 @@ export type Middleware = (context: ProcessorContext, visitor: TVisitor, next: Ne
 export type Next = () => void;
 export type ImageExtension = "png" | "jpeg" | "gif";
 
+export interface ExtendsParam {
+  pid?: string;
+}
+
 export interface PublisherPlugin {
+  extendsParam?(extendsParam: ExtendsParam): PublisherPlugin;
   process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult>;
   name: string;
 }
 
 export interface PublishResult {
+  pid?: string;
   name?: string;
   success: boolean;
   info?: string;

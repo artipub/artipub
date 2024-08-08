@@ -1,4 +1,4 @@
-import { PublishResult, PublisherPlugin, TVisitor, ToMarkdown } from "@/types";
+import { PublishResult, PublisherPlugin, TVisitor, ToMarkdown, ExtendsParam } from "@/types";
 import { DevToPublisherPluginOption } from "@artipub/shared";
 import { Heading } from "mdast";
 import { createCommonJS } from "mlly";
@@ -7,8 +7,13 @@ const { require } = createCommonJS(import.meta.url);
 const axios = require("axios");
 
 export default function DevToPublisherPlugin(option: DevToPublisherPluginOption): PublisherPlugin {
+  let extendsParam: ExtendsParam = {};
   return {
     name: "DevToPublisherPlugin",
+    extendsParam(params: ExtendsParam) {
+      extendsParam = params;
+      return this;
+    },
     async process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> {
       const tags: string[] = [];
 
@@ -36,7 +41,7 @@ export default function DevToPublisherPlugin(option: DevToPublisherPluginOption)
       const { content } = toMarkdown();
 
       async function postArticle() {
-        await axios.post(
+        return await axios.post(
           "https://dev.to/api/articles",
           {
             article: {
@@ -85,15 +90,27 @@ export default function DevToPublisherPlugin(option: DevToPublisherPluginOption)
         );
       }
 
+      let article_id = option.article_id ?? extendsParam.pid;
       try {
-        await (option.article_id ? updateArticle(option.article_id) : postArticle());
+        if (article_id) {
+          await updateArticle(article_id);
+        } else {
+          const res = await postArticle();
+          if (res.status >= 200 && res.status < 300) {
+            article_id = res.data.id;
+          } else {
+            throw new Error(res?.data?.error);
+          }
+        }
       } catch (error: any) {
         return {
+          pid: article_id,
           success: false,
-          info: error.error,
+          info: error.message,
         };
       }
       return {
+        pid: article_id,
         success: true,
         info: "Published to Dev.to",
       };

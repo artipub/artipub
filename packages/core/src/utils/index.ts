@@ -30,6 +30,10 @@ export function normalizedPath(filePath: string) {
   return path.posix.normalize(filePath).replace(/\\/g, "/");
 }
 
+export function getUniqueId() {
+  return Math.random().toString(36).slice(2, 10);
+}
+
 export async function getCache(cachePath: string) {
   const res = new Map<string, string>();
   try {
