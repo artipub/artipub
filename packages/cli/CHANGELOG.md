@@ -1,3 +1,8 @@
+## <small>0.0.7-beta.1 (2024-08-09)</small>
+
+
+
+
 ## <small>0.0.7-beta.0 (2024-08-09)</small>
 
 * fix(chore): build command mistake ([888c12e](https://github.com/artipub/artipub/commit/888c12e045d14b0a74922237dc598923cb831d84))
