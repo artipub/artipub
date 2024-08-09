@@ -1,3 +1,10 @@
+## <small>0.0.7-beta.0 (2024-08-09)</small>
+
+* fix(chore): build command mistake ([888c12e](https://github.com/artipub/artipub/commit/888c12e045d14b0a74922237dc598923cb831d84))
+* fix(chore): package do not display readme on npm ([0bce1fa](https://github.com/artipub/artipub/commit/0bce1fac0020db6377d2a8f0172f08ee2da26e12))
+
+
+
 ## <small>0.0.6 (2024-08-08)</small>
 
 
