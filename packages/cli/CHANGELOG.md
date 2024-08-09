@@ -1,3 +1,9 @@
+## <small>0.0.9-alpha.0 (2024-08-09)</small>
+
+* fix(cli): cannot find module 'inquirer' ([f260894](https://github.com/artipub/artipub/commit/f260894c1decff79cafc86c4116190d53a2d7d95))
+
+
+
 ## <small>0.0.8 (2024-08-09)</small>
 
 * fix(cli): dependency error, cause can't install ([56dc7d9](https://github.com/artipub/artipub/commit/56dc7d9b1845bc093cffda926004be5bd31a2a9a))
