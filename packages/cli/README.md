@@ -7,7 +7,7 @@ English | [简体中文](./README_zh-CN.md)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/artipub/artipub/publish.yml)
 ![NPM Version](https://img.shields.io/npm/v/%40artipub%2Fcli)
 
-@artipub/cli is an artipub cli tools，convenient for users to publish and update articles through the command line
+@artipub/cli is an artipub cli tools，convenient for users to publish and update articles through the command line.
 
 ## ❓ Why is it needed @artipub/cli?
 
