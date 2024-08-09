@@ -1,3 +1,9 @@
+## <small>0.0.7-beta.2 (2024-08-09)</small>
+
+* chore(cli): update readme ([710a0dd](https://github.com/artipub/artipub/commit/710a0dd76d59ba765bb7032a80ed3539d00ebd14))
+
+
+
 ## <small>0.0.7-beta.1 (2024-08-09)</small>
 
 
