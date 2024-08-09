@@ -81,9 +81,18 @@ importers:
       ajv:
         specifier: ^8.17.1
         version: 8.17.1
+      commander:
+        specifier: ^12.1.0
+        version: 12.1.0
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
+      inquirer:
+        specifier: ^10.1.2
+        version: 10.1.6
+      mlly:
+        specifier: ^1.7.1
+        version: 1.7.1
     devDependencies:
       '@artipub/shared':
         specifier: workspace:*
@@ -121,15 +130,6 @@ importers:
       '@types/node':
         specifier: ^20.14.2
         version: 20.14.13
-      commander:
-        specifier: ^12.1.0
-        version: 12.1.0
-      inquirer:
-        specifier: ^10.1.2
-        version: 10.1.6
-      mlly:
-        specifier: ^1.7.1
-        version: 1.7.1
       rollup:
         specifier: ^4.18.0
         version: 4.19.1
