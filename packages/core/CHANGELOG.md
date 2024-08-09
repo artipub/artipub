@@ -1,3 +1,9 @@
+## <small>1.1.5 (2024-08-09)</small>
+
+* feat(core):  auto update article content based on history,  dev.to platform is supported ([03f7643](https://github.com/artipub/artipub/commit/03f76430711a8bff7f1f8d7885ea7f7b5a439ef8))
+
+
+
 ## <small>1.1.5-beta.0 (2024-08-08)</small>
 
 * fix(chore): build command mistake ([888c12e](https://github.com/artipub/artipub/commit/888c12e045d14b0a74922237dc598923cb831d84))
