@@ -74,27 +74,28 @@ export class PublisherManager {
           }
         }
       });
-      if (!articleUniqueID) {
-        throw new Error("Inner Error: Article id is required !");
-      }
       return articleUniqueID;
     }
 
     const tree = await unified().use(remarkParse).parse(this.content);
     const articleTitle = getArticleTitle(tree);
     const articleUniqueID = getArticleUniqueID(tree, this.content);
+    const isNeedRecord = !!articleUniqueID;
     const postMapRecords = getPostMapRecord();
     const tasks: Promise<PublishResult>[] = [];
     for (const plugin of this.plugins) {
       const cloneTree = cloneDeep(tree);
-      const postMapRecord = (postMapRecords[articleUniqueID] = postMapRecords[articleUniqueID] ?? {});
+      let postMapRecord: Record<string, any> = {};
+      if (isNeedRecord) {
+        postMapRecord = postMapRecords[articleUniqueID] = postMapRecords[articleUniqueID] ?? {};
+      }
       if (plugin.extendsParam) {
         plugin.extendsParam({ pid: postMapRecord[plugin.name] });
       }
       const result = plugin
         .process(articleTitle, createVisitor(cloneTree), () => toMarkdown(cloneTree))
         .then((res) => {
-          if (res.success) {
+          if (res.success && articleUniqueID) {
             postMapRecord[plugin.name] = res.pid;
           }
           return Object.assign({ name: plugin.name }, res);
@@ -106,7 +107,7 @@ export class PublisherManager {
     }
 
     return await Promise.all(tasks).then((res) => {
-      updatePostMapRecords(postMapRecords);
+      isNeedRecord && updatePostMapRecords(postMapRecords);
       return res;
     });
   }
