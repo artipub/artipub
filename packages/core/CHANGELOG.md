@@ -1,3 +1,13 @@
+## [1.1.6-beta.0](https://github.com/artipub/artipub/compare/v1.1.5...v1.1.6-beta.0) (2024-08-11)
+
+
+### Bug Fixes
+
+* **chore:** package do not display readme on npm ([0bce1fa](https://github.com/artipub/artipub/commit/0bce1fac0020db6377d2a8f0172f08ee2da26e12))
+* **core:** no article id , no error should be reported ([10b1909](https://github.com/artipub/artipub/commit/10b1909d73708f8286d87c64c645be5e86cd7d24))
+
+
+
 ## <small>1.1.5 (2024-08-09)</small>
 
 * feat(core):  auto update article content based on history,  dev.to platform is supported ([03f7643](https://github.com/artipub/artipub/commit/03f76430711a8bff7f1f8d7885ea7f7b5a439ef8))
