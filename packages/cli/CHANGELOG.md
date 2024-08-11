@@ -1,3 +1,7 @@
+## [0.0.9](https://github.com/artipub/artipub/compare/cli@0.0.9-alpha.0...cli@0.0.9) (2024-08-11)
+
+
+
 ## <small>0.0.9-alpha.0 (2024-08-09)</small>
 
 * fix(cli): cannot find module 'inquirer' ([f260894](https://github.com/artipub/artipub/commit/f260894c1decff79cafc86c4116190d53a2d7d95))
