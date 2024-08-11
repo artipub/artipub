@@ -186,7 +186,10 @@ export function registerCommands(resolve: (value?: unknown) => void) {
   program
     .command("add")
     .argument("<string>", "article path")
-    .option("-c, --config [path]", "config file path, note: the path must be wrapped with quotation marks to avoid reporting that the path does not exist")
+    .option(
+      "-c, --config [path]",
+      "config file path, note: the path must be wrapped with quotation marks to avoid reporting that the path does not exist"
+    )
     .description("add an existing article")
     .action(async (articlePath: string, options: AddOrUpdateCommandOptions) => {
       await handleAddOrUpdate("Add", articlePath, options);
@@ -196,7 +199,10 @@ export function registerCommands(resolve: (value?: unknown) => void) {
   program
     .command("update")
     .argument("<string>", "article path")
-    .option("-c, --config [path]", "config file path, note: the path must be wrapped with quotation marks to avoid reporting that the path does not exist")
+    .option(
+      "-c, --config [path]",
+      "config file path, note: the path must be wrapped with quotation marks to avoid reporting that the path does not exist"
+    )
     .description("Update an existing article")
     .action(async (articlePath: string, options: AddOrUpdateCommandOptions) => {
       await handleAddOrUpdate("Update", articlePath, options);
