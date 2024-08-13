@@ -136,7 +136,10 @@ async function generateChangelog(pkgName: string) {
   console.log(colors.cyan("\nGenerating changelog..."));
   const changelogArgs = ["conventional-changelog", "-p", "angular", "-i", "CHANGELOG.md", "-s", "--commit-path", "."];
   if (pkgName !== "core") changelogArgs.push("--lerna-package", pkgName);
-  await runIfNotDry("npx", changelogArgs, { cwd: `packages/${pkgName}` });
+  const res = await runIfNotDry("npx", changelogArgs, { cwd: `packages/${pkgName}` });
+
+  console.log(res.stdout);
+
   // conventional-changelog generates links with short commit hashes, extend them to full hashes
   extendCommitHash(`packages/${pkgName}/CHANGELOG.md`);
 }
@@ -145,6 +148,7 @@ function extendCommitHash(path: string): void {
   let content = readFileSync(path, "utf8");
   const base = "https://github.com/artipub/artipub/commit/";
   const matchHashReg = new RegExp(`${base}(\\w{7})\\)`, "g");
+  let authorInfos = new Set();
   console.log(colors.cyan(`\nextending commit hash in ${path}...`));
   let match;
   while ((match = matchHashReg.exec(content))) {
@@ -152,10 +156,14 @@ function extendCommitHash(path: string): void {
     try {
       const longHash = execSync(`git rev-parse ${shortHash}`).toString().trim();
       content = content.replace(`${base}${shortHash}`, `${base}${longHash}`);
+      const authorInfo = execSync(`git show -s --format='%an <%ae>' ${shortHash}`).toString().trim();
+      authorInfos.add(authorInfo);
     } catch {
       console.log(colors.red(`Failed to extend commit hash for ${shortHash}`));
     }
   }
+
+
   writeFileSync(path, content);
   console.log(colors.green(`${path} update success!`));
 }
