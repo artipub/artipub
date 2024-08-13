@@ -5,6 +5,21 @@ const { require } = createCommonJS(import.meta.url);
 const pkg = require("../package.json");
 export const projectName = pkg.name;
 
+export function getHelpInfo() {
+  return `
+Usage: artipub [command]
+
+Commands:
+  add    <article path>  add an existing article
+  update <article path>  update an existing article
+  clear                  clear the cache
+
+Options:
+  -h, --help  display help for command
+  -c, --config <path> config file path
+  `;
+}
+
 export const nativePlatformSchema: JSONSchemaType<{ name: "blog"; destination_path: string; cdn_prefix?: string; res_domain?: string }> = {
   type: "object",
   properties: {

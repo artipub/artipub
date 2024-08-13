@@ -1,7 +1,7 @@
 import { Command } from "commander";
 import { createCommonJS } from "mlly";
 import interactPrompt, { promptForPlatform } from "./interact";
-import { schema } from "./constant";
+import { getHelpInfo, schema } from "./constant";
 import { getConfigPath, loadConfig } from "./config";
 import fs from "fs-extra";
 import { ArticleProcessor, ArticleProcessResult, PublisherManager, PublisherPlugin, publisherPlugins } from "@artipub/core";
@@ -22,18 +22,7 @@ const Ajv = require("Ajv");
 const program = new Command();
 
 export function help() {
-  logger.info(`
-Usage: artipub [command]
-
-Commands:
-  add    <article path>  add an existing article
-  update <article path>  update an existing article
-  clear                  clear the cache
-
-Options:
-  -h, --help  display help for command
-  -c, --config <path> config file path
-  `);
+  logger.info(getHelpInfo());
 }
 
 function answersToConfig(answers: InteractPrompt): ArticleConfig {
