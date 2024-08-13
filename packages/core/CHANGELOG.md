@@ -1,3 +1,16 @@
+## <small>1.1.7-beta.3 (2024-08-13)</small>
+
+* build: contributors insert changelog position incorrect ([ffd4d03](https://github.com/artipub/artipub/commit/ffd4d0320b9fd216ff1adde3ebe86d37c61414ab))
+
+
+
+
+### Contributors
+
+- Potter <aa4790139@qq.com>
+
+
+
 ## <small>1.1.7-beta.2 (2024-08-13)</small>
 
 * build: contributors insert changelog position incorrect ([1e3bb78](https://github.com/artipub/artipub/commit/1e3bb78a1ee277be0b4c6f1bdfeab01fe80f3c75))
