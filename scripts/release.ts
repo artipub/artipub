@@ -134,7 +134,7 @@ async function promptVersionChoice(pkg: { version: string }) {
 
 async function generateChangelog(pkgName: string) {
   console.log(colors.cyan("\nGenerating changelog..."));
-  const changelogArgs = ["conventional-changelog", "-p", "angular", "-i", "CHANGELOG.md", "-s", "--commit-path", "."];
+  const changelogArgs = ["conventional-changelog", "-i", "CHANGELOG.md", "-s", "--commit-path", "."];
   if (pkgName !== "core") changelogArgs.push("--lerna-package", pkgName);
   await runIfNotDry("npx", changelogArgs, { cwd: `packages/${pkgName}`, stdio: "pipe" });
 
@@ -170,6 +170,9 @@ async function extendCommitHash(path: string): Promise<void> {
 }
 
 function injectAuthorInfos(path: string, content: string, authorInfos: Set<string>) {
+  if (authorInfos.size === 0) {
+    return content;
+  }
   const authorInfo = [...authorInfos].map((it) => `- ${it}`).join("\n");
   const injectContent = `\n\n### Contributors\n\n${authorInfo}\n\n`;
   const insertIndex = getChangeFileLastLineNum(path);
