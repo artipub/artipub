@@ -3,16 +3,11 @@
 * chore(core):  remove not use script ([b7b2eea](https://github.com/artipub/artipub/commit/b7b2eea1dab9434ce3a378c728d0ab90e1c9a403))
 
 
-
-## [1.1.6](https://github.com/artipub/artipub/compare/v1.1.6-beta.0...v1.1.6) (2024-08-11)
-
-
-
-
-
 ### Contributors
 
 - Potter <aa4790139@qq.com>
+
+## [1.1.6](https://github.com/artipub/artipub/compare/v1.1.6-beta.0...v1.1.6) (2024-08-11)
 
 
 ## [1.1.6-beta.0](https://github.com/artipub/artipub/compare/v1.1.5...v1.1.6-beta.0) (2024-08-11)

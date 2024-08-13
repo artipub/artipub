@@ -175,26 +175,24 @@ function injectAuthorInfos(path: string, content: string, authorInfos: Set<strin
   }
   const authorInfo = [...authorInfos].map((it) => `- ${it}`).join("\n");
   const injectContent = `\n\n### Contributors\n\n${authorInfo}\n\n`;
-  const insertIndex = getChangeFileLastLineNum(path);
+  const insertIndex = getChangeFileLastLineNum(content);
   const lines = content.split("\n");
   lines.splice(insertIndex, 0, injectContent);
 
   return lines.join("\n");
 }
 
-function getChangeFileLastLineNum(path: string) {
+function getChangeFileLastLineNum(content: string) {
   try {
-    const diff = execSync(`git diff -- ${path}`).toString();
-    const lines = diff.split("\n");
+    const lines = content.split("\n");
     let lastLineNum = -1;
-    for (let i = lines.length - 1; i >= 0; i--) {
-      const line = lines[i];
-      if (line && line.startsWith("+") && !line.startsWith("+++")) {
+    for (const [i, line] of lines.entries()) {
+      if (line && line.startsWith("## ")) {
         lastLineNum = i;
         break;
       }
     }
-    return lastLineNum;
+    return lastLineNum - 1;
   } catch (error) {
     throw new Error("getChangeFileLastLineNum Error:" + error);
   }
