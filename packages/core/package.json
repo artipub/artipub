@@ -18,8 +18,7 @@
     "lint": "eslint --ext .ts && prettier -c src",
     "lint:fix": "eslint --fix --ext .ts && prettier -w src",
     "build": "pnpm clean && npx tsx scripts/build.ts",
-    "clean": "rm -rf dist",
-    "release": "pnpm changelogen --release -i --prerelease"
+    "clean": "rm -rf dist"
   },
   "type": "module",
   "main": "./dist/index.cjs",
