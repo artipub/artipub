@@ -1,4 +1,15 @@
+## [1.1.7-beta.0](https://github.com/artipub/artipub/compare/v1.1.6...v1.1.7-beta.0) (2024-08-13)
+
+
+
 ## [1.1.6](https://github.com/artipub/artipub/compare/v1.1.6-beta.0...v1.1.6) (2024-08-11)
+
+
+
+
+
+### Contributors
+
 
 
 
