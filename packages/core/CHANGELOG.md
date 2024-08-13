@@ -1,3 +1,9 @@
+## <small>1.1.7-beta.2 (2024-08-13)</small>
+
+* build: contributors insert changelog position incorrect ([8a872c8](https://github.com/artipub/artipub/commit/8a872c88ea757640e2fd5ae470331c5fddfb2092))
+
+
+
 ## <small>1.1.7-beta.1 (2024-08-13)</small>
 
 * chore(core):  remove not use script ([b7b2eea](https://github.com/artipub/artipub/commit/b7b2eea1dab9434ce3a378c728d0ab90e1c9a403))
@@ -83,5 +89,12 @@
 
 
 
+
+
+
+
+### Contributors
+
+- Potter <aa4790139@qq.com>
 
 
