@@ -1,11 +1,6 @@
-## <small>1.1.7-beta.1 (2024-08-13)</small>
+## <small>1.1.7-beta.2 (2024-08-13)</small>
 
-* chore(core):  remove not use script ([b7b2eea](https://github.com/artipub/artipub/commit/b7b2eea1dab9434ce3a378c728d0ab90e1c9a403))
-
-
-
-## [1.1.6](https://github.com/artipub/artipub/compare/v1.1.6-beta.0...v1.1.6) (2024-08-11)
-
+* build: contributors insert changelog position incorrect ([1e3bb78](https://github.com/artipub/artipub/commit/1e3bb78a1ee277be0b4c6f1bdfeab01fe80f3c75))
 
 
 
@@ -13,6 +8,19 @@
 ### Contributors
 
 - Potter <aa4790139@qq.com>
+
+
+
+## <small>1.1.7-beta.1 (2024-08-13)</small>
+
+* chore(core):  remove not use script ([b7b2eea](https://github.com/artipub/artipub/commit/b7b2eea1dab9434ce3a378c728d0ab90e1c9a403))
+
+
+### Contributors
+
+- Potter <aa4790139@qq.com>
+
+## [1.1.6](https://github.com/artipub/artipub/compare/v1.1.6-beta.0...v1.1.6) (2024-08-11)
 
 
 ## [1.1.6-beta.0](https://github.com/artipub/artipub/compare/v1.1.5...v1.1.6-beta.0) (2024-08-11)
