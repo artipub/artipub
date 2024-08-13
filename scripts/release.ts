@@ -134,21 +134,19 @@ async function promptVersionChoice(pkg: { version: string }) {
 
 async function generateChangelog(pkgName: string) {
   console.log(colors.cyan("\nGenerating changelog..."));
-  const changelogArgs = ["conventional-changelog", "-p", "angular", "-i", "CHANGELOG.md", "-s", "--commit-path", "."];
+  const changelogArgs = ["conventional-changelog", "-i", "CHANGELOG.md", "-s", "--commit-path", "."];
   if (pkgName !== "core") changelogArgs.push("--lerna-package", pkgName);
-  const res = await runIfNotDry("npx", changelogArgs, { cwd: `packages/${pkgName}` });
-
-  console.log(res.stdout);
+  await runIfNotDry("npx", changelogArgs, { cwd: `packages/${pkgName}`, stdio: "pipe" });
 
   // conventional-changelog generates links with short commit hashes, extend them to full hashes
-  extendCommitHash(`packages/${pkgName}/CHANGELOG.md`);
+  await extendCommitHash(`packages/${pkgName}/CHANGELOG.md`);
 }
 
-function extendCommitHash(path: string): void {
+async function extendCommitHash(path: string): Promise<void> {
   let content = readFileSync(path, "utf8");
   const base = "https://github.com/artipub/artipub/commit/";
   const matchHashReg = new RegExp(`${base}(\\w{7})\\)`, "g");
-  let authorInfos = new Set();
+  const authorInfos = new Set<string>();
   console.log(colors.cyan(`\nextending commit hash in ${path}...`));
   let match;
   while ((match = matchHashReg.exec(content))) {
@@ -156,16 +154,50 @@ function extendCommitHash(path: string): void {
     try {
       const longHash = execSync(`git rev-parse ${shortHash}`).toString().trim();
       content = content.replace(`${base}${shortHash}`, `${base}${longHash}`);
-      const authorInfo = execSync(`git show -s --format='%an <%ae>' ${shortHash}`).toString().trim();
-      authorInfos.add(authorInfo);
-    } catch {
-      console.log(colors.red(`Failed to extend commit hash for ${shortHash}`));
+      const authorInfo = await runIfNotDry("git", ["show", "-s", "--format=%an <%ae>", shortHash], { stdio: "pipe" }).then(
+        (res) => res.stdout
+      );
+      if (authorInfo) {
+        authorInfos.add(authorInfo);
+      }
+    } catch (error) {
+      console.log(colors.red(`Failed to extend commit hash for ${shortHash}: ${error}`));
     }
   }
-
-
+  content = injectAuthorInfos(path, content, authorInfos);
   writeFileSync(path, content);
   console.log(colors.green(`${path} update success!`));
+}
+
+function injectAuthorInfos(path: string, content: string, authorInfos: Set<string>) {
+  if (authorInfos.size === 0) {
+    return content;
+  }
+  const authorInfo = [...authorInfos].map((it) => `- ${it}`).join("\n");
+  const injectContent = `\n\n### Contributors\n\n${authorInfo}\n\n`;
+  const insertIndex = getChangeFileLastLineNum(path);
+  const lines = content.split("\n");
+  lines.splice(insertIndex, 0, injectContent);
+
+  return lines.join("\n");
+}
+
+function getChangeFileLastLineNum(path: string) {
+  try {
+    const diff = execSync(`git diff -- ${path}`).toString();
+    const lines = diff.split("\n");
+    let lastLineNum = -1;
+    for (let i = lines.length - 1; i >= 0; i--) {
+      const line = lines[i];
+      if (line && line.startsWith("+") && !line.startsWith("+++")) {
+        lastLineNum = i;
+        break;
+      }
+    }
+    return lastLineNum;
+  } catch (error) {
+    throw new Error("getChangeFileLastLineNum Error:" + error);
+  }
 }
 
 async function commitChanges(repo: string, tag: string) {
