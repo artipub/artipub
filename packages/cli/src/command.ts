@@ -76,7 +76,7 @@ async function addArticleToPlatform(articlePath: string, config: ArticleConfig, 
     }
 
     const res = await publisher.publish();
-    logger.info("publish res:", res);
+    logger.info("publish res:", JSON.stringify(res, null, 2));
     return res;
   });
 }
@@ -142,7 +142,7 @@ async function confirmConfig(config: ArticleConfig) {
   }
 }
 
-async function handleAddOrUpdate(type: ActionType, articlePath: string, options: AddOrUpdateCommandOptions) {
+export async function handleAddOrUpdate(type: ActionType, articlePath: string, options: AddOrUpdateCommandOptions) {
   articlePath = resolvePath(articlePath);
   if (!fs.existsSync(articlePath)) {
     throw new Error("Article path does not exist.");
@@ -168,6 +168,7 @@ async function handleAddOrUpdate(type: ActionType, articlePath: string, options:
       }
       saveConfigToUserHome(config);
     }
+    return publishResults;
   }
 }
 

@@ -12,3 +12,5 @@ export function run() {
 }
 
 export default run;
+
+export { handleAddOrUpdate } from "./command";
