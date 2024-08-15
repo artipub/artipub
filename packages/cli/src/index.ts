@@ -1,16 +1,23 @@
-import { registerCommands } from "./command";
-export * from "./config";
+import { RunResult } from "./types";
+import configHandler from "./config";
+import * as constant from "./constant";
+import command from "./command";
+import interact from "./interact";
 
-export function run() {
-  return new Promise((resolve, reject) => {
-    try {
-      registerCommands(resolve);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
+export * from "./types";
 
-export default run;
-
-export { handleAddOrUpdate } from "./command";
+export default {
+  ...configHandler,
+  ...constant,
+  interact,
+  command,
+  run(args: any = process.argv): Promise<RunResult> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.command.registerCommands(resolve, reject, args);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  },
+};

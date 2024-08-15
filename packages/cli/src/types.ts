@@ -1,3 +1,4 @@
+import { PublishResult } from "@artipub/core";
 import type { DevToPublisherPluginOption, GithubPicBedOption, NativePublisherOption, NotionPublisherPluginOption } from "@artipub/shared";
 
 export type PlatformOptions = {
@@ -20,3 +21,5 @@ export interface AddOrUpdateCommandOptions {
 }
 
 export type ActionType = "Add" | "Update";
+
+export type RunResult = PublishResult[] | undefined | void | null;

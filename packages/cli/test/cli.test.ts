@@ -4,13 +4,13 @@ import path from "node:path";
 import fs from "node:fs";
 import { afterEach, beforeAll, expect, test, vi } from "vitest";
 
-import { getHelpInfo } from "../src/constant";
-import { handleAddOrUpdate } from "../src/command";
-import { ActionType, AddOrUpdateCommandOptions } from "../src/types";
+import CLI from "../src";
+import type { ActionType, AddOrUpdateCommandOptions } from "../src";
 
+const { getHelpInfo, command } = CLI;
 const CLI_PATH = path.join(__dirname, "..", "bin/index.js");
 
-const run = <SO extends SyncOptions>(args: string[], options?: SO): SyncResult<SO> => {
+const runDetach = <SO extends SyncOptions>(args: string[], options?: SO): SyncResult<SO> => {
   return execaCommandSync(`node ${CLI_PATH} ${args.join(" ")}`, options);
 };
 
@@ -22,13 +22,13 @@ beforeAll(() => cleanGenPath());
 afterEach(() => cleanGenPath());
 
 test("output artipub help", () => {
-  const { stdout } = run([]);
+  const { stdout } = runDetach([]);
   expect(stdout).toContain(getHelpInfo());
 });
 
 test("invalid command", () => {
   try {
-    run(["abc"]);
+    runDetach(["abc"]);
   } catch (error) {
     expect(error.message).toContain(`error: unknown command 'abc'`);
   }
@@ -36,22 +36,24 @@ test("invalid command", () => {
 
 test("Article path does not exist.", () => {
   try {
-    run(["add", "./ddd.md"]);
+    runDetach(["add", "./ddd.md"]);
   } catch (error) {
     expect(error.message).toContain("Article path does not exist.");
   }
 });
 
 test("Add an existing article", async () => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     fs.mkdirSync(genPath);
+    const testFilePath = path.join(genPath, "test.md");
+    const configPath = path.join(__dirname, "fixtures/article/artipub.config.mjs");
     const rs = fs.createReadStream(path.join(__dirname, "fixtures/article/test.md"));
-    const ws = fs.createWriteStream(path.join(genPath, "test.md"));
+    const ws = fs.createWriteStream(testFilePath);
     rs.pipe(ws);
 
     ws.on("close", async () => {
       const handleAddOrUpdateMock = vi
-        .fn(handleAddOrUpdate)
+        .spyOn(command, "handleAddOrUpdate")
         .mockImplementation(async (type: ActionType, articlePath: string, options: AddOrUpdateCommandOptions) => {
           const res = [
             {
@@ -65,25 +67,23 @@ test("Add an existing article", async () => {
           return res;
         });
 
-      const { stdout } = run(["add", "test.md"], { cwd: genPath, stdout: "pipe" });
-      const mark = "publish res:";
-      const output = stdout
-        .slice(Math.max(0, stdout.indexOf(mark) + mark.length))
-        .replace(/\n/gm, "")
-        .trim();
-      const result = JSON.parse(output);
-
-      const result = await handleAddOrUpdateMock("Add", "test.md", {});
-
-      expect(result).toMatchObject([
-        {
-          name: "DevToPublisherPlugin",
-          success: true,
-          info: "Published to Dev.to",
-        },
-      ]);
-      resolve(null);
-      handleAddOrUpdateMock.mockRestore();
+      CLI.run(["node", "--", "add", testFilePath, "-c", configPath])
+        .then((publishRes) => {
+          expect(publishRes).toMatchObject([
+            {
+              name: "DevToPublisherPlugin",
+              success: true,
+              info: "Published to Dev.to",
+            },
+          ]);
+          resolve(null);
+        })
+        .catch((error_) => {
+          reject(error_);
+        })
+        .finally(() => {
+          handleAddOrUpdateMock.mockRestore();
+        });
     });
   });
 });
