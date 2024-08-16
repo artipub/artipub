@@ -1,5 +1,5 @@
 import { PublisherPlugin, PublishResult } from "@/types";
-import { createVisitor, getProjectRootPath, isFunction, normalizedPath } from "@/utils";
+import { createVisitor, getProjectRootPath, isFunction, isString, normalizedPath, PostMapRecorder } from "@/utils";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
@@ -8,23 +8,8 @@ import { Root } from "remark-stringify/lib";
 import { visit } from "unist-util-visit";
 import { Heading, Paragraph, Text } from "mdast";
 import path from "node:path";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 const postRecordsPath = normalizedPath(path.resolve(getProjectRootPath(), "postMapRecords.json"));
-
-function getPostMapRecord() {
-  let postMapRecords: Record<string, any> = {};
-  if (existsSync(postRecordsPath!)) {
-    postMapRecords = JSON.parse(readFileSync(postRecordsPath!, { encoding: "utf8" }));
-  }
-  return postMapRecords;
-}
-
-function updatePostMapRecords(postMapRecords: any) {
-  if (postMapRecords) {
-    return writeFileSync(postRecordsPath!, JSON.stringify(postMapRecords, null, 2), { encoding: "utf8" });
-  }
-}
 
 export class PublisherManager {
   private plugins: PublisherPlugin[];
@@ -81,22 +66,20 @@ export class PublisherManager {
     const articleTitle = getArticleTitle(tree);
     const articleUniqueID = getArticleUniqueID(tree, this.content);
     const isNeedRecord = !!articleUniqueID;
-    const postMapRecords = getPostMapRecord();
+    const postMapRecorder = new PostMapRecorder(postRecordsPath!);
     const tasks: Promise<PublishResult>[] = [];
-    for (const plugin of this.plugins) {
+    for (let i = 0; i < this.plugins.length; i++) {
+      const plugin = this.plugins[i];
       const cloneTree = cloneDeep(tree);
-      let postMapRecord: Record<string, any> = {};
-      if (isNeedRecord) {
-        postMapRecord = postMapRecords[articleUniqueID] = postMapRecords[articleUniqueID] ?? {};
-      }
+      const postMapRecord: Record<string, any> = {};
       if (plugin.extendsParam) {
         plugin.extendsParam({ pid: postMapRecord[plugin.name] });
       }
       const result = plugin
         .process(articleTitle, createVisitor(cloneTree), () => toMarkdown(cloneTree))
         .then((res) => {
-          if (res.success && articleUniqueID) {
-            postMapRecord[plugin.name] = res.pid;
+          if (res.success && plugin?.isTraceUpdate && articleUniqueID) {
+            postMapRecorder.addOrUpdate(articleUniqueID, plugin.name, res.pid);
           }
           return Object.assign({ name: plugin.name }, res);
         });
@@ -107,7 +90,7 @@ export class PublisherManager {
     }
 
     return await Promise.all(tasks).then((res) => {
-      isNeedRecord && updatePostMapRecords(postMapRecords);
+      isNeedRecord && postMapRecorder.solidToNative();
       return res;
     });
   }

@@ -1,10 +1,11 @@
 import chalk from "chalk";
-import { existsSync } from "node:fs";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { Node } from "unified/lib";
 import { Test, Visitor } from "unist-util-visit/lib";
 import { visit } from "unist-util-visit";
+import { PostMapRecord } from "@/types";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 export const log = {
   info(...args: any) {
@@ -20,6 +21,10 @@ export const log = {
 
 export function isFunction(val: any) {
   return typeof val === "function";
+}
+
+export function isString(val: any) {
+  return typeof val === "string";
 }
 
 export function getProjectRootPath() {
@@ -93,3 +98,112 @@ export function createVisitor(tree: Node) {
 }
 
 export const relativePathImgRegex = /^[^?hpst].+\.(png|jpg|jpeg|svg|gif)$/im;
+
+export class PostMapRecorder {
+  private filePath: string;
+  private postMapRecords: Record<string, PostMapRecord>;
+  constructor(filePath: string) {
+    this.filePath = filePath;
+    this.postMapRecords = this.getPostMapRecord();
+  }
+  getPostMapRecord() {
+    let postMapRecords: Record<string, any> = {};
+    if (existsSync(this.filePath)) {
+      postMapRecords = JSON.parse(readFileSync(this.filePath, { encoding: "utf8" }));
+    }
+    return this.convertRecordStructure(postMapRecords);
+  }
+  convertRecordStructure(postMapRecords: Record<string, any>) {
+    const newPostMapRecords: Record<string, PostMapRecord> = {};
+    for (const articleUniqueID in postMapRecords) {
+      if (postMapRecords[articleUniqueID] && !isString(postMapRecords[articleUniqueID])) {
+        newPostMapRecords[articleUniqueID] = {};
+        for (const platformName of Object.keys(postMapRecords[articleUniqueID])) {
+          newPostMapRecords[articleUniqueID][platformName] = {
+            k: postMapRecords[articleUniqueID][platformName],
+          };
+        }
+      } else {
+        newPostMapRecords[articleUniqueID] = this.decode(postMapRecords[articleUniqueID]);
+      }
+    }
+    return newPostMapRecords;
+  }
+  decode(record: string) {
+    const newRecord: PostMapRecord = {};
+    if (record) {
+      const platformArr = record.split(";");
+      for (const platformData of platformArr) {
+        const params = platformData.split(",");
+        const data: Record<string, string> = {};
+        for (const param of params) {
+          const [key, value] = param.split(":");
+          data[key] = value;
+        }
+        const platformName = data["p"];
+        delete data["p"];
+        if (platformName) {
+          newRecord[platformName] = {
+            ...data,
+          };
+        }
+      }
+    }
+    return newRecord;
+  }
+  encode(record: PostMapRecord) {
+    let recordStr = "";
+    if (record) {
+      for (const key in record) {
+        const paramStr = this.encodeParams(record[key] as Record<string, string>);
+        recordStr += `p:${key}`;
+        if (paramStr && paramStr.length > 0) {
+          recordStr += `,${paramStr}`;
+        }
+        recordStr += ";";
+      }
+    }
+    return recordStr;
+  }
+  encodeParams(data: Record<string, string>) {
+    let paramStr = "";
+    const keys = Object.keys(data);
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      paramStr += i === keys.length - 1 ? `${key}:${data[key]}` : `${key}:${data[key]},`;
+    }
+    return paramStr;
+  }
+  addOrUpdate(articleUniqueID: string, platformName: string, pid?: string) {
+    if (!platformName) {
+      throw new Error("Platform name is required");
+    }
+    if (!this.postMapRecords[articleUniqueID]) {
+      this.postMapRecords[articleUniqueID] = {};
+    }
+    if (!this.postMapRecords[articleUniqueID][platformName]) {
+      this.postMapRecords[articleUniqueID][platformName] = {
+        k: pid,
+      };
+    } else if (pid) {
+      this.postMapRecords[articleUniqueID][platformName] = {
+        ...this.postMapRecords[articleUniqueID][platformName],
+        k: pid,
+      };
+    }
+  }
+  serialize() {
+    const records: Map<string, string> = new Map<string, string>();
+    for (const articleUniqueID of Object.keys(this.postMapRecords)) {
+      const record = this.encode(this.postMapRecords[articleUniqueID]);
+      records.set(articleUniqueID, record);
+    }
+    return records.size > 0 ? JSON.stringify(Object.fromEntries(records.entries()), null, 2) : null;
+  }
+  solidToNative() {
+    const str = this.serialize();
+    if (str) {
+      writeFileSync(this.filePath, str, { encoding: "utf8" });
+    }
+  }
+}

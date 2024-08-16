@@ -10,6 +10,7 @@ export default function DevToPublisherPlugin(option: DevToPublisherPluginOption)
   let extendsParam: ExtendsParam = {};
   return {
     name: "DevToPublisherPlugin",
+    isTraceUpdate: true,
     extendsParam(params: ExtendsParam) {
       extendsParam = params;
       return this;

@@ -11,6 +11,7 @@ export default function NotionPublisherPlugin(option: NotionPublisherPluginOptio
   let extendsParam: ExtendsParam = {};
   return {
     name: "NotionPublisherPlugin",
+    isTraceUpdate: true,
     extendsParam(params: ExtendsParam) {
       extendsParam = params;
       return this;

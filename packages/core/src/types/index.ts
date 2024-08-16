@@ -40,6 +40,7 @@ export interface PublisherPlugin {
   extendsParam?(extendsParam: ExtendsParam): PublisherPlugin;
   process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult>;
   name: string;
+  isTraceUpdate?: boolean;
 }
 
 export interface PublishResult {
@@ -59,3 +60,15 @@ export type TVt = (
   visitorOrReverse: Visitor | boolean | null | undefined,
   maybeReverse: boolean | null | undefined
 ) => void;
+
+export type PostMapRecord = Record<
+  string,
+  | {
+      p: string;
+      k: string;
+      [key: string]: string;
+    }
+  | null
+  | undefined
+  | object
+>;
