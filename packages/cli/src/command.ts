@@ -43,15 +43,13 @@ export default {
       throw new Error("Invalid configuration");
     }
 
-    if (type == "Add") {
-      return await this.addArticleToPlatform(articlePath, config, pluginNameMapConfigPropertyName);
-    } else if (type === "Update") {
+    if (type === "Add" || type === "Update") {
       return await this.updateArticleToPlatform(articlePath, config, pluginNameMapConfigPropertyName);
     } else {
       throw new Error("Invalid action type");
     }
   },
-  async addArticleToPlatform(articlePath: string, config: ArticleConfig, pluginNameMapConfigPropertyName?: Record<string, string>) {
+  updateArticleToPlatform(articlePath: string, config: ArticleConfig, pluginNameMapConfigPropertyName?: Record<string, string>) {
     const processor = new ArticleProcessor({
       uploadImgOption: {
         ...config.githubOption,
@@ -74,18 +72,11 @@ export default {
       }
 
       const res = await publisher.publish();
-      logger.info("publish res:", JSON.stringify(res, null, 2));
+      logger.info("publish res:", res);
       return res;
     });
   },
-  updateArticleToPlatform(_articlePath: string, _config: ArticleConfig, _pluginNameMapConfigPropertyName?: Record<string, string>) {
-    //TODO:
-    /* 
-    1. 提取ArticlePath内容中的唯一串article_unique_id
-    2. 根据article_unique_id 从缓存文章中获取文章之前被发布至哪些平台的信息
-    3. 根据平台信息，将文章更新至对应平台
-    */
-  },
+
   validateConfig(config: any) {
     const ajv = new Ajv();
     const validate = ajv.compile(schema);
@@ -95,6 +86,7 @@ export default {
     }
     return true;
   },
+
   saveConfigToUserHome(saveConfig: ArticleConfig) {
     if (!fs.existsSync(userHomeDir)) {
       fs.mkdirSync(userHomeDir);
