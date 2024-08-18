@@ -1,8 +1,13 @@
 import mri from "mri";
 import semver from "semver";
 import { getPackageInfo, run, runIfNotDry, step } from "./utils";
+import path from "node:path";
+import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 
 const args = mri(process.argv.slice(2));
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const coreDistPath = path.resolve(__dirname, "../packages/core/dist");
 
 async function publish({ defaultPackage, packageManager }) {
   const tag = args._[0];
@@ -36,6 +41,13 @@ async function publish({ defaultPackage, packageManager }) {
 
 async function buildPackage(pkgName: string, packageManager: "npm" | "pnpm" = "npm") {
   step("Building package...");
+
+  if (pkgName === "cli" && !existsSync(coreDistPath)) {
+    await runIfNotDry(packageManager, ["run", "build"], {
+      cwd: `packages/core`,
+    });
+  }
+
   await runIfNotDry(packageManager, ["run", "build"], {
     cwd: `packages/${pkgName}`,
   });

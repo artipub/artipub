@@ -4,7 +4,7 @@ import interact from "./interact";
 import { getHelpInfo, schema } from "./constant";
 import configHandler from "./config";
 import fs from "fs-extra";
-import { ArticleProcessor, ArticleProcessResult, PublisherManager, PublisherPlugin, publisherPlugins, PublishResult } from "@artipub/core";
+import { ArticleProcessor, ArticleProcessResult, PublisherManager, PublisherPlugin, publisherPlugins } from "@artipub/core";
 import { normalizePath, resolvePath } from "@artipub/shared";
 import os from "node:os";
 import path from "node:path";
