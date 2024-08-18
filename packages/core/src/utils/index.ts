@@ -201,18 +201,18 @@ export class PostMapRecorder {
       };
     }
   }
-  serialize() {
+  getRecords() {
     const records: Map<string, string> = new Map<string, string>();
     for (const articleUniqueID of Object.keys(this.postMapRecords)) {
       const record = this.encode(this.postMapRecords[articleUniqueID]);
       records.set(articleUniqueID, record);
     }
-    return records.size > 0 ? JSON.stringify(Object.fromEntries(records.entries()), null, 2) : null;
+    return records.size > 0 ? Object.fromEntries(records.entries()) : null;
   }
   solidToNative() {
-    const str = this.serialize();
-    if (str) {
-      writeFileSync(this.filePath, str, { encoding: "utf8" });
+    const records = this.getRecords();
+    if (records) {
+      writeFileSync(this.filePath, JSON.stringify(records, null, 2), { encoding: "utf8" });
     }
   }
 }

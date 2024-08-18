@@ -18,6 +18,7 @@
     "lint": "eslint --ext .ts && prettier -c src",
     "lint:fix": "eslint --fix --ext .ts && prettier -w src",
     "build": "pnpm clean && npx tsx scripts/build.ts",
+    "test": "pnpm build && vitest --run",
     "clean": "rm -rf dist"
   },
   "type": "module",
