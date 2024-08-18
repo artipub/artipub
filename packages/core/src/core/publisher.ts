@@ -71,9 +71,9 @@ export class PublisherManager {
     for (let i = 0; i < this.plugins.length; i++) {
       const plugin = this.plugins[i];
       const cloneTree = cloneDeep(tree);
-      const postMapRecord: Record<string, any> = {};
-      if (plugin.extendsParam) {
-        plugin.extendsParam({ pid: postMapRecord[plugin.name] });
+      const postMapRecord: Record<string, any> | null = postMapRecorder.getPostRecord(articleUniqueID);
+      if (plugin.extendsParam && postMapRecord) {
+        plugin.extendsParam({ pid: postMapRecord[plugin.name]?.k });
       }
       const result = plugin
         .process(articleTitle, createVisitor(cloneTree), () => toMarkdown(cloneTree))

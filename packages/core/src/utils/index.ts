@@ -113,6 +113,15 @@ export class PostMapRecorder {
     }
     return this.convertRecordStructure(postMapRecords);
   }
+  getPostRecord(articleUniqueID?: string | null) {
+    if (!articleUniqueID) {
+      return null;
+    }
+    if (!this.postMapRecords[articleUniqueID]) {
+      this.postMapRecords[articleUniqueID] = {};
+    }
+    return this.postMapRecords[articleUniqueID];
+  }
   convertRecordStructure(postMapRecords: Record<string, any>) {
     const newPostMapRecords: Record<string, PostMapRecord> = {};
     for (const articleUniqueID in postMapRecords) {

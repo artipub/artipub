@@ -50,15 +50,32 @@ export default function NotionPublisherPlugin(option: NotionPublisherPluginOptio
         return res;
       }
 
-      function updateArticle() {
-        //TODO: Implement update article
-        throw new Error(`Failed to publish [${articleTitle}] to Notion, The Notion does not support updated articles at this time !`);
+      async function deleteChildren(childrenIds: string[]) {
+        return childrenIds.reduce((pre, cur) => {
+          return pre.then(() => notion.blocks.delete({ block_id: cur }));
+        }, Promise.resolve());
+      }
+
+      async function updateArticle(page_id: string) {
+        const childrenResponse = await notion.blocks.children.list({
+          block_id: page_id,
+          page_size: 100,
+        });
+
+        const children = childrenResponse.results;
+        const childrenIds = children.map((child: any) => child.id);
+        await deleteChildren(childrenIds);
+
+        await notion.blocks.children.append({
+          block_id: page_id,
+          children: blocks,
+        });
       }
 
       let article_id = option.update_page_id ?? extendsParam.pid;
       try {
         if (article_id) {
-          await updateArticle();
+          await updateArticle(article_id);
         } else {
           const res = await postArticle();
           if (res.id) {
