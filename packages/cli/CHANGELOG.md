@@ -1,3 +1,20 @@
+## [0.0.13](https://github.com/artipub/artipub/compare/cli@0.0.12...cli@0.0.13) (2024-08-18)
+
+
+### Bug Fixes
+
+* **cli:** cannot find module 'Ajv' ([f347ead](https://github.com/artipub/artipub/commit/f347ead1f107b5190fcb205c1990b736b49e408f))
+* core was not packaged in advance during cli packaging, cause build failed ([b23e035](https://github.com/artipub/artipub/commit/b23e0352d0a82d82015cd25ddc1081857e86bb4d))
+
+
+
+
+### Contributors
+
+- Potter <aa4790139@gmail.com>
+
+
+
 ## [0.0.12](https://github.com/artipub/artipub/compare/cli@0.0.11...cli@0.0.12) (2024-08-18)
 
 
