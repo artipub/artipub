@@ -23,6 +23,7 @@
     "docs:build": "pnpm -F=docs docs:build",
     "docs:preview": "pnpm -F=docs docs:preview",
     "docs:lunaria:build": "pnpm -F=docs lunaria:build",
+    "test": "pnpm --filter=./packages/* run test",
     "clean": "pnpm --filter=./packages/* run clean",
     "release": "tsx scripts/release.ts",
     "ci-publish": "tsx scripts/publishCI.ts",
