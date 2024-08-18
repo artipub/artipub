@@ -1,4 +1,4 @@
-import { RunResult } from "./types";
+import type { RunResult } from "./types";
 import configHandler from "./config";
 import * as constant from "./constant";
 import command from "./command";

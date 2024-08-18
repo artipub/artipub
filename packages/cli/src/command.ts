@@ -8,9 +8,11 @@ import { ArticleProcessor, ArticleProcessResult, PublisherManager, PublisherPlug
 import { normalizePath, resolvePath } from "@artipub/shared";
 import os from "node:os";
 import path from "node:path";
+import { existsSync, watch } from "node:fs";
+import { exec } from "node:child_process";
 import useLogger from "./logger";
 
-import type { ActionType, AddOrUpdateCommandOptions, ArticleConfig, RunResult } from "./types";
+import type { ActionType, AddOrUpdateCommandOptions, ArticleConfig, ConfigCommandOptions, RunResult } from "./types";
 
 type InteractPrompt = Awaited<ReturnType<typeof interact.interactPrompt>>;
 const userHomeDir = os.homedir();
@@ -155,6 +157,32 @@ export default {
       return publishResults;
     }
   },
+  openConfigFile(options: ConfigCommandOptions) {
+    if (!options.edit) {
+      throw new Error("Please specify the --edit option to edit the configuration file.");
+    }
+    const configPath = this.resolveConfigPath(undefined);
+    if (!configPath || !existsSync(configPath)) {
+      throw new Error("No configuration file found.");
+    }
+
+    const watcher = watch(configPath, async (eventType) => {
+      if (eventType === "change") {
+        logger.log("Configuration file has been changed.");
+        const config = await configHandler.loadConfig(configPath);
+        this.validateConfig(config);
+      }
+    });
+
+    exec(`"${configPath}"`, (error) => {
+      if (error) {
+        logger.error("Failed to open the configuration file:", error);
+        watcher.close();
+      } else {
+        logger.info("Configuration file opened successfully.");
+      }
+    });
+  },
   registerCommands(resolve: (value?: RunResult) => RunResult, reject: (message: string) => void, args: any = process.argv) {
     program
       .command("add")
@@ -186,6 +214,14 @@ export default {
       .action(() => {
         logger.info("Cache cleared.");
         resolve(null);
+      });
+
+    program
+      .command("config")
+      .option("--edit", "Edit the configuration file")
+      .description("Edit the configuration file")
+      .action((options: ConfigCommandOptions) => {
+        this.openConfigFile(options);
       });
 
     if (args.length <= 2) {

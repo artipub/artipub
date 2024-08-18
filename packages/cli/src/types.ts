@@ -20,6 +20,10 @@ export interface AddOrUpdateCommandOptions {
   config?: string;
 }
 
+export interface ConfigCommandOptions {
+  edit: boolean;
+}
+
 export type ActionType = "Add" | "Update";
 
 export type RunResult = PublishResult[] | undefined | void | null;

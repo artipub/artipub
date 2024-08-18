@@ -13,6 +13,8 @@ Commands:
   add    <article path>  add an existing article
   update <article path>  update an existing article
   clear                  clear the cache
+  config 
+    --edit               edit the configuration file
 
 Options:
   -h, --help  display help for command
