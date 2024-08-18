@@ -1,3 +1,12 @@
+## [0.0.11](https://github.com/artipub/artipub/compare/cli@0.0.10...cli@0.0.11) (2024-08-18)
+
+
+### Bug Fixes
+
+* **cli:** after the configuration window is closed, the cli is stuck consistently and does not exit ([7235e2e](https://github.com/artipub/artipub/commit/7235e2ec8f6fe7dd1a70ba46b8856c5b723d95d6))
+
+
+
 ## <small>0.0.10 (2024-08-18)</small>
 
 * feat(cli): add config command for reedit config ([69523b6](https://github.com/artipub/artipub/commit/69523b6fbb9db9efa8cdde133102f39cd792e015))
