@@ -20,7 +20,7 @@ const userHomeDirDefaultConfigName = "artipub.config.mjs";
 const logger = useLogger("cli");
 
 const { require } = createCommonJS(import.meta.url);
-const Ajv = require("Ajv");
+const Ajv = require("ajv");
 const pkg = require("../package.json");
 const program = new Command();
 

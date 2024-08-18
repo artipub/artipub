@@ -10,7 +10,6 @@ import pkg from "./package.json";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const external = Object.keys(pkg?.peerDependencies || {});
-external.push("chalk");
 
 export default defineConfig([
   {
@@ -31,7 +30,7 @@ export default defineConfig([
       alias({
         entries: [{ find: "@", replacement: path.resolve(__dirname, "./src") }],
       }),
-      resolve({ browser: false, extensions: [".ts", ".js"] }),
+      resolve({ browser: false, extensions: [".ts", ".js"], exportConditions: ["node"] }),
       commonjs(),
       typescript({
         tsconfig: "./tsconfig.json",
