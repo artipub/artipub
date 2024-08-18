@@ -1,3 +1,20 @@
+## [1.1.8](https://github.com/artipub/artipub/compare/v1.1.7...v1.1.8) (2024-08-18)
+
+
+### Bug Fixes
+
+* **cli:** cannot find module 'Ajv' ([f347ead](https://github.com/artipub/artipub/commit/f347ead1f107b5190fcb205c1990b736b49e408f))
+* **core:** navigator is not defined ([ca2b245](https://github.com/artipub/artipub/commit/ca2b2451b7b463a46f00ae400da5983d9fa9d749))
+
+
+
+
+### Contributors
+
+- Potter <aa4790139@gmail.com>
+
+
+
 ## <small>1.1.7 (2024-08-18)</small>
 
 * feat(core): notion support update article's content ([a34c316](https://github.com/artipub/artipub/commit/a34c31622139b654b31082eb7329bf4d02e4df5c))
