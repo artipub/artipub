@@ -34,8 +34,5 @@ jobs:
       - name: Install tsx
         run: pnpm install -g tsx
 
-      - name: Build
-        run: pnpm run build
-
       - name: Run tests
         run: pnpm run test
