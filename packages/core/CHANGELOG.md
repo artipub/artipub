@@ -1,3 +1,18 @@
+## <small>1.1.7 (2024-08-18)</small>
+
+* feat(core): notion support update article's content ([a34c316](https://github.com/artipub/artipub/commit/a34c31622139b654b31082eb7329bf4d02e4df5c))
+* refactor(core)!: optimize the postMapRecords.json storage structure ([b1805ff](https://github.com/artipub/artipub/commit/b1805ff619df7c030128a22ccdb94797be141399))
+
+
+
+
+### Contributors
+
+- Potter <aa4790139@gmail.com>
+- Potter <aa4790139@qq.com>
+
+
+
 ## <small>1.1.7-beta.3 (2024-08-13)</small>
 
 * build: contributors insert changelog position incorrect ([ffd4d03](https://github.com/artipub/artipub/commit/ffd4d0320b9fd216ff1adde3ebe86d37c61414ab))
