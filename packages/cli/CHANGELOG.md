@@ -1,3 +1,19 @@
+## [0.0.12](https://github.com/artipub/artipub/compare/cli@0.0.11...cli@0.0.12) (2024-08-18)
+
+
+### Features
+
+* **cli:** add version command, output current version ([f9b6a31](https://github.com/artipub/artipub/commit/f9b6a316d49df2c502ad9978592f9e15993c2266))
+
+
+
+
+### Contributors
+
+- Potter <aa4790139@gmail.com>
+
+
+
 ## [0.0.11](https://github.com/artipub/artipub/compare/cli@0.0.10...cli@0.0.11) (2024-08-18)
 
 
