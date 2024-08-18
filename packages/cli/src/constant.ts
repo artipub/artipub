@@ -19,6 +19,7 @@ Commands:
 Options:
   -h, --help  display help for command
   -c, --config <path> config file path
+  -v, --version  output the version number
   `;
 }
 

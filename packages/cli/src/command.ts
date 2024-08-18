@@ -21,6 +21,7 @@ const logger = useLogger("cli");
 
 const { require } = createCommonJS(import.meta.url);
 const Ajv = require("Ajv");
+const pkg = require("../package.json");
 const program = new Command();
 
 export default {
@@ -233,6 +234,8 @@ export default {
       .action((options: ConfigCommandOptions) => {
         this.openConfigFile(options);
       });
+
+    program.version(pkg.version, "-v,--version", "output the current version");
 
     if (args.length <= 2) {
       this.help();
