@@ -1,3 +1,30 @@
+## <small>0.0.10 (2024-08-18)</small>
+
+* feat(cli): add config command for reedit config ([69523b6](https://github.com/artipub/artipub/commit/69523b6fbb9db9efa8cdde133102f39cd792e015))
+* feat(cli): add test case ([df3c7ef](https://github.com/artipub/artipub/commit/df3c7efa5ea6fd68cf5f15a0fd63254c7eefcb9f))
+* feat(cli): improve test case ([fdeccce](https://github.com/artipub/artipub/commit/fdeccce282254be327b60a82d32bb0209f600f6c))
+* feat(cli): support update article's content ([b7489fd](https://github.com/artipub/artipub/commit/b7489fd5a5d63e7886997615231eee23f097de1b))
+* test(cli): add an independent vitest.config.js ([3b60a8d](https://github.com/artipub/artipub/commit/3b60a8d86cd80ebabfa84d79f24559e304eb56c6))
+* fix: ajv output schema warning ([e423581](https://github.com/artipub/artipub/commit/e423581bbc80bc9f3d9f6736ef2644165a321695))
+* refactor(cli)!:  refactor the export structure to support mock test cases ([9f85716](https://github.com/artipub/artipub/commit/9f85716588e1b6cf130112fb5e9e4cb2a82779bc))
+* chore(cli):  remove not use script ([1b12f04](https://github.com/artipub/artipub/commit/1b12f04d66311b8ef4084215d61bad9938be8269))
+
+
+
+
+### Contributors
+
+- Potter <aa4790139@gmail.com>
+- Potter <aa4790139@qq.com>
+
+
+
+## <small>1.1.6 (2024-08-11)</small>
+
+* chore: release v1.1.6 ([5137b6f](https://github.com/artipub/artipub/commit/5137b6f3f59e952df84854c81cf72121c361e0ec))
+
+
+
 ## [0.0.9](https://github.com/artipub/artipub/compare/cli@0.0.9-alpha.0...cli@0.0.9) (2024-08-11)
 
 
