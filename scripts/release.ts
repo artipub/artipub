@@ -145,23 +145,26 @@ async function generateChangelog(pkgName: string) {
 async function extendCommitHash(path: string): Promise<void> {
   let content = readFileSync(path, "utf8");
   const base = "https://github.com/artipub/artipub/commit/";
-  const matchHashReg = new RegExp(`${base}(\\w{7})\\)`, "g");
+  const matchHashReg = new RegExp(`(\\w{7})\\](?=\\(${base}\\w{40})`, "g");
+  const matchChangeReg = new RegExp(`^##[^#]*(.*\n)+?(?=##)`, "g");
   const authorInfos = new Set<string>();
   console.log(colors.cyan(`\nextending commit hash in ${path}...`));
-  let match;
-  while ((match = matchHashReg.exec(content))) {
-    const shortHash = match[1];
-    try {
-      const longHash = execSync(`git rev-parse ${shortHash}`).toString().trim();
-      content = content.replace(`${base}${shortHash}`, `${base}${longHash}`);
-      const authorInfo = await runIfNotDry("git", ["show", "-s", "--format=%an <%ae>", shortHash], { stdio: "pipe" }).then(
-        (res) => res.stdout
-      );
-      if (authorInfo) {
-        authorInfos.add(authorInfo);
+  const matchChangeLog = matchChangeReg.exec(content);
+  if (matchChangeLog && matchChangeLog[0]) {
+    const changeLog = matchChangeLog[0];
+    let match;
+    while ((match = matchHashReg.exec(changeLog))) {
+      const shortHash = match[1];
+      try {
+        const authorInfo = await runIfNotDry("git", ["show", "-s", "--format=%an <%ae>", shortHash], { stdio: "pipe" }).then(
+          (res) => res.stdout
+        );
+        if (authorInfo) {
+          authorInfos.add(authorInfo);
+        }
+      } catch (error) {
+        console.log(colors.red(`Failed to extend commit hash for ${shortHash}: ${error}`));
       }
-    } catch (error) {
-      console.log(colors.red(`Failed to extend commit hash for ${shortHash}: ${error}`));
     }
   }
   content = injectAuthorInfos(path, content, authorInfos);
