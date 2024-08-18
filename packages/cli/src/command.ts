@@ -174,13 +174,23 @@ export default {
       }
     });
 
-    exec(`"${configPath}"`, (error) => {
+    const editProcess = exec(`"${configPath}"`, (error) => {
       if (error) {
         logger.error("Failed to open the configuration file:", error);
         watcher.close();
       } else {
         logger.info("Configuration file opened successfully.");
       }
+    });
+
+    editProcess.on("close", (code) => {
+      if (code === 0) {
+        logger.log("Configuration file editing completed.");
+      } else {
+        logger.error(`Editor process exited with code ${code}`);
+      }
+      watcher.close();
+      process.exit(code);
     });
   },
   registerCommands(resolve: (value?: RunResult) => RunResult, reject: (message: string) => void, args: any = process.argv) {
