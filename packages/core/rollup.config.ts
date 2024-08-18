@@ -10,6 +10,7 @@ import pkg from "./package.json";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const external = Object.keys(pkg?.peerDependencies || {});
+external.push("chalk");
 
 export default defineConfig([
   {
