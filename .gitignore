@@ -8,3 +8,4 @@ docs/.vitepress/cache/
 /**/artipub.config.*
 playground/postMapRecords.json
 playground/doc/article
+/**/coverage
