@@ -35,4 +35,14 @@ jobs:
         run: pnpm install -g tsx
 
       - name: Run tests
-        run: pnpm run test
+        run: pnpm run test:coverage
+
+      - name: Upload coverage to Codecov
+        run: |
+          for package in ./packages/*; do
+            if [ -d "$package/coverage" ]; then
+              npx codecov -f "$package/coverage/lcov.info" -F "$(basename $package)"
+            fi
+          done
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

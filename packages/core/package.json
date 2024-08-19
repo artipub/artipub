@@ -19,6 +19,7 @@
     "lint:fix": "eslint --fix --ext .ts && prettier -w src",
     "build": "pnpm clean && npx tsx scripts/build.ts",
     "test": "pnpm build && vitest --run",
+    "test:coverage": "pnpm build && vitest --coverage --run",
     "clean": "rm -rf dist"
   },
   "type": "module",
