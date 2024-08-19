@@ -6,6 +6,7 @@
 ![GitHub License](https://img.shields.io/github/license/artipub/artipub)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/artipub/artipub/publish.yml)
 ![NPM Version](https://img.shields.io/npm/v/%40artipub%2Fcli)
+![GitHub Actions CI Status](https://img.shields.io/github/actions/workflow/status/artipub/artipub/ci.yml?branch=main)
 
 @artipub/cli 是一个artipub cli 工具，方便用户通过命令行进行文章的发布和更新。
 

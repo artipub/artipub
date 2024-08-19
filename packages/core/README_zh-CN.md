@@ -6,6 +6,7 @@
 ![GitHub License](https://img.shields.io/github/license/artipub/artipub)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/artipub/artipub/publish.yml)
 ![NPM Version](https://img.shields.io/npm/v/%40artipub%2Fcore)
+![GitHub Actions CI Status](https://img.shields.io/github/actions/workflow/status/artipub/artipub/ci.yml?branch=main)
 
 ArtiPub（文章发布助手）是一个旨在简化内容创作者跨平台发布文章过程的工具库。它提供了一套简单的API，可以让你轻松地将文章发布到任意平台，如博客、社交媒体等，无需手动操作每个平台。
 
