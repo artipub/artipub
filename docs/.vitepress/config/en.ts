@@ -43,6 +43,11 @@ function nav() {
       activeMatch: "/API/",
     },
     {
+      text: "Config",
+      link: "/config/index",
+      activeMatch: "/config/",
+    },
+    {
       text: `core:${corePkg.version}`,
       items: [
         {
@@ -71,6 +76,7 @@ function sidebarGuide() {
       items: [
         { text: "What is VitePress?", link: "what-is-artipub" },
         { text: "Getting Started", link: "getting-started" },
+        { text: "CLI", link: "cli" },
         { text: "Contribute", link: "contribute" },
         { text: "Sponsor", link: "sponsor" },
       ],
