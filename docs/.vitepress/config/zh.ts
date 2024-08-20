@@ -41,6 +41,11 @@ function nav() {
       activeMatch: "/API/",
     },
     {
+      text: "配置",
+      link: "/zh/config/index",
+      activeMatch: "/config/",
+    },
+    {
       text: pkg.version,
       items: [
         {
@@ -60,6 +65,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: "artipub 是什么?", link: "what-is-artipub" },
         { text: "快速开始", link: "getting-started" },
+        { text: "命令行界面", link: "cli" },
         { text: "贡献", link: "contribute" },
         { text: "赞助", link: "sponsor" },
       ],
