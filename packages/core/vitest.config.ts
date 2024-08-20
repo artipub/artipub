@@ -12,8 +12,8 @@ export default defineConfig({
       "@": resolve(__dirname, "src"),
     },
     coverage: {
-      provider: "v8",
-      reporter: ["text", "lcov"],
+      provider: "istanbul",
+      reporter: ["text", "json", "html"],
       include: ["src/**/*.ts"],
       exclude: ["src/**/*.test.ts"],
     },

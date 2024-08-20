@@ -9,11 +9,8 @@ on:
       - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,5 +31,29 @@ jobs:
       - name: Install tsx
         run: pnpm install -g tsx
 
+      - name: Build
+        run: pnpm run build
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Run tests
         run: pnpm run test
+
+  test-coverage:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Run tests with coverage
+        run: pnpm run test:coverage
+
+      - name: Upload coverage to Codecov
+        run: |
+          for package in ./packages/*; do
+            if [ -d "$package/coverage" ]; then
+              npx codecov -d "$package/coverage" -F "$(basename $package)"
+            fi
+          done
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
