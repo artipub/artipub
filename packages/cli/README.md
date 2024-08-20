@@ -6,7 +6,6 @@ English | [简体中文](./README_zh-CN.md)
 ![GitHub License](https://img.shields.io/github/license/artipub/artipub)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/artipub/artipub/publish.yml)
 ![NPM Version](https://img.shields.io/npm/v/%40artipub%2Fcli)
-![GitHub Actions CI Status](https://img.shields.io/github/actions/workflow/status/artipub/artipub/ci.yml?branch=main)
 
 @artipub/cli is an artipub cli tools，convenient for users to publish and update articles through the command line.
 
