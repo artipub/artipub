@@ -1,12 +1,12 @@
 import { expect, describe, test, vi } from "vitest";
 import path from "node:path";
 import fs from "node:fs";
-import { PostMapRecorder } from "../src";
+import { PostMapRecorder } from "@artipub/core";
 
 describe("PostMapRecorder", () => {
   test("convertRecordStructure", () => {
-    const configPath = path.resolve(__dirname, "fixtures/utils/old.postMapRecords.json");
-    const newConfigPath = path.resolve(__dirname, "fixtures/utils/postMapRecords.json");
+    const configPath = path.resolve(__dirname, "../fixtures/utils/old.postMapRecords.json");
+    const newConfigPath = path.resolve(__dirname, "../fixtures/utils/postMapRecords.json");
     const postMapRecorder = new PostMapRecorder(configPath);
     const records = postMapRecorder.getRecords();
     const newRecords = JSON.parse(fs.readFileSync(newConfigPath, { encoding: "utf8" }));
@@ -14,7 +14,7 @@ describe("PostMapRecorder", () => {
   });
 
   test("add record", () => {
-    const configPath = path.resolve(__dirname, "fixtures/utils/postMapRecords.json");
+    const configPath = path.resolve(__dirname, "../fixtures/utils/postMapRecords.json");
     const postMapRecorder = new PostMapRecorder(configPath);
     postMapRecorder.addOrUpdate("aaaaaa", "NotionPublisherPlugin", "123456");
 
@@ -27,7 +27,7 @@ describe("PostMapRecorder", () => {
   });
 
   test("update record", () => {
-    const configPath = path.resolve(__dirname, "fixtures/utils/postMapRecords.json");
+    const configPath = path.resolve(__dirname, "../fixtures/utils/postMapRecords.json");
     const postMapRecorder = new PostMapRecorder(configPath);
     postMapRecorder.addOrUpdate("y605zk0s", "NotionPublisherPlugin", "123456");
 

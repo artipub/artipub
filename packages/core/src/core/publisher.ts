@@ -1,5 +1,5 @@
 import { PublisherPlugin, PublishResult } from "@/types";
-import { createVisitor, getProjectRootPath, isFunction, isString, normalizedPath, PostMapRecorder } from "@/utils";
+import { articleUniqueIdRegex, createVisitor, getProjectRootPath, isFunction, isString, normalizedPath, PostMapRecorder } from "@/utils";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
@@ -52,7 +52,7 @@ export class PublisherManager {
       visit(tree, "paragraph", (node: Paragraph, index, parent) => {
         if (parent?.type === "root" && index === 1 && node && node.children[0] && node.children[0].type === "text") {
           const value = (node.children[0] as Text).value ?? "";
-          const match = value.match(/id:\s+(\w+)$/im);
+          const match = value.match(articleUniqueIdRegex);
           if (match) {
             articleUniqueID = match[1];
             return true;

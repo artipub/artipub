@@ -18,5 +18,5 @@ export function fileNameWithOutExtension(filePath: string) {
 }
 
 export function isFunction(val: any) {
-  return typeof val === "function";
+  return typeof val === "function" || Object.prototype.toString.call(val) === "[object AsyncFunction]";
 }

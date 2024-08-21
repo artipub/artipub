@@ -21,3 +21,5 @@ export function getUniqueId() {
 }
 
 export const relativePathImgRegex = /^[^?hpst].+\.(png|jpg|jpeg|svg|gif)$/im;
+
+export const articleUniqueIdRegex = /id:\s+(\w+)$/im;
