@@ -2,7 +2,7 @@ import { ImageExtension, Next, NodeContext, TVisitor } from "@/types";
 import { ProcessorContext } from "@/core";
 import path from "node:path";
 import fs from "node:fs/promises";
-import { getCache, getProjectRootPath, normalizedPath, relativePathImgRegex, writeCache } from "@/utils";
+import { getCache, getProjectRootPath, normalizedPath, nodeImgRelativePathRegex, writeCache } from "@/utils";
 import { createCommonJS } from "mlly";
 
 const { require } = createCommonJS(import.meta.url);
@@ -21,7 +21,7 @@ export default async function picCompress(context: ProcessorContext, visit: TVis
     if (url) {
       matchNodes.push({ node: _node, parent: parent as any });
       url = decodeURIComponent(url);
-      const regex = relativePathImgRegex;
+      const regex = nodeImgRelativePathRegex;
       if (regex.test(url)) {
         matchNodes.push({
           node: _node,

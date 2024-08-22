@@ -20,6 +20,8 @@ export function getUniqueId() {
   return Math.random().toString(36).slice(2, 10);
 }
 
-export const relativePathImgRegex = /^[^?hpst].+\.(png|jpg|jpeg|svg|gif)$/im;
+export const nodeImgRelativePathRegex = /^[^?hpst].+\.(png|jpg|jpeg|svg|gif)$/im;
+
+export const imgRelativePathRegex = /(?!https?:\/\/)[^(]*\.(png|jpg|jpeg|svg|gif)/gm;
 
 export const articleUniqueIdRegex = /id:\s+(\w+)$/im;

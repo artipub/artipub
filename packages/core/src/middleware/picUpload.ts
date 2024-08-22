@@ -3,7 +3,7 @@ import { ProcessorContext } from "@/core";
 import path from "node:path";
 import fs from "node:fs/promises";
 import { fileTypeFromBuffer } from "file-type";
-import { getCache, getProjectRootPath, isFunction, log, normalizedPath, relativePathImgRegex, writeCache } from "@/utils";
+import { getCache, getProjectRootPath, isFunction, log, normalizedPath, nodeImgRelativePathRegex, writeCache } from "@/utils";
 import { createCommonJS } from "mlly";
 import { GithubPicBedOption } from "@artipub/shared";
 
@@ -63,7 +63,7 @@ export default async function picUpload(context: ProcessorContext, visit: TVisit
     const node = _node as any;
     if (node.url) {
       const url = decodeURIComponent(node.url);
-      const regex = relativePathImgRegex;
+      const regex = nodeImgRelativePathRegex;
       if (regex.test(url)) {
         matchNodes.push({
           node,
@@ -82,7 +82,7 @@ export default async function picUpload(context: ProcessorContext, visit: TVisit
           node.url = caches.get(url);
           continue;
         }
-        const regex = relativePathImgRegex;
+        const regex = nodeImgRelativePathRegex;
         if (regex.test(url)) {
           const rootDir = path.resolve(path.dirname(context.filePath));
           const filePath = path.resolve(path.join(rootDir, url));
