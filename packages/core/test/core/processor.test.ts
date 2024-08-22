@@ -7,7 +7,7 @@ import { ArticleProcessor, articleUniqueIdRegex, getProjectRootPath, normalizedP
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const projectName = "test-temp";
+const projectName = "test-temp-processor";
 const genPath = path.join(__dirname, projectName);
 const fixturesPath = path.join(__dirname, "..", "fixtures", "core");
 const projectCacheDir = getProjectRootPath();

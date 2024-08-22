@@ -9,3 +9,4 @@ docs/.vitepress/cache/
 playground/postMapRecords.json
 playground/doc/article
 /**/coverage
+/**/postMapRecords.json
