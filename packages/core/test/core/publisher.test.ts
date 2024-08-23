@@ -16,9 +16,9 @@ const cleanDir = async (dir: string) => {
     const filePaths = await pfs.readdir(dir);
     for (const file of filePaths) {
       const curPath = path.join(dir, file);
-      await (fs.lstatSync(curPath).isDirectory() ? pfs.rmdir(curPath, { recursive: true }) : pfs.unlink(curPath));
+      await (fs.lstatSync(curPath).isDirectory() ? pfs.rm(curPath, { recursive: true }) : pfs.unlink(curPath));
     }
-    await pfs.rmdir(dir);
+    await pfs.rm(dir, { recursive: true });
   }
 };
 const copyFixturesToGenPath = () => fs.cpSync(fixturesPath, genPath, { recursive: true });
