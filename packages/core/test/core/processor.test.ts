@@ -1,39 +1,27 @@
-import { expect, describe, test, beforeAll, afterEach, afterAll } from "vitest";
+import { expect, describe, test, beforeAll, beforeEach, afterAll } from "vitest";
 import path from "node:path";
 import fs from "node:fs";
-import pfs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { ArticleProcessor, articleUniqueIdRegex, getProjectRootPath, normalizedPath, imgRelativePathRegex } from "../../src";
+import { cleanDir, copyDir } from "@artipub/shared";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const testTempDir = path.join(__dirname, "../../test-temp");
 const projectName = "test-temp-processor";
-const genPath = path.join(__dirname, projectName);
 const fixturesPath = path.join(__dirname, "..", "fixtures", "core");
+const genPath = path.join(testTempDir, projectName);
 const projectCacheDir = getProjectRootPath();
 const cacheDir = path.join(projectCacheDir, ".artipub/cache");
-
-const cleanDir = async (dir: string) => {
-  if (fs.existsSync(dir)) {
-    const filePaths = await pfs.readdir(dir);
-    for (const file of filePaths) {
-      const curPath = path.join(dir, file);
-      await (fs.lstatSync(curPath).isDirectory() ? pfs.rm(curPath, { recursive: true }) : pfs.unlink(curPath));
-    }
-    await pfs.rm(dir, { recursive: true });
-  }
-};
-const copyFixturesToGenPath = () => fs.cpSync(fixturesPath, genPath, { recursive: true });
 
 beforeAll(async () => {
   await cleanDir(cacheDir);
   await cleanDir(genPath);
-  await copyFixturesToGenPath();
 });
 
-afterEach(async () => {
+beforeEach(async () => {
   await cleanDir(genPath);
-  await copyFixturesToGenPath();
+  await copyDir(fixturesPath, genPath);
 });
 
 afterAll(async () => {

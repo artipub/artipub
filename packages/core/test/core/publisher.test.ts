@@ -1,27 +1,16 @@
 import { expect, describe, test, beforeAll, beforeEach, afterAll } from "vitest";
 import path from "node:path";
 import fs from "node:fs";
-import pfs from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { cleanDir, copyDir } from "@artipub/shared";
 
 import { ArticleProcessor, PublisherManager, publisherPlugins } from "../../src";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const testTempDir = path.join(__dirname, "../../test-temp");
 const fixturesPath = path.join(__dirname, "..", "fixtures", "core");
 const projectName = "test-temp-publisher";
-const genPath = path.join(__dirname, projectName);
-
-const cleanDir = async (dir: string) => {
-  if (fs.existsSync(dir)) {
-    const filePaths = await pfs.readdir(dir);
-    for (const file of filePaths) {
-      const curPath = path.join(dir, file);
-      await (fs.lstatSync(curPath).isDirectory() ? pfs.rm(curPath, { recursive: true }) : pfs.unlink(curPath));
-    }
-    await pfs.rm(dir, { recursive: true });
-  }
-};
-const copyFixturesToGenPath = () => fs.cpSync(fixturesPath, genPath, { recursive: true });
+const genPath = path.join(testTempDir, projectName);
 
 beforeAll(async () => {
   await cleanDir(genPath);
@@ -29,7 +18,7 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   await cleanDir(genPath);
-  await copyFixturesToGenPath();
+  await copyDir(fixturesPath, genPath);
 });
 
 afterAll(async () => {
