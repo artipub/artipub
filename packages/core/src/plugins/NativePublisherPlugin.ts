@@ -1,9 +1,9 @@
-import { PublishResult, ToMarkdown, TVisitor, ExtendsParam } from "@/types";
+import { PublishResult, ToMarkdown, TVisitor, ExtendsParam, PublisherPlugin } from "@/types";
 import { NativePublisherOption } from "@artipub/shared";
 import path from "node:path";
 import fs from "node:fs/promises";
 
-export default function NativePublisherPlugin(options: NativePublisherOption) {
+export default function NativePublisherPlugin(options: NativePublisherOption): PublisherPlugin {
   let { cdn_prefix, res_domain } = options;
   const { destination_path } = options;
   if (!cdn_prefix) {

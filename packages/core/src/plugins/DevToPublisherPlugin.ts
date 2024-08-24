@@ -8,6 +8,7 @@ const axios = require("axios");
 
 export default function DevToPublisherPlugin(option: DevToPublisherPluginOption): PublisherPlugin {
   let extendsParam: ExtendsParam = {};
+  const tags: string[] = [];
   return {
     name: "DevToPublisherPlugin",
     isTraceUpdate: true,
@@ -16,8 +17,6 @@ export default function DevToPublisherPlugin(option: DevToPublisherPluginOption)
       return this;
     },
     async process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> {
-      const tags: string[] = [];
-
       //Get tags
       visit("list", (_node, index, parent) => {
         const node = _node as any;
@@ -40,7 +39,23 @@ export default function DevToPublisherPlugin(option: DevToPublisherPluginOption)
       });
 
       const { content } = toMarkdown();
-
+      const article_id = option.article_id ?? extendsParam.pid;
+      try {
+        await this.update!(article_id, articleTitle, content);
+      } catch (error: any) {
+        return {
+          pid: article_id,
+          success: false,
+          info: error.message,
+        };
+      }
+      return {
+        pid: article_id,
+        success: true,
+        info: "Published to Dev.to",
+      };
+    },
+    async update(article_id: string | undefined, articleTitle: string, content: string) {
       async function postArticle() {
         return await axios.post(
           "https://dev.to/api/articles",
@@ -91,30 +106,16 @@ export default function DevToPublisherPlugin(option: DevToPublisherPluginOption)
         );
       }
 
-      let article_id = option.article_id ?? extendsParam.pid;
-      try {
-        if (article_id) {
-          await updateArticle(article_id);
+      if (article_id) {
+        await updateArticle(article_id);
+      } else {
+        const res = await postArticle();
+        if (res.status >= 200 && res.status < 300) {
+          article_id = res.data.id;
         } else {
-          const res = await postArticle();
-          if (res.status >= 200 && res.status < 300) {
-            article_id = res.data.id;
-          } else {
-            throw new Error(res?.data?.error);
-          }
+          throw new Error(res?.data?.error);
         }
-      } catch (error: any) {
-        return {
-          pid: article_id,
-          success: false,
-          info: error.message,
-        };
       }
-      return {
-        pid: article_id,
-        success: true,
-        info: "Published to Dev.to",
-      };
     },
   };
 }

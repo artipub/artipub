@@ -1,4 +1,4 @@
-import { PublishResult, TVisitor, ToMarkdown, ExtendsParam } from "@/types";
+import { PublishResult, TVisitor, ToMarkdown, ExtendsParam, PublisherPlugin } from "@/types";
 import { NotionPublisherPluginOption } from "@artipub/shared";
 import { Heading } from "mdast";
 import { createCommonJS } from "mlly";
@@ -7,7 +7,7 @@ const { require } = createCommonJS(import.meta.url);
 const { Client } = require("@notionhq/client");
 const { markdownToBlocks } = require("@tryfabric/martian");
 
-export default function NotionPublisherPlugin(option: NotionPublisherPluginOption) {
+export default function NotionPublisherPlugin(option: NotionPublisherPluginOption): PublisherPlugin {
   let extendsParam: ExtendsParam = {};
   return {
     name: "NotionPublisherPlugin",
@@ -26,6 +26,25 @@ export default function NotionPublisherPlugin(option: NotionPublisherPluginOptio
       });
 
       const { content } = toMarkdown();
+      const article_id = option.update_page_id ?? extendsParam.pid;
+      try {
+        this.update!(article_id, articleTitle, content);
+      } catch (error: any) {
+        return {
+          pid: article_id,
+          success: false,
+          info: error,
+        };
+      }
+
+      const res: PublishResult = {
+        pid: article_id,
+        success: true,
+        info: `Published [${articleTitle}] to Notion successfully!`,
+      };
+      return res;
+    },
+    async update(articleId: string | undefined, articleTitle: string, content: string) {
       const blocks = markdownToBlocks(content);
       const notion = new Client({ auth: option.api_key });
 
@@ -56,9 +75,9 @@ export default function NotionPublisherPlugin(option: NotionPublisherPluginOptio
         }, Promise.resolve());
       }
 
-      async function updateArticle(page_id: string) {
+      async function updateArticle(pageId: string) {
         const childrenResponse = await notion.blocks.children.list({
-          block_id: page_id,
+          block_id: pageId,
           page_size: 100,
         });
 
@@ -67,37 +86,21 @@ export default function NotionPublisherPlugin(option: NotionPublisherPluginOptio
         await deleteChildren(childrenIds);
 
         await notion.blocks.children.append({
-          block_id: page_id,
+          block_id: pageId,
           children: blocks,
         });
       }
 
-      let article_id = option.update_page_id ?? extendsParam.pid;
-      try {
-        if (article_id) {
-          await updateArticle(article_id);
+      if (articleId) {
+        await updateArticle(articleId);
+      } else {
+        const res = await postArticle();
+        if (res.id) {
+          articleId = res.id;
         } else {
-          const res = await postArticle();
-          if (res.id) {
-            article_id = res.id;
-          } else {
-            throw new Error(`Failed to publish [${articleTitle}] to Notion!`);
-          }
+          throw new Error(`Failed to publish [${articleTitle}] to Notion!`);
         }
-      } catch (error: any) {
-        return {
-          pid: article_id,
-          success: false,
-          info: error,
-        };
       }
-
-      const res: PublishResult = {
-        pid: article_id,
-        success: true,
-        info: `Published [${articleTitle}] to Notion successfully!`,
-      };
-      return res;
     },
   };
 }

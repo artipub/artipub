@@ -39,6 +39,7 @@ export interface ExtendsParam {
 export interface PublisherPlugin {
   extendsParam?(extendsParam: ExtendsParam): PublisherPlugin;
   process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult>;
+  update?(article_id: string | undefined, articleTitle: string, content: string): Promise<void>;
   name: string;
   isTraceUpdate?: boolean;
 }
