@@ -1,6 +1,6 @@
 import { PublishResult, TVisitor, ToMarkdown, ExtendsParam, PublisherPlugin } from "@/types";
+import { removeTitle } from "@/utils";
 import { NotionPublisherPluginOption } from "@artipub/shared";
-import { Heading } from "mdast";
 import { createCommonJS } from "mlly";
 
 const { require } = createCommonJS(import.meta.url);
@@ -17,14 +17,7 @@ export default function NotionPublisherPlugin(option: NotionPublisherPluginOptio
       return this;
     },
     async process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> {
-      visit("heading", (_node, _index, parent) => {
-        const node = _node as Heading;
-        if (parent && node.depth === 1) {
-          parent.children.splice(0, (_index ?? 0) + 1);
-          return true;
-        }
-      });
-
+      removeTitle(visit);
       const { content } = toMarkdown();
       const article_id = option.update_page_id ?? extendsParam.pid;
       try {

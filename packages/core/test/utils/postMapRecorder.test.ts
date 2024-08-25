@@ -1,4 +1,4 @@
-import { expect, describe, test, vi } from "vitest";
+import { expect, describe, test } from "vitest";
 import path from "node:path";
 import fs from "node:fs";
 import { PostMapRecorder } from "@artipub/core";

@@ -29,7 +29,7 @@ describe("publisher", () => {
     return new Promise((resolve) => {
       const imgURL = "https://test.com/xxx.png";
       const processor = new ArticleProcessor({
-        uploadImgOption: (filePath: string) => {
+        uploadImgOption: () => {
           return Promise.resolve(imgURL);
         },
       });

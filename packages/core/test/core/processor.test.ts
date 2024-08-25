@@ -57,7 +57,7 @@ describe("processor", () => {
       const imgURL = "https://test.com/xxx.png";
       let uploadCount = 0;
       const processor = new ArticleProcessor({
-        uploadImgOption: (filePath: string) => {
+        uploadImgOption: () => {
           uploadCount++;
           return Promise.resolve(imgURL);
         },
@@ -68,7 +68,7 @@ describe("processor", () => {
       const imgRelativePath = matchImgs ? matchImgs[0] : null;
       expect(imgRelativePath).not.toBeNull();
 
-      processor.processMarkdown(path.join(genPath, "draft.md")).then(({ content }) => {
+      processor.processMarkdown(path.join(genPath, "draft.md")).then(() => {
         expect(uploadCount).toBe(0);
 
         const compressCachePath = normalizedPath(path.join(cacheDir, "compressCache.json"));

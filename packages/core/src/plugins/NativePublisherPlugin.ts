@@ -2,6 +2,7 @@ import { PublishResult, ToMarkdown, TVisitor, ExtendsParam, PublisherPlugin } fr
 import { NativePublisherOption } from "@artipub/shared";
 import path from "node:path";
 import fs from "node:fs/promises";
+import { replaceImgUrlToCDN } from "@/utils";
 
 export default function NativePublisherPlugin(options: NativePublisherOption): PublisherPlugin {
   let { cdn_prefix, res_domain } = options;
@@ -20,16 +21,7 @@ export default function NativePublisherPlugin(options: NativePublisherOption): P
       return this;
     },
     async process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> {
-      const regex = new RegExp(`/https://(${res_domain})/(.*?)/(.*?)/(.*?)(.png|.jpg|jpeg|svg|jif)`, "im");
-      visit("image", (node: any) => {
-        if (node.url && regex.test(node.url)) {
-          regex.lastIndex = 0;
-          const match = regex.exec(node.url);
-          const [, , p3, p4, p5, p6] = match as string[];
-          const cdnUrl = `${cdn_prefix}/${p3}/${p4}@${p5}${p6}`;
-          node.url = cdnUrl;
-        }
-      });
+      replaceImgUrlToCDN(visit, cdn_prefix, res_domain);
       const { content } = toMarkdown();
       const targetPath = path.join(destination_path, `${articleTitle}.md`);
       await fs.writeFile(targetPath, content, { encoding: "utf8" });

@@ -2,7 +2,6 @@ import fs from "node:fs/promises";
 import { readFileSync, writeFileSync } from "node:fs";
 import prompts from "prompts";
 import semver from "semver";
-import { execSync } from "node:child_process";
 import colors from "picocolors";
 
 import type { ReleaseType } from "semver";

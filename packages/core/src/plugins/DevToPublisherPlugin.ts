@@ -1,6 +1,6 @@
 import { PublishResult, PublisherPlugin, TVisitor, ToMarkdown, ExtendsParam } from "@/types";
+import { pickTagNode, removeArticleDescPart } from "@/utils";
 import { DevToPublisherPluginOption } from "@artipub/shared";
-import { Heading } from "mdast";
 import { createCommonJS } from "mlly";
 
 const { require } = createCommonJS(import.meta.url);
@@ -8,7 +8,7 @@ const axios = require("axios");
 
 export default function DevToPublisherPlugin(option: DevToPublisherPluginOption): PublisherPlugin {
   let extendsParam: ExtendsParam = {};
-  const tags: string[] = [];
+  let tags: string[] = [];
   return {
     name: "DevToPublisherPlugin",
     isTraceUpdate: true,
@@ -17,26 +17,8 @@ export default function DevToPublisherPlugin(option: DevToPublisherPluginOption)
       return this;
     },
     async process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> {
-      //Get tags
-      visit("list", (_node, index, parent) => {
-        const node = _node as any;
-        const prevSibling = parent?.children[Number(index) - 1] as any;
-        if (prevSibling && prevSibling?.children && prevSibling.children[0].value === "tags:") {
-          node.children.forEach((child: any) => {
-            tags.push(child.children[0].children[0].value);
-          });
-          return true;
-        }
-      });
-
-      //Remove article description part
-      visit("heading", (_node, _index, parent) => {
-        const node = _node as Heading;
-        if (parent && node.depth === 1) {
-          parent.children.splice(0, (_index ?? 0) + 1);
-          return true;
-        }
-      });
+      tags = pickTagNode(visit);
+      removeArticleDescPart(visit);
 
       const { content } = toMarkdown();
       const article_id = option.article_id ?? extendsParam.pid;
