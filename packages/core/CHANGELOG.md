@@ -1,3 +1,20 @@
+## [1.1.9](https://github.com/artipub/artipub/compare/v1.1.8...v1.1.9) (2024-08-27)
+
+
+### Bug Fixes
+
+* rmdir deprecationWarning ([8b19c30](https://github.com/artipub/artipub/commit/8b19c301fd2698d70e6298cbb06f520420a059a2))
+* **test:** the cache was not cleared before the test case was executed ([8b44dc7](https://github.com/artipub/artipub/commit/8b44dc708e57199cdef1e7d9ec7934ec3af2ec38))
+
+
+
+
+### Contributors
+
+- Potter <aa4790139@gmail.com>
+
+
+
 ## [1.1.8](https://github.com/artipub/artipub/compare/v1.1.7...v1.1.8) (2024-08-18)
 
 
