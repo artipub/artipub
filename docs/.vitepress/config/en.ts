@@ -74,7 +74,7 @@ function sidebarGuide() {
       text: "Introduction",
       collapsed: false,
       items: [
-        { text: "What is VitePress?", link: "what-is-artipub" },
+        { text: "What is Artipub?", link: "what-is-artipub" },
         { text: "Getting Started", link: "getting-started" },
         { text: "CLI", link: "cli" },
         { text: "Contribute", link: "contribute" },
