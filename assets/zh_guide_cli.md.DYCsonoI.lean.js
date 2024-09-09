@@ -1,1 +1,0 @@
-import{_ as s,c as i,o as a,a2 as t}from"./chunks/framework.DqitMrFO.js";const F=JSON.parse('{"title":"命令行界面","description":"","frontmatter":{},"headers":[],"relativePath":"zh/guide/cli.md","filePath":"zh/guide/cli.md"}'),n={name:"zh/guide/cli.md"},h=t("",20),e=[h];function l(p,d,k,r,o,c){return a(),i("div",null,e)}const u=s(n,[["render",l]]);export{F as __pageData,u as default};
