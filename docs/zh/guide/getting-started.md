@@ -2,23 +2,21 @@
 
 ## 📦 安装
 
-使用 npm 安装 ：
+::: code-group
 
-```bash
+```bash [npm]
 npm install -D @artipub/core
 ```
 
-使用 yarn 安装：
-
-```bash
+```bash [yarn]
 yarn add -D @artipub/core
 ```
 
-使用pnpm 安装：
-
-```bash
+```bash [pnpm]
 pnpm add -D @artipub/core
 ```
+
+:::
 
 ## 🚀 示例
 

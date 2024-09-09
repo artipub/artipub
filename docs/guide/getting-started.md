@@ -2,23 +2,21 @@
 
 ## 📦 Install
 
-npm：
+::: code-group
 
-```bash
+```bash [npm]
 npm install -D @artipub/core
 ```
 
-yarn：
-
-```bash
+```bash [yarn]
 yarn add -D @artipub/core
 ```
 
-pnpm：
-
-```bash
+```bash [pnpm]
 pnpm add -D @artipub/core
 ```
+
+:::
 
 ## 🚀 Example
 
