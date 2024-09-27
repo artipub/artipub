@@ -87,3 +87,16 @@ test("Add an existing article", async () => {
     });
   });
 });
+
+test("Clear cache", () => {
+  const rootDir = path.join(__dirname, "../.artipub");
+  if (!fs.existsSync(rootDir)) {
+    fs.mkdirSync(rootDir);
+  }
+  const cacheDir = path.join(rootDir, "cache");
+  if (!fs.existsSync(cacheDir)) {
+    fs.mkdirSync(cacheDir);
+  }
+  runDetach(["clear"]);
+  expect(fs.existsSync(cacheDir)).toBe(false);
+});

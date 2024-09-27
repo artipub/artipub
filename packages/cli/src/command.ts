@@ -194,6 +194,12 @@ export default {
       process.exit(code);
     });
   },
+  clearCache() {
+    const cachePath = path.resolve(process.cwd(), ".artipub/cache");
+    if (fs.existsSync(cachePath)) {
+      fs.removeSync(cachePath);
+    }
+  },
   registerCommands(resolve: (value?: RunResult) => RunResult, reject: (message: string) => void, args: any = process.argv) {
     program
       .command("add")
@@ -222,9 +228,9 @@ export default {
     program
       .command("clear")
       .description("Clear the cache")
-      .action(() => {
+      .action(async () => {
         logger.info("Cache cleared.");
-        resolve(null);
+        await this.clearCache();
       });
 
     program
