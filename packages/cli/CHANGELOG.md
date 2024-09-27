@@ -1,3 +1,19 @@
+## [0.0.15](https://github.com/artipub/artipub/compare/cli@0.0.14...cli@0.0.15) (2024-09-27)
+
+
+### Features
+
+* **cli:**  implement clear cache ([9261fc0](https://github.com/artipub/artipub/commit/9261fc02433dd90a09e8e99857777eadfd469f83))
+
+
+
+
+### Contributors
+
+- Potter <aa4790139@gmail.com>
+
+
+
 ## [0.0.14](https://github.com/artipub/artipub/compare/cli@0.0.13...cli@0.0.14) (2024-08-27)
 
 
