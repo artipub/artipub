@@ -1,5 +1,23 @@
 # 命令行界面
 
+## `安装`
+
+::: code-group
+
+```bash [npm]
+npm install -g @artipub/cli
+```
+
+```bash [yarn]
+yarn add -g @artipub/cli
+```
+
+```bash [pnpm]
+pnpm add -g @artipub/cli
+```
+
+:::
+
 ## `artipub`
 
 ```bash

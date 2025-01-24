@@ -12,14 +12,24 @@ on:
 
 jobs:
   Build:
+    # prevents this action from running on forks
+    if: github.repository == 'artipub/artipub'
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2.1.0
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4.0.0
+
+      - name: Set node version to 20
+        uses: actions/setup-node@v4
         with:
-          version: 7.2.1
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+          cache: "pnpm"
 
       - name: Set npmrc
         run: |
@@ -28,7 +38,7 @@ jobs:
 
       - name: Install modules
         run: |
-          pnpm install
+          pnpm install --no-frozen-lockfile
 
       - name: Run Lint
         run: pnpm run docs:build
