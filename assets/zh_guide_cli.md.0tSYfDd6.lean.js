@@ -1,0 +1,1 @@
+import{_ as s,c as a,o as i,a2 as t}from"./chunks/framework.DbJxbwXi.js";const F=JSON.parse('{"title":"命令行界面","description":"","frontmatter":{},"headers":[],"relativePath":"zh/guide/cli.md","filePath":"zh/guide/cli.md"}'),e={name:"zh/guide/cli.md"},n=t("",22),h=[n];function l(p,d,k,r,o,c){return i(),a("div",null,h)}const b=s(e,[["render",l]]);export{F as __pageData,b as default};

@@ -1,1 +1,0 @@
-import{_ as e,c as t,o}from"./chunks/framework.CHaY16fV.js";const _=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"guide/config.md","filePath":"guide/config.md"}'),a={name:"guide/config.md"};function c(n,r,i,s,d,f){return o(),t("div")}const m=e(a,[["render",c]]);export{_ as __pageData,m as default};
