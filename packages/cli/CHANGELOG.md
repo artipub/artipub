@@ -1,3 +1,19 @@
+## [0.0.16](https://github.com/artipub/artipub/compare/cli@0.0.15...cli@0.0.16) (2025-01-24)
+
+
+### Bug Fixes
+
+* **cli:** update log messages for clarity in interactPrompt ([0fbb7d0](https://github.com/artipub/artipub/commit/0fbb7d079c935ee592ce750fee86e8a85ef58ed9))
+
+
+
+
+### Contributors
+
+- Potter <75838259@qq.com>
+
+
+
 ## [0.0.15](https://github.com/artipub/artipub/compare/cli@0.0.14...cli@0.0.15) (2024-09-27)
 
 
