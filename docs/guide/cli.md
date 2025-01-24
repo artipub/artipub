@@ -40,7 +40,7 @@ Commands:
 
 ### `Usage`
 
-首次发布文章，使用add命令rticle for the first time, using the ADD command
+article for the first time, using the ADD command
 
 ```bash
 artipub add <markdown file path>
