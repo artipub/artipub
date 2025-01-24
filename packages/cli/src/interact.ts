@@ -64,7 +64,7 @@ const platformPrompts: Record<string, any[]> = {
 
 export default {
   async interactPrompt() {
-    logger.info("Please enter the following GitHub related information:");
+    logger.info("Please enter the gitHub pic bed related information:");
 
     const githubQuestions = [
       {
@@ -121,7 +121,7 @@ export default {
     ];
     const githubAnswers: GithubPicBedOption = await inquirer.prompt(githubQuestions);
 
-    logger.info("GitHub information entered successfully. Now, please select the platform:");
+    logger.info("GitHub information entered successfully. now, please select the platform to publish:");
     const checkPlatformAnswers = await inquirer.prompt([
       {
         type: "checkbox",
