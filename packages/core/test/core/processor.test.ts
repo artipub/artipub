@@ -31,25 +31,24 @@ afterAll(async () => {
 
 describe("processor", () => {
   test("base", async () => {
-    return cleanDir(cacheDir).then(() => {
-      return new Promise((resolve) => {
-        const imgURL = "https://test.com/xxx.png";
-        let uploadCount = 0;
-        const processor = new ArticleProcessor({
-          uploadImgOption: (filePath: string) => {
-            uploadCount++;
-            return Promise.resolve(imgURL);
-          },
-        });
+    await cleanDir(cacheDir);
+    return new Promise((resolve) => {
+      const imgURL = "https://test.com/xxx.png";
+      let uploadCount = 0;
+      const processor = new ArticleProcessor({
+        uploadImgOption: (filePath: string) => {
+          uploadCount++;
+          return Promise.resolve(imgURL);
+        },
+      });
 
-        processor.processMarkdown(path.join(genPath, "draft.md")).then(({ content }) => {
-          expect(uploadCount).toBe(1);
+      processor.processMarkdown(path.join(genPath, "draft.md")).then(({ content }) => {
+        expect(uploadCount).toBe(1);
 
-          expect(content).toContain(imgURL);
-          expect(articleUniqueIdRegex.test(content)).toBeTruthy();
+        expect(content).toContain(imgURL);
+        expect(articleUniqueIdRegex.test(content)).toBeTruthy();
 
-          resolve(null);
-        });
+        resolve(null);
       });
     });
   });
