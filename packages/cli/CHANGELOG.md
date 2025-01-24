@@ -1,3 +1,7 @@
+## [0.0.17](https://github.com/artipub/artipub/compare/cli@0.0.16...cli@0.0.17) (2025-01-24)
+
+
+
 ## [0.0.16](https://github.com/artipub/artipub/compare/cli@0.0.15...cli@0.0.16) (2025-01-24)
 
 
