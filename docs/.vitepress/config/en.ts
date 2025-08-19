@@ -87,12 +87,22 @@ function sidebarGuide() {
 function sidebarReference(): DefaultTheme.SidebarItem[] {
   return [
     {
-      text: "API",
+      text: "Core API",
       collapsed: false,
       items: [
         { text: "ArticleProcessor", link: "processor" },
         { text: "PublisherManager", link: "publisher" },
-        { text: "Plugins", link: "plugin" },
+      ],
+    },
+    {
+      text: "Publisher Plugins",
+      collapsed: false,
+      items: [
+        { text: "Overview", link: "plugin" },
+        { text: "Notion Plugin", link: "plugins/notion" },
+        { text: "Dev.to Plugin", link: "plugins/devto" },
+        { text: "Native Plugin", link: "plugins/native" },
+        { text: "Custom Plugins", link: "plugins/custom" },
       ],
     },
   ];

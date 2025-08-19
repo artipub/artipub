@@ -76,11 +76,22 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
 function sidebarReference(): DefaultTheme.SidebarItem[] {
   return [
     {
-      text: "API",
+      text: "核心 API",
+      collapsed: false,
       items: [
-        { text: "ArticleProcessor", link: "processor" },
-        { text: "PublisherManager", link: "publisher" },
-        { text: "Plugins", link: "plugin" },
+        { text: "文章处理器", link: "processor" },
+        { text: "发布管理器", link: "publisher" },
+      ],
+    },
+    {
+      text: "发布插件",
+      collapsed: false,
+      items: [
+        { text: "概览", link: "plugin" },
+        { text: "Notion 插件", link: "plugins/notion" },
+        { text: "Dev.to 插件", link: "plugins/devto" },
+        { text: "本地文件插件", link: "plugins/native" },
+        { text: "自定义插件", link: "plugins/custom" },
       ],
     },
   ];
