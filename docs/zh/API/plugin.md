@@ -280,15 +280,6 @@ async process(articleTitle, visit, toMarkdown) {
 }
 ```
 
-## 平台对比
-
-| 平台       | 更新支持  | 草稿支持            | 系列/集合 | 图片托管    |
-| ---------- | --------- | ------------------- | --------- | ----------- |
-| **Notion** | ✅ 是     | ❌ 否               | ✅ 数据库 | ✅ 自动上传 |
-| **Dev.to** | ✅ 是     | ✅ 是               | ✅ 系列   | ✅ 自动上传 |
-| **Native** | ❌ 否（仅覆盖） | ✅ 通过 frontmatter | ❌ 否     | 🔄 URL 转换 |
-| **自定义** | 🔧 可配置 | 🔧 可配置           | 🔧 可配置 | 🔧 可配置   |
-
 ## 最佳实践
 
 1. **环境变量**：安全地存储敏感数据
@@ -321,6 +312,7 @@ async process(articleTitle, visit, toMarkdown) {
    ```
 
 4. **验证**：发布前检查内容
+
    ```ts
    if (!content || content.trim().length === 0) {
      throw new Error("内容为空");
@@ -350,14 +342,6 @@ async process(articleTitle, visit, toMarkdown) {
 ## 社区插件
 
 > 与社区分享您的自定义插件！提交 PR 将您的插件添加到此列表。
-
-即将推出：
-
-- Medium 发布插件
-- WordPress 发布插件
-- Ghost 发布插件
-- Hashnode 发布插件
-- Discord Webhook 插件
 
 ## 支持
 

@@ -81,15 +81,19 @@ publisher.addPlugin(
 The plugin saves articles as standard Markdown files that can be used with any static site generator:
 
 ### Hugo
+
 Place files in `./content/posts/` directory
 
 ### Jekyll
+
 Place files in `./_posts/` directory
 
 ### Gatsby
+
 Place files in `./src/content/blog/` directory
 
 ### Next.js
+
 Place files in `./posts/` or configured content directory
 
 ## Image URL Transformation
@@ -97,6 +101,7 @@ Place files in `./posts/` or configured content directory
 The plugin automatically transforms GitHub raw image URLs to use CDN for better performance:
 
 ### Default Transformation
+
 - **Source Domain**: `raw.githubusercontent.com`
 - **Target CDN**: `https://cdn.jsdelivr.net/gh`
 
@@ -154,6 +159,7 @@ console.log(publishResults);
 ## Output Format
 
 The plugin saves articles as plain Markdown files with:
+
 - Filename: `{articleTitle}.md`
 - Content: Processed Markdown with transformed image URLs
 - Encoding: UTF-8
@@ -161,11 +167,13 @@ The plugin saves articles as plain Markdown files with:
 ## Best Practices
 
 1. **Use Absolute Paths**: Always provide absolute paths for `destination_path`
+
    ```ts
-   path.resolve(__dirname, "./content/posts")
+   path.resolve(__dirname, "./content/posts");
    ```
 
 2. **Create Directory First**: Ensure the destination directory exists
+
    ```ts
    import fs from "fs";
    fs.mkdirSync("./content/posts", { recursive: true });

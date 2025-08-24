@@ -279,15 +279,6 @@ async process(articleTitle, visit, toMarkdown) {
 }
 ```
 
-## Platform Comparison
-
-| Platform   | Update Support  | Draft Support      | Series/Collections | Image Hosting    |
-| ---------- | --------------- | ------------------ | ------------------ | ---------------- |
-| **Notion** | ✅ Yes          | ❌ No              | ✅ Databases       | ✅ Auto-upload   |
-| **Dev.to** | ✅ Yes          | ✅ Yes             | ✅ Series          | ✅ Auto-upload   |
-| **Native** | ❌ No (Overwrites only) | ✅ Via frontmatter | ❌ No              | 🔄 URL transform |
-| **Custom** | 🔧 Configurable | 🔧 Configurable    | 🔧 Configurable    | 🔧 Configurable  |
-
 ## Best Practices
 
 1. **Environment Variables**: Store sensitive data securely
@@ -320,6 +311,7 @@ async process(articleTitle, visit, toMarkdown) {
    ```
 
 4. **Validation**: Check content before publishing
+
    ```ts
    if (!content || content.trim().length === 0) {
      throw new Error("Content is empty");
@@ -349,14 +341,6 @@ async process(articleTitle, visit, toMarkdown) {
 ## Community Plugins
 
 > Share your custom plugins with the community! Submit a PR to add your plugin to this list.
-
-Coming soon:
-
-- Medium Publisher Plugin
-- WordPress Publisher Plugin
-- Ghost Publisher Plugin
-- Hashnode Publisher Plugin
-- Discord Webhook Plugin
 
 ## Support
 

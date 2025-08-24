@@ -81,15 +81,19 @@ publisher.addPlugin(
 插件保存的是标准 Markdown 文件，可用于任何静态站点生成器：
 
 ### Hugo
+
 将文件放在 `./content/posts/` 目录
 
 ### Jekyll
+
 将文件放在 `./_posts/` 目录
 
 ### Gatsby
+
 将文件放在 `./src/content/blog/` 目录
 
 ### Next.js
+
 将文件放在 `./posts/` 或配置的内容目录
 
 ## 图片 URL 转换
@@ -97,6 +101,7 @@ publisher.addPlugin(
 插件会自动将 GitHub raw 图片 URL 转换为使用 CDN 以获得更好的性能：
 
 ### 默认转换
+
 - **源域名**：`raw.githubusercontent.com`
 - **目标 CDN**：`https://cdn.jsdelivr.net/gh`
 
@@ -154,6 +159,7 @@ console.log(publishResults);
 ## 输出格式
 
 插件保存的文章为纯 Markdown 文件，包含：
+
 - 文件名：`{文章标题}.md`
 - 内容：处理后的 Markdown，包含转换后的图片 URL
 - 编码：UTF-8
@@ -161,11 +167,13 @@ console.log(publishResults);
 ## 最佳实践
 
 1. **使用绝对路径**：始终为 `destination_path` 提供绝对路径
+
    ```ts
-   path.resolve(__dirname, "./content/posts")
+   path.resolve(__dirname, "./content/posts");
    ```
 
 2. **预先创建目录**：确保目标目录存在
+
    ```ts
    import fs from "fs";
    fs.mkdirSync("./content/posts", { recursive: true });
