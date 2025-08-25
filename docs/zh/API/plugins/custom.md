@@ -864,7 +864,7 @@ import { MyPublisherPlugin } from "artipub-plugin-myplatform";
 
 ## 资源
 
-- [ArtiPub Core API](../../processor.md)
+- [ArtiPub Core API](../processor.md)
 - [AST 文档](https://github.com/syntax-tree/mdast)
 - [unified 文档](https://github.com/unifiedjs/unified)
 - [发布插件示例](https://github.com/artipub/artipub/tree/main/packages/core/src/plugins)

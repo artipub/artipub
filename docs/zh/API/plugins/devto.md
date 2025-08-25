@@ -526,6 +526,6 @@ publisher.addPlugin(DevToPublisherPlugin(devtoConfig));
 
 ## 另请参阅
 
-- [ArticleProcessor API](../../processor.md)
-- [PublisherManager API](../../publisher.md)
+- [ArticleProcessor API](../processor.md)
+- [PublisherManager API](../publisher.md)
 - [自定义插件开发](./custom.md)

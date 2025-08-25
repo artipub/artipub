@@ -864,7 +864,7 @@ import { MyPublisherPlugin } from "artipub-plugin-myplatform";
 
 ## Resources
 
-- [ArtiPub Core API](../../processor.md)
+- [ArtiPub Core API](../processor.md)
 - [AST Documentation](https://github.com/syntax-tree/mdast)
 - [unified Documentation](https://github.com/unifiedjs/unified)
 - [Publisher Plugin Examples](https://github.com/artipub/artipub/tree/main/packages/core/src/plugins)

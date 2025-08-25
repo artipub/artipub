@@ -363,6 +363,6 @@ publisher.addPlugin(NotionPublisherPlugin(notionConfig));
 
 ## 相关链接
 
-- [ArticleProcessor API](../../processor.md)
-- [PublisherManager API](../../publisher.md)
+- [ArticleProcessor API](../processor.md)
+- [PublisherManager API](../publisher.md)
 - [自定义插件开发](./custom.md)
