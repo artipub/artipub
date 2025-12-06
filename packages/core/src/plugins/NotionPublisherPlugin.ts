@@ -21,7 +21,7 @@ export default function NotionPublisherPlugin(option: NotionPublisherPluginOptio
       const { content } = toMarkdown();
       const article_id = option.update_page_id ?? extendsParam.pid;
       try {
-        this.update!(article_id, articleTitle, content);
+        await this.update!(article_id, articleTitle, content);
       } catch (error: any) {
         return {
           pid: article_id,
