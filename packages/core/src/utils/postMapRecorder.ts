@@ -1,6 +1,7 @@
 import { PostMapRecord } from "@/types";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { isString } from "./utils";
+import { log } from "./log";
 
 export class PostMapRecorder {
   private filePath: string;
@@ -50,7 +51,9 @@ export class PostMapRecorder {
         const data: Record<string, string> = {};
         for (const param of params) {
           const [key, value] = param.split(":");
-          data[key] = value;
+          if (key && value && value !== "undefined") {
+            data[key] = value;
+          }
         }
         const platformName = data["p"];
         delete data["p"];
@@ -90,10 +93,14 @@ export class PostMapRecorder {
     if (!platformName) {
       throw new Error("Platform name is required");
     }
+    if (!pid) {
+      log.warn(`addOrUpdate: PID is empty for articleUniqueID: ${articleUniqueID}, platformName: ${platformName}`);
+      return;
+    }
     if (!this.postMapRecords[articleUniqueID]) {
       this.postMapRecords[articleUniqueID] = {};
     }
-    if (!this.postMapRecords[articleUniqueID][platformName]) {
+    if (!this.postMapRecords[articleUniqueID][platformName] && !pid) {
       this.postMapRecords[articleUniqueID][platformName] = {
         k: pid,
       };

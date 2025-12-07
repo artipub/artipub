@@ -37,4 +37,16 @@ describe("PostMapRecorder", () => {
       y605zk0s: "p:NotionPublisherPlugin,k:123456;p:DevToPublisherPlugin,k:123;",
     });
   });
+
+  test("undefined not update", () => {
+    const configPath = path.resolve(__dirname, "../fixtures/utils/postMapRecords.json");
+    const postMapRecorder = new PostMapRecorder(configPath);
+    postMapRecorder.addOrUpdate("y605zk0t", "NotionPublisherPlugin");
+
+    const records = postMapRecorder.getRecords();
+    expect(records).toEqual({
+      jr1x8pn1: "p:NotionPublisherPlugin,k:ff8756c1-c815-4bfc-a357-xxx;p:DevToPublisherPlugin,k:33;",
+      y605zk0s: "p:NotionPublisherPlugin,k:f3ff6887-206d-4c20-9a81-ttt;p:DevToPublisherPlugin,k:123;",
+    });
+  });
 });
