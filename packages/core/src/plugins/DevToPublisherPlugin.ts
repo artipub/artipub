@@ -21,9 +21,9 @@ export default function DevToPublisherPlugin(option: DevToPublisherPluginOption)
       removeArticleDescPart(visit);
 
       const { content } = toMarkdown();
-      const article_id = option.article_id ?? extendsParam.pid;
+      let article_id = option.article_id ?? extendsParam.pid;
       try {
-        await this.update!(article_id, articleTitle, content);
+        article_id = await this.update!(article_id, articleTitle, content);
       } catch (error: any) {
         return {
           pid: article_id,
@@ -37,7 +37,7 @@ export default function DevToPublisherPlugin(option: DevToPublisherPluginOption)
         info: "Published to Dev.to",
       };
     },
-    async update(article_id: string | undefined, articleTitle: string, content: string) {
+    async update(article_id: string | undefined, articleTitle: string, content: string): Promise<string> {
       async function postArticle() {
         return await axios.post(
           "https://dev.to/api/articles",
@@ -98,6 +98,7 @@ export default function DevToPublisherPlugin(option: DevToPublisherPluginOption)
           throw new Error(res?.data?.error);
         }
       }
+      return article_id!;
     },
   };
 }

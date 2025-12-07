@@ -19,9 +19,9 @@ export default function NotionPublisherPlugin(option: NotionPublisherPluginOptio
     async process(articleTitle: string, visit: TVisitor, toMarkdown: ToMarkdown): Promise<PublishResult> {
       removeTitle(visit);
       const { content } = toMarkdown();
-      const article_id = option.update_page_id ?? extendsParam.pid;
+      let article_id = option.update_page_id ?? extendsParam.pid;
       try {
-        await this.update!(article_id, articleTitle, content);
+        article_id = await this.update!(article_id, articleTitle, content);
       } catch (error: any) {
         return {
           pid: article_id,
@@ -37,7 +37,7 @@ export default function NotionPublisherPlugin(option: NotionPublisherPluginOptio
       };
       return res;
     },
-    async update(articleId: string | undefined, articleTitle: string, content: string) {
+    async update(articleId: string | undefined, articleTitle: string, content: string): Promise<string> {
       const blocks = markdownToBlocks(content);
       const notion = new Client({ auth: option.api_key });
 
@@ -94,6 +94,7 @@ export default function NotionPublisherPlugin(option: NotionPublisherPluginOptio
           throw new Error(`Failed to publish [${articleTitle}] to Notion!`);
         }
       }
+      return articleId!;
     },
   };
 }
