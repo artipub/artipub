@@ -1,3 +1,23 @@
+## [1.1.10](https://github.com/artipub/artipub/compare/v1.1.9...v1.1.10) (2025-12-07)
+
+
+### Bug Fixes
+
+* **core:** article_id not updated after article upload ([bbf7ef9](https://github.com/artipub/artipub/commit/bbf7ef9d72de959365f42378f87ef794b862faa1))
+* **core:** clean cache fail ([ae76248](https://github.com/artipub/artipub/commit/ae7624835183559ffb3c3fbf06f9b4129ba76e42))
+* **core:** ensure async update call in NotionPublisherPlugin ([7d6e230](https://github.com/artipub/artipub/commit/7d6e230b7f030e2b14ddeb092ab0a39fdd771d24))
+* **core:** prevent undefined values from updating records in PostMapRecorder ([d5e791b](https://github.com/artipub/artipub/commit/d5e791bddc4d7b0648aa37b4ad64a58af3754bd6))
+
+
+
+
+### Contributors
+
+- yxw007 <aa4790139@gmail.com>
+- Potter <75838259@qq.com>
+
+
+
 ## [1.1.9](https://github.com/artipub/artipub/compare/v1.1.8...v1.1.9) (2024-08-27)
 
 
